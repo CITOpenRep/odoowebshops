@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ====================== Recently Viewed in Product ================= -->
+    <template id="recently_viewed_product_ept" inherit_id="website_sale.product" name="Recently Viewed Prodeuct">
+        <xpath expr="//div[hasclass('js_sale')]" position="after">
+            <t t-call="theme_clarico.recently_viewed_ept">
+                <t t-set="recent_data" t-value="website.get_recently_viewed_items(product.id)" /></t>
+        </xpath>
+    </template>
+    <!--================= Recently Viewed Items =========================-->
+    <template id="recently_viewed_ept" name="Recently Viewed items">
+        <t t-if="recent_data">
+            <t t-set="recent_products" t-value="recent_data.get('recent_products')" />
+            <t t-set="compute_currency" t-value="recent_data.get('compute_currency')" />
+             <t t-if="not len(recent_products) == 1 and product and product.id in recent_products">
+                <section id="carousel_recently_view" data-type="multi" class="container mt64" data-interval="false">
+                    <h3 class="te_product_recent_h2">Recently Viewed Products</h3>
+                    <div class="owl-carousel" role="listbox">
+                        <t t-foreach="recent_products" t-as="recent_product">
+                            <t t-set="rproduct"
+							t-value="request.env['product.template'].search([('id','=',int(recent_product))])" />
+                            <div t-if="not rproduct.id == product.id" t-att-data-active="true if product and product.id == rproduct.id else false" class="img_hover">
+                                <div class="border">
+                                    <a t-att-href="'/shop/product/%s' %slug(rproduct)">
+                                        <div class="new_span">
+                                            <img class="img-responsive img-fluid pt-3 mx-auto d-block"
+										t-attf-src="/website/image/product.product/{{rproduct.product_variant_id.id}}/image/200x200"
+										t-att-alt="rproduct.name" />
+                                        </div>
+                                    </a>
+                                    <div class="px-2 text-left te_recent_detail_section">
+                                        <a class="d-block product_name o_text_overflow" t-field="rproduct.name"
+										t-att-href="'/shop/product/%s' %slug(rproduct)" />
+                                        <t
+										t-if="rproduct.product_variant_id and rproduct.website_price_difference and website.get_current_pricelist().discount_policy=='without_discount'">
+                                            <del class="te_shop_del mr8" style="white-space: nowrap;">
+                                                <span t-esc="compute_currency(rproduct.website_public_price)"
+												t-options="{'widget': 'monetary', 'display_currency': website.get_current_pricelist().currency_id, 'from_currency': website.currency_id}"></span>
+                                            </del>
+                                        </t>
+                                        <b>
+                                            <span t-esc="rproduct.website_price"
+										t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                        </b>
+                                    </div>
+                                    <div class="w-100 d-inline-blocl p-2">
+                                            <a title="Add To Cart"
+                                               class="btn btn-secondary bg-success btn-sm quick-view-a w-25 p-2"
+                                               t-att-data-id="'%s' % rproduct.id">
+                                                <span class="fa fa-shopping-cart text-white"/>
+                                            </a>
+                                           <t t-set="in_wish" t-value="rproduct._is_in_wishlist()"/>
+                                            <t t-set="product_variant"
+                                               t-value="rproduct._create_first_product_variant()"/>
+                                            <button t-if="product_variant" type="button" role="button"
+                                                    class="btn btn-secondary btn-sm o_add_wishlist w-25 p-2"
+                                                    t-att-disabled="in_wish or None" title="Add to Wishlist"
+                                                    t-att-data-product-template-id="rproduct.id"
+                                                    t-att-data-product-product-id="product_variant.id"
+                                                    data-action="o_wishlist">
+                                                <span class="fa fa-heart" role="img"
+                                                      aria-label="Add to wishlist"></span>
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <t t-if="len(recent_products) &gt; 4">
+                        <a class="carousel-control-prev" role="button" data-slide="prev"
+						data-target="#carousel_recently_view">
+                            <i class="fa fa-chevron-left fa-lg text-muted" />
+                        </a>
+                        <a class="carousel-control-next" role="button" data-slide="next"
+						data-target="#carousel_recently_view">
+                            <i class="fa fa-chevron-right fa-lg text-muted" />
+                        </a>
+                    </t>
+                </section>
+            </t>
+        </t>
+    </template>
+</odoo>

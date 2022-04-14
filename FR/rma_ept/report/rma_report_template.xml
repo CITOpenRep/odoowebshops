@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_rma_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+            <t t-set="address">
+                <address class="pull-left" t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+<!--
+                <div t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></div>
+-->
+            </t>
+            <div class="page">
+                <h2>
+	                <span>Return Order #</span>
+	                <span t-field="doc.code"/>
+	                <span t-if="doc.state in ['approve','process']">- Approved</span>
+	                <span t-if="doc.state in ['draft']">- Waiting For Approval</span>
+	                <span t-if="doc.state in ['close']">- Closed</span>
+	                <span t-if="doc.state in ['reject']">- Rejected</span>
+                </h2>
+                <div class="row mt16" id="informations">
+                    <div t-if="doc.date" class="col-auto mw-100" style="white-space: nowrap;">
+                        <strong>Date:</strong>
+                        <p class="m-0" t-field="doc.date"/>
+                    </div>
+                    <div t-if="doc.sale_id.name" class="col-auto mw-100" style="white-space: nowrap;">
+                        <strong>Order Reference:</strong>
+                        <p class="m-0" t-field="doc.sale_id"/>
+                    </div>
+                    <div t-if="doc.picking_id.name" class="col-auto mw-100" style="white-space: nowrap;">
+                        <strong>Shipping Reference:</strong>
+                        <p class="m-0" t-field="doc.picking_id"/>
+                    </div>
+                  </div>
+                <div class="row mt16 mb16">
+                    <div class="col-auto mw-100">
+                        <p class="mb0"><strong>Return Address:</strong></p>
+						<t t-if="doc.sale_id.warehouse_id.return_partner_id">
+							<t t-set="return_partner_address" t-value="doc.sale_id.warehouse_id.return_partner_id"></t>
+							<t t-if="return_partner_address.street"><span t-field="return_partner_address.street"></span><br/></t>
+							<t t-if="return_partner_address.street2"><span t-field="return_partner_address.street2"></span><br/></t>
+							<t t-if="return_partner_address.city"><span t-field="return_partner_address.city"></span><br/></t>
+							<t t-if="return_partner_address.state_id"><span t-field="return_partner_address.state_id"></span></t>
+							<t t-if="return_partner_address.zip">,<span t-field="return_partner_address.zip"></span><br/></t>
+							<t t-if="return_partner_address.country_id"><span t-field="return_partner_address.country_id"></span><br/></t>
+						</t>
+						<t t-else="">
+							<t t-set="to_address" t-value="doc.sale_id.warehouse_id.partner_id"></t>
+							<t t-if="to_address.street"><span t-field="to_address.street"></span><br/></t>
+							<t t-if="to_address.street2"><span t-field="to_address.street2"></span><br/></t>
+							<t t-if="to_address.city"><span t-field="to_address.city"></span><br/></t>
+							<t t-if="to_address.state_id"><span t-field="to_address.state_id"></span></t>
+							<t t-if="to_address.zip">,<span t-field="to_address.zip"></span><br/></t>
+							<t t-if="to_address.country_id"><span t-field="to_address.country_id"></span><br/></t>
+						</t>
+                    </div>
+                </div>
+                <div t-if='doc.reject_message_id and doc.state=="reject"'>
+                    <strong style='color:red'>Reject Reason:
+                        <span t-field='doc.reject_message_id.name'/>
+                    </strong>
+                </div>
+                
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Delivered Quantity</th>
+                            <th>Return Quantity</th>
+                            <th>Requested Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="doc.claim_line_ids" t-as="l">
+                            <tr>
+                                <td>
+                                    <span t-field="l.product_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.done_qty"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.quantity"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.rma_reason_id.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                    
+		                <tr t-if="doc.description" height="10px">
+		                    <td colspan="4"><strong>RMA Note:</strong>
+		                    	<p t-field="doc.description"/>
+		                    </td>
+		                </tr>
+                	</tbody>
+                </table>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+    <template id="report_rma">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="rma_ept.report_rma_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_rma_delivery_label_document">
+	    <div class="page">
+            <style>
+                div, span, td{
+                    font-size:20px;
+                }
+            </style>
+	        <h2>
+	         	<span>Return Order #</span>
+	         	<span t-field="doc.code"/>
+	        </h2>
+	        <div class="row">
+	        	<table class="mw100" style="width:100%">
+	        		<tr>
+	        			<td class="mt2 mb2" style="width:50%"><strong>From:</strong></td>
+	        			<td class="mt2 mb2" style="width:50%"><strong>To:</strong></td>
+	        		</tr>
+	        		<tr>
+	        			<td style="width:50%; vertical-align: top;">
+	        				<address class="pull-left" t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+<!--
+	            			<div t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></div>
+-->
+	        			</td>
+	        			<td style="width:50%; vertical-align: top;">
+	        				<div class="pull-left" style="vertical-align: top;">
+		        				<t t-if="doc.sale_id.warehouse_id.return_partner_id">
+		                    		<t t-set="return_partner_address" t-value="doc.sale_id.warehouse_id.return_partner_id"></t>
+		                            <t t-if="return_partner_address.street"><span t-field="return_partner_address.street"></span><br/></t>
+		                    		<t t-if="return_partner_address.street2"><span t-field="return_partner_address.street2"></span><br/></t>
+				                    <t t-if="return_partner_address.city"><span t-field="return_partner_address.city"></span><br/></t>
+				                    <t t-if="return_partner_address.state_id"><span t-field="return_partner_address.state_id"></span></t>
+				                    <t t-if="return_partner_address.zip">,<span t-field="return_partner_address.zip"></span><br/></t>
+				                    <t t-if="return_partner_address.country_id"><span t-field="return_partner_address.country_id"></span><br/></t>
+				                </t>
+				                <t t-else="">
+				                    <t t-set="to_address" t-value="doc.sale_id.warehouse_id.partner_id"></t>
+		                            <t t-if="to_address.street"><span t-field="to_address.street"></span><br/></t>
+		                    		<t t-if="to_address.street2"><span t-field="to_address.street2"></span><br/></t>
+				                    <t t-if="to_address.city"><span t-field="to_address.city"></span><br/></t>
+				                    <t t-if="to_address.state_id"><span t-field="to_address.state_id"></span></t>
+				                    <t t-if="to_address.zip">,<span t-field="to_address.zip"></span><br/></t>
+				                    <t t-if="to_address.country_id"><span t-field="to_address.country_id"></span><br/></t>
+				                </t>
+			                </div>
+	        			</td>
+	        		</tr>
+	        	</table>
+	         </div>
+	    </div>
+    </template>
+    
+    <template id="report_rma_delivery_label">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="rma_ept.report_rma_delivery_label_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

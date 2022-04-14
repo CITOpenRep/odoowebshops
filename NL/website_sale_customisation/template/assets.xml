@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="website_sale_customisation_assets_frontend" inherit_id="website.assets_frontend">
+		<xpath expr="link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss"	href="/website_sale_customisation/static/src/scss/website_sale_customisation.scss" />
+        </xpath>
+		<xpath expr="script[last()]" position="after">
+			<script type="text/javascript" src="/website_sale_customisation/static/src/js/website_sale_customisation.js"/>
+	    </xpath>
+	</template>
+	
+	<template id="website_sale_customisation_report_assets_common" inherit_id="web.report_assets_common">
+		<xpath expr="link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss"	href="/website_sale_customisation/static/src/scss/report_layout.scss" />
+        </xpath>	
+	</template>
+	<template id="website_sale_customisation_wishlist_assets" inherit_id="website_sale_wishlist.assets_frontend">
+		<xpath expr="script[@src='/website_sale_wishlist/static/src/js/website_sale_wishlist.js']" position="replace">
+			<script type="text/javascript" src="/website_sale_customisation/static/src/js/website_sale_wishlist.js"></script>
+        </xpath>
+	</template>
+	<template id="website_sale_customisation_image_load_assets" inherit_id="website_sale.assets_frontend">
+		<xpath expr="script[@src='/sale/static/src/js/product_configurator_mixin.js']" position="replace">
+			<script type="text/javascript" src="/website_sale_customisation/static/src/js/product_configurator_mixin.js"></script>
+        </xpath>
+	</template>
+</odoo>

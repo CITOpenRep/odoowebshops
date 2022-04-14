@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="homepage_ept" inherit_id="website.homepage">
+		<xpath expr="//div[@id='wrap']" position="replace">
+			<div id="wrap" class="oe_structure oe_empty">
+				<div class="oe_structure"/>
+				<div id="myCarousel1562128345517" class="s_carousel carousel te_arrow_small aos-init container slide s_carousel_default" data-interval="5000" data-aos="s_carousel_default">
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel1562128345517" data-slide-to="0" class="active"/>
+						<li data-target="#myCarousel1562128345517" data-slide-to="1"/>
+					</ol>
+					<div class="carousel-inner te_arrow_small te_ts_style_7_inner">
+						<div class="carousel-item oe_img_bg pt120 pb120 oe_custom_bg active" style="background-image: url('/theme_clarico/static/src/img/home/webshop-carousel-donnie-oma-producten-home-b1.jpg');" data-name="Slide">
+							<div class="container">
+								<div class="row content">
+									<div class="carousel-content col-md-8 te_t_slider_sm_content col-lg-4" style="animation: animatezoom 0.3s ease-in both; animation-delay: 0.5s;">
+										<div class="s_title pb8" data-name="Title">
+											<h1 class="carousel_heading te_t_slider_7_title te_slider_title">It's easy being green!</h1>
+										</div>
+										<p class="carousel_content">Welkom op de CANNA webshop. Hier vindt je de beste voeding voor jouw plantjes.</p>
+										<div class="s_btn text-left pt16 pb16" data-name="Buttons">
+											<a href="/shop" class="btn btn-primary te_slider_btn" data-original-title="" title="" aria-describedby="tooltip12658">Ontdek het hier</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item oe_img_bg pt120 pb120 oe_custom_bg" style="background-image: url('/theme_clarico/static/src/img/home/webshop-carousel-donnie-starterskit-home-b2.jpg');" data-name="Slide">
+							<div class="container">
+								<div class="row content">
+									<div class="carousel-content col-md-8 te_t_slider_sm_content col-lg-4" style="animation: animatezoom 0.3s ease-in both; animation-delay: 0.5s;">
+										<p class="carousel_content">Wil jij zelf aan de slag na het zien van <u><a href="https://www.instagram.com/cannanederland.official/" target="_blank" data-original-title="" title="" aria-describedby="tooltip218753"><font style="color: rgb(255, 255, 255);">Donnie’s Plantjes</font></a></u>, maar heb je geen idee waar te beginnen? Geen probleem: de Terra Starterskit helpt je tot in de puntjes op weg. <br/></p>
+										<div class="s_btn text-left pt16 pb16" data-name="Buttons">
+											<a href="/shop/product/14100025-canna-terra-starterskit-110" class="btn btn-primary te_slider_btn" data-original-title="" title="" aria-describedby="tooltip12658">Bestel TERRA Starterskit</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-control-prev" data-target="#myCarousel1562128345517" data-slide="prev" role="img" aria-label="Previous" title="Previous">
+							<span class="carousel-control-prev-icon"/>
+							<span class="sr-only o_default_snippet_text">Previous</span>
+						</div>
+						<div class="carousel-control-next" data-target="#myCarousel1562128345517" data-slide="next" role="img" aria-label="Next" title="Next">
+							<span class="carousel-control-next-icon"/>
+							<span class="sr-only o_default_snippet_text">Next</span>
+						</div>
+					</div>
+				</div>
+				<section class="py-3 py-sm-5 te_space_style pb0 pt32"/>
+				<section>
+					<div class="container">
+						<div class="row s_nb_column_fixed">
+							<div class="col-lg-12 s_title">
+								<h2>CANNA productlijnen</h2>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="oe_structure"/>
+				<section class="s_three_columns pb32">
+					<div class="container">
+						<div class="row d-flex align-items-stretch">
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/canna-terra-16">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-canna-terra_1.jpg" alt="CANNA TERRA" data-original-title="" aria-describedby="tooltip829108"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title text-left te_three_columns_heading">
+											<a href="/shop/category/canna-terra-16">CANNA TERRA</a>
+										</p>
+									</section>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/biocanna-13">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-biocanna_6.jpg" alt="BIOCANNA" data-original-title="" aria-describedby="tooltip75349"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title te_three_columns_heading text-left">
+											<a href="/shop/category/biocanna-13" data-original-title="" title="" aria-describedby="tooltip698151">BIOCANNA</a>
+										</p>
+									</section>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/canna-coco-11">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-canna-coco_2.jpg" alt="CANNA COCO" data-original-title="" aria-describedby="tooltip197924"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title text-left te_three_columns_heading">
+											<a href="/shop/category/canna-coco-11">CANNA COCO</a>
+										</p>
+									</section>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/additieven-12">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-canna-additieven_5.jpg" alt="CANNA Additieven" data-original-title="" aria-describedby="tooltip852021"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title text-left te_three_columns_heading">
+											<a href="/shop/category/additieven-12" data-original-title="" title="" aria-describedby="tooltip817158">Additieven</a>
+										</p>
+									</section>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/canna-aqua-5">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-canna-aqua_3.jpg" alt="CANNA AQUA" data-original-title="" aria-describedby="tooltip471871"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title te_three_columns_heading text-left">
+											<a href="/shop/category/canna-aqua-5">CANNA AQUA</a>
+										</p>
+									</section>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 s_col_no_bgcolor te_ts_img_hvr">
+								<div>
+									<section class="te_img_hover_overflow"> </section>
+									<a href="/shop/category/canna-hydro-2">
+										<img class="card-img-top img img-responsive te_feature_image" src="/theme_clarico/static/src/img/home/webshop-category-canna-hydro_4.jpg" alt="CANNA HYDRO" data-original-title="" aria-describedby="tooltip92726"/>
+									</a>
+									<section class="te_img_hover_overflow"> </section>
+									<section class="card-body bg-100 oe_custom_bg pt8">
+										<p class="card-title text-left te_three_columns_heading">
+											<a href="/shop/category/canna-hydro-2" data-original-title="" title="" aria-describedby="tooltip164239">CANNA HYDRO</a>
+										</p>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<div class="container">
+						<div class="row s_nb_column_fixed">
+							<div class="col-lg-12 s_title">
+								<h2>Bestsellers</h2>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="input-group js_slider_snippet hidden" data-isemipro="true" data-slider-id="4" data-date-time="Wed Jul 03 2019 12:29:20 GMT+0530 (India Standard Time)"/>
+				<section class="py-3 py-sm-5 te_space_style pt24 pb24"/>
+				<section class="te_s_text_image pt40 pb56">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6 pt16 pb16">
+								<h2 style="font-size: 36px;">Wie zijn wij?</h2>
+								<h5 class="mb16">Makers van kwalitatieve plantenvoeding</h5>
+								<p class="te_content_text">CANNA is een familiebedrijf wat begin jaren negentig is opgericht door twee plantenliefhebbers. Het is allemaal begonnen met het adviseren van kwekers om een oogst te behalen van een zo hoog mogelijke kwaliteit. Als eerste in de markt zijn ze begonnen met het produceren van voedingsproducten voor het hobbymatig kweken van snelgroeiende gewassen.<br/></p>
+								<section>
+									<div>
+										<div class="s_btn text-left pt16 pb16 mr16 te_button_inline" data-name="Buttons">
+											<a href="/aboutus" class="btn btn-primary" data-original-title="" title="">Lees meer</a>
+										</div>
+										<div class="s_btn text-left pt16 pb16 te_button_inline" data-name="Buttons">
+											<a href="https://www.canna.nl" class="btn btn-secondary" data-original-title="" title="" target="_blank">bezoek canna.nl</a>
+										</div>
+									</div>
+								</section>
+							</div>
+							<div class="te_image_size col-lg-6 bg-white-75">
+								<div class="text-center">
+									<img src="/theme_clarico/static/src/img/home/webshop-about-us-3.jpg" class="img img-fluid mx-auto" alt="About us" data-original-title="" title="" aria-describedby="tooltip119190"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</xpath>
+	</template>
+</odoo>

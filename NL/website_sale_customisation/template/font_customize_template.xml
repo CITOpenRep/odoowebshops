@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Added extra font into the theme customize option -->
+	<template id="theme_customisation_fonts" inherit_id="website._assets_primary_variables">
+        <xpath expr="//link" position="before">
+            <link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts.scss" />
+        </xpath>
+    </template>
+    
+	<!-- Title fonts -->
+	<template id="option_font_title_16_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_title_16_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_title_17_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_title_17_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_title_18_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_title_18_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_title_19_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_title_19_variables.scss" />
+		</xpath>
+	</template>
+	
+	<!-- Body fonts -->
+	<template id="option_font_body_16_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_body_16_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_body_17_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_body_17_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_body_18_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_body_18_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_body_19_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_body_19_variables.scss" />
+		</xpath>
+	</template>
+	
+	<!-- Button fonts -->
+	<template id="option_font_button_16_variables" inherit_id="website._assets_primary_variables" active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_button_16_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_button_17_variables" inherit_id="website._assets_primary_variables" active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_button_17_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_button_18_variables" inherit_id="website._assets_primary_variables" active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_button_18_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_button_19_variables" inherit_id="website._assets_primary_variables" active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_button_19_variables.scss" />
+		</xpath>
+	</template>
+	
+	<!-- Navbar fonts -->
+	<template id="option_font_navbar_16_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_navbar_16_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_navbar_17_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_navbar_17_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_navbar_18_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_navbar_18_variables.scss" />
+		</xpath>
+	</template>
+	<template id="option_font_navbar_19_variables" inherit_id="website._assets_primary_variables"
+		active="False">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/scss"
+				href="/website_sale_customisation/static/src/scss/fonts/option_font_navbar_19_variables.scss" />
+		</xpath>
+	</template>
+	
+	<!-- Theme Extra Fonts list in customize -->
+	<template id="theme_sale_customize_ept" inherit_id="website.theme_customize">
+		<!-- Fonts Style Title-->
+		<xpath expr="//list[@id='theme_customize_content_fonts_title']" position="inside">
+			<opt data-xmlid="website_sale_customisation.option_font_title_16_variables" data-font="16" />
+			<opt data-xmlid="website_sale_customisation.option_font_title_17_variables" data-font="17" />
+			<opt data-xmlid="website_sale_customisation.option_font_title_18_variables" data-font="18" />
+			<opt data-xmlid="website_sale_customisation.option_font_title_19_variables" data-font="19" />
+		</xpath>
+		<!-- Fonts Style Body-->
+		<xpath expr="//list[@id='theme_customize_content_fonts_body']" position="inside">
+			<opt data-xmlid="website_sale_customisation.option_font_body_16_variables" data-font="16" />
+			<opt data-xmlid="website_sale_customisation.option_font_body_17_variables" data-font="17" />
+			<opt data-xmlid="website_sale_customisation.option_font_body_18_variables" data-font="18" />
+			<opt data-xmlid="website_sale_customisation.option_font_body_19_variables" data-font="19" />
+		</xpath>
+		<!-- Fonts Style Button-->
+		<xpath expr="//list[@id='theme_customize_content_fonts_button']" position="inside">
+			<opt data-xmlid="website_sale_customisation.option_font_button_16_variables" data-font="16" />
+			<opt data-xmlid="website_sale_customisation.option_font_button_17_variables" data-font="17" />
+			<opt data-xmlid="website_sale_customisation.option_font_button_18_variables" data-font="18" />
+			<opt data-xmlid="website_sale_customisation.option_font_button_19_variables" data-font="19" />
+		</xpath>
+		<!-- Fonts Style Navbar-->
+		<xpath expr="//list[@id='theme_customize_content_fonts_navbar']" position="inside">
+			<opt data-xmlid="website_sale_customisation.option_font_navbar_16_variables" data-font="16" />
+			<opt data-xmlid="website_sale_customisation.option_font_navbar_17_variables" data-font="17" />
+			<opt data-xmlid="website_sale_customisation.option_font_navbar_18_variables" data-font="18" />
+			<opt data-xmlid="website_sale_customisation.option_font_navbar_19_variables" data-font="19" />
+		</xpath>
+	</template>
+</odoo>

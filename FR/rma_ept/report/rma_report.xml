@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report id="action_report_rma" string="RMA Report" model="crm.claim.ept"
+			report_type="qweb-pdf" file="rma_ept.report_rma" name="rma_ept.report_rma"
+			print_report_name="'Canna_Return_Shipment_%s' % (object.code)" />
+			
+		<record id="paperformat_rma_label" model="report.paperformat">
+		    <field name="name">RMA Delivery Label</field>
+		    <field name="default" eval="True"/>
+		    <field name="format">custom</field>
+		    <field name="page_height">110</field>
+		    <field name="page_width">200</field>
+		    <field name="orientation">Portrait</field>
+		    <field name="margin_top">10</field>
+		    <field name="margin_bottom">5</field>
+		    <field name="margin_left">10</field>
+		    <field name="margin_right">5</field>
+		    <field name="header_line" eval="False"/>
+		    <field name="header_spacing">3</field>
+		    <field name="dpi">80</field>
+		</record>
+	    
+	    <report
+	        id="action_report_rma_label"
+	        model="crm.claim.ept"
+	        string="RMA Delivery Label"
+	        report_type="qweb-pdf"
+	        name="rma_ept.report_rma_delivery_label"
+	        file="rma_ept.report_rma_delivery_label"
+	        paperformat="rma_ept.paperformat_rma_label"
+	        print_report_name="'Canna_Return_Label_%s' % (object.code).replace('/','')"
+	    />
+	</data>
+</odoo>

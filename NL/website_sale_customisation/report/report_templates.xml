@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- External layout design template -->
+	<template id="web.external_layout_boxed">
+			<div class="article te_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+			<div class="header">
+	            <div class="o_boxed_header" style="padding-top : 30px !important;">
+	            <div class="row">
+	                <div class="col-8 mb16">
+	                    <img class="logo_header" style=" left:5%;" t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+	                </div>
+	                <div class="col-4 text-left mb16" style="padding-top : 30px !important;">
+	                	<strong>
+		                    <span>Cashew Urban Green B.V.</span><br/>
+		                    <t t-if="company.partner_id.street"><span t-field="company.partner_id.street"></span><br/></t>
+		                    <t t-if="company.partner_id.street2"><span t-field="company.partner_id.street2"></span></t>
+		                    <t t-if="company.partner_id.city"><span t-field="company.partner_id.city"></span><br/></t>
+		                    <t t-if="company.partner_id.state_id"><span t-field="company.partner_id.state_id"></span></t>
+		                    <t t-if="company.partner_id.zip">,<span t-field="company.partner_id.zip"></span><br/></t>
+		                    <t t-if="company.partner_id.phone">T. <span t-field="company.partner_id.phone"></span><br/></t>
+		                    <span>F. + 31 76 5201800</span><br/>
+		                    <span>E. webshop@canna.nl</span><br/>
+		                    <span>B.T.W. nr.: 850198434B01</span><br/>
+	                    </strong>
+	                </div>
+	            </div>
+	            </div>
+	        </div>
+	        <div class="o_report_layout_boxed" style="padding-top : 70px !important;" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+	            <t t-call="web.address_layout"/>
+	            <t t-raw="0"/>
+	        </div>
+	        <div class="footer o_boxed_footer">
+  				<div class="text-center">
+  					<div t-field="company.report_footer"/>
+  					<div class="mt8" t-if="report_type == 'pdf'">
+  						Page: <span class="page"/> / <span class="topage"/>
+  					</div>
+  				</div>
+			</div>
+		</div>
+	</template>
+	<!-- Address layout design template -->
+	<template id="website_sale_customisation_address_layout" inherit_id="web.address_layout">
+		<xpath expr="//div[@name='information_block']" position="attributes">
+			<attribute name="class">col-10</attribute>
+		</xpath>
+	</template>
+
+	<template id="website_sale_customisation_report_layout" inherit_id="web.report_layout">
+		<xpath expr="//div[@id='wrapwrap']" position="replace">
+			<div id="wrapwrap">
+	            <main t-att-class="'te_website_report_html' if not full_width else 'container-fluid'">
+	                <t t-raw="0"/>
+	            </main>
+	        </div>
+		</xpath>
+	</template>
+
+	<!-- Invoice report  -->
+	<template id="website_sale_customisation_report_invoice_document" inherit_id="account.report_invoice_document">
+		<xpath expr="//div[@id='informations']" position="attributes">
+			<attribute name="class">row mt16</attribute>
+		</xpath>
+		<xpath expr="//p[@t-if='o.reference']" position="replace">
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']//tbody//tr//td[2]" position="attributes">
+			<attribute name="class"></attribute>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']/thead/tr//th[6]" position="attributes">
+			<attribute name="t-attf-class">text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}</attribute>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']/thead/tr//th[6]//span" position="replace">
+			<span>VAT</span>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']//tbody//tr//td[6]" position="attributes">
+			<attribute name="t-attf-class">text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}</attribute>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']" position="before">
+			<t t-if="o.origin" t-set="sale_order" t-value="request.env['sale.order'].sudo().search([('name','=',o.origin)])"></t>
+			<h6 t-if="sale_order and sale_order.pricelist_id and sale_order.pricelist_id.code" class="mb16" style="color:#000;">
+				Applied <t t-esc="sale_order.pricelist_id.name"></t>
+			</h6>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']//tbody//t[@t-foreach='o.invoice_line_ids']" position="after">
+			 <t t-if="o.origin" t-set="sale_order" t-value="request.env['sale.order'].sudo().search([('name','=',o.origin)])"/>
+			<tr class="border-black o_subtotal">
+                <td><strong>Price excluding VAT</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td t-if="display_discount"></td>
+                <td class="t-center">
+                    <!-- <span t-field="o.amount_untaxed"/>-->
+                    <!-- <span t-esc="sum(sale_order.order_line.filtered(lambda line: line.reward_line == False).mapped('price_reduce_taxexcl'))" t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'/> -->
+					<t t-set="doc_total" t-value="0"/>
+					 <t t-foreach="sale_order.order_line.filtered(lambda line: line.reward_line == False)" t-as="order_line">
+						<t t-set="doc_total" t-value="doc_total + (order_line.price_reduce_taxexcl * order_line.product_uom_qty)"/>
+					</t>
+                    <span t-esc="doc_total" t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'/>
+                </td>
+            </tr>
+			<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                 <tr style="">
+                     <t t-if="len(o.tax_line_ids) == 1 and o.amount_untaxed == amount_by_group[2]">
+                         <td><span t-esc="amount_by_group[0]"/></td>
+                		 <td></td>
+                 		 <td></td>
+             			 <td></td>
+             			 <td t-if="display_discount"></td>
+                         <td class="t-center o_price_total">
+                             <span t-esc="amount_by_group[3]" />
+                         </td>
+                     </t>
+                     <t t-else="">
+                         <td>
+                             <span t-esc="amount_by_group[0]"/>
+                             <span>&amp;nbsp;<span>on</span>
+                                 <t t-esc="amount_by_group[4]"/>
+                             </span>
+                         </td>
+                		 <td></td>
+                 		 <td></td>
+             			 <td></td>
+             			 <td t-if="display_discount"></td>
+                         <td class="t-center o_price_total">
+                             <span t-esc="amount_by_group[3]"/>
+                         </td>
+                     </t>
+                 </tr>
+             </t>
+             <tr class="border-black o_total">
+             	<td><strong>Total</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td t-if="display_discount"></td>
+                <td class="t-center">
+                    <span t-field="o.amount_total"/>
+                </td>
+             </tr>
+		</xpath>
+		<xpath expr="//div[hasclass('clearfix')]//table" position="replace">
+			<table></table>
+		</xpath>
+		<xpath expr="//table[@name='invoice_line_table']/thead/tr/th[2]" position="replace">
+		</xpath>
+		<xpath expr="//t[@name='account_invoice_line_accountable']/td[2]" position="replace">
+		</xpath>
+		<xpath expr="//div[@t-if='o.origin']/strong" position="replace">
+			<strong>Sale Order No:</strong>
+		</xpath>
+		<xpath expr="//div[@t-if='o.reference']" position="replace">
+		</xpath>
+		<xpath expr="//div[@name='invoice_date']" position="attributes">
+			<attribute name="style">white-space: nowrap;</attribute>
+		</xpath>
+		<xpath expr="//div[@name='origin']" position="attributes">
+			<attribute name="style">white-space: nowrap;</attribute>
+		</xpath>
+		<xpath expr="//div[@t-if='o.partner_id.vat']" position="replace"></xpath>
+		<xpath expr="//div[@name='due_date']" position="replace"></xpath>
+		<xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+			<t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+            <t t-foreach="payments_vals" t-as="payment_vals">
+            	<!--<p t-if="payment_vals['date']">Paid date : <t t-esc="payment_vals['date']"/></p>-->
+            </t>
+		</xpath>
+	</template>
+
+	<!-- Remove extra address if order have different shipping and billing -->
+	<template id="website_sale_customisation_report_invoice_document_inherit_sale" inherit_id="sale.report_invoice_document_inherit_sale">
+		<xpath expr="//t[@t-if='o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)']" position="replace">
+            <t t-set="information_block">
+				<div style="display:inline-block;width:49%;vertical-align: top;">
+					<strong t-if="o.partner_shipping_id == o.partner_id">Invoice and Shipment address:</strong>
+					<strong t-if="o.partner_shipping_id != o.partner_id">Invoice address:</strong>
+					<span class="mb16" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}" groups="sale.group_delivery_invoice_address"/>
+				</div>
+				<t t-if="o.partner_shipping_id != o.partner_id">
+                    <div groups="sale.group_delivery_invoice_address" style="display:inline-block;width:49%;vertical-align: top;">
+                        <strong>Shipment address:</strong>
+                        <div t-field="o.partner_shipping_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                    </div>
+                </t>
+            </t>
+		</xpath>
+		<xpath expr="//div[@t-field='o.partner_id']" position="replace"></xpath>
+	</template>
+
+	<!-- Invoice amount due option -->
+	<template id="account.report_invoice_document_with_payments" inherit_id="account.report_invoice_document" primary="True">
+		<xpath expr="." position="attributes"><attribute name="t-name">account.report_invoice_document_with_payments</attribute></xpath>
+	</template>
+
+	<!-- Sale order report  -->
+	<template id="website_sale_customisation_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+		<xpath expr="//t[@t-set='address']" position="replace">
+			<t t-set="address">
+				<strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoice and Shipment address:</strong>
+	            <div t-att-class="'d-none' if doc.partner_shipping_id != doc.partner_invoice_id else ''" t-field="doc.partner_id"
+	                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+	            <p t-att-class="'d-none' if doc.partner_shipping_id != doc.partner_invoice_id else ''" t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>
+	        </t>
+		</xpath>
+		<xpath expr="//t[@t-set='information_block']" position="replace">
+			<t t-set="information_block">
+				<div style="display:inline-block;width:49%;vertical-align: top;">
+					<strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoice and Shipment address:</strong>
+					<strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoice address:</strong>
+					<div t-field="doc.partner_invoice_id"
+					t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+				</div>
+                <t t-if="doc.partner_shipping_id != doc.partner_invoice_id">
+					<div style="display:inline-block;width:49%;vertical-align: top;">
+                    <strong>Shipment address:</strong>
+                    <div t-field="doc.partner_shipping_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                    </div>
+                </t>
+            </t>
+		</xpath>
+		<xpath expr="//div[@id='informations']" position="attributes">
+			<attribute name="class">row mt16 mb0</attribute>
+		</xpath>
+		<xpath expr="//div[@t-field='doc.partner_invoice_id']" position="attributes">
+			<attribute name="class">mb16</attribute>
+		</xpath>
+		<xpath expr="//div[hasclass('clearfix')]//table" position="replace">
+			<table></table>
+		</xpath>
+		<xpath expr="//table[hasclass('o_main_table')]" position="before">
+			<h6 t-if="doc.pricelist_id and doc.pricelist_id.code" class="mb16" style="color:#000;">
+				Applied : <t t-esc="doc.pricelist_id.name"></t>
+			</h6>
+		</xpath>
+		<xpath expr="//table[hasclass('o_main_table')]//tbody" position="after">
+			<tr class="border-black o_subtotal" style="">
+                 <td><strong>Price excluding VAT</strong></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td t-if="display_discount"></td>
+                 <td class="t-center">
+					 <!-- <span t-field="doc.amount_untaxed"/> -->
+					 <t t-set="doc_total" t-value="0"/>
+					<t t-foreach="doc.order_line.filtered(lambda line: line.reward_line == False)" t-as="order_line">
+						<t t-set="doc_total" t-value="doc_total + (order_line.price_reduce_taxexcl * order_line.product_uom_qty)"/>
+					</t>
+                    <span t-esc="doc_total" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                 </td>
+             </tr>
+             <t t-foreach="doc.amount_by_group" t-as="amount_by_group">
+                 <tr style="">
+                     <t t-if="amount_by_group[3] == 1 and doc.amount_untaxed == amount_by_group[2]">
+                         <td>
+                             <span t-esc="amount_by_group[0]"/>
+                             <span>&amp;nbsp;<span>on</span>&amp;nbsp;<t t-esc="amount_by_group[2]" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/></span>
+                       	 </td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td t-if="display_discount"></td>
+                         <td class="t-center o_price_total">
+                             <span t-esc="amount_by_group[1]"
+                                 t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                         </td>
+                     </t>
+                     <t t-else ="">
+                         <td>
+                             <span t-esc="amount_by_group[0]"/>
+                         </td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td t-if="display_discount"></td>
+                         <td class="t-center o_price_total">
+                             <span t-esc="amount_by_group[1]"
+                                 t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                         </td>
+                     </t>
+                 </tr>
+             </t>
+             <tr class="border-black o_total">
+                 <td><strong>Total</strong></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td t-if="display_discount"></td>
+                 <td class="t-center">
+                     <span t-field="doc.amount_total"/>
+                 </td>
+             </tr>
+		</xpath>
+
+		<xpath expr="//table[hasclass('o_main_table')]/thead/tr//th[5]" position="replace">
+			<th class="text-right">VAT</th>
+		</xpath>
+		<!-- Sale Person Remove -->
+		<xpath expr="//div[@t-if='doc.user_id.name']" position="replace">
+		</xpath>
+	</template>
+</odoo>    

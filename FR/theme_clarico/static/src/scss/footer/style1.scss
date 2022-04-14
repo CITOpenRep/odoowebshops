@@ -1,0 +1,224 @@
+/*========================== Footer Style 1 ================================*/
+/*---- Company Logo ----- */
+.te_footer_add_tel_email
+{
+	li{       
+		margin-top: 14px;
+		list-style-type: none;
+	   }
+	.te_footer_info_text 
+		{
+			margin: 0;
+			padding: 0;	
+		}
+	.te_ftr_text_style
+		{
+        	font-size:nth($f_sizes,3);
+		}
+	.te_footer_add_tel_email_text_ept
+	{
+		@include style(3,19,inherit,null,uppercase);
+		font-weight:bold;
+	}
+	.te_footer_social_icon
+	{
+	    margin: 16px 0 16px 0;
+		
+		>a
+		{
+			color: #fff;
+			border-radius: 100% !important;
+			margin: 0px 5px 5px 0px;
+			width: 35px;
+    		height: 35px;
+			@include transition(all,0.25s,ease-out,0s)
+			@include transform(scale(1))
+			    padding: 0;
+			& i{
+				font-size: 1rem;
+			    text-align: center;
+			    padding: 9px 5px;
+			}
+		}
+	}
+	.te_footer_logo_img 
+	{
+		> img
+		    {
+			max-height: 32px !important;
+		    }
+	}
+	.js_language_selector{
+		& .btn-sm{
+			width: 165px;
+			max-width: 165px;
+    		background-color: #ddd !important;
+    		padding: 0.675rem 1rem !important;
+    		font-size: 0.875rem !important;
+    		border: 0;
+    		& span{
+    			color: nth($f_color,3);
+    			font-size: 0.75rem;
+    		}
+    		&:after{
+				color: nth($f_color,3);
+			}
+		}
+		img{
+			/*max-width: 35px;
+			max-height: 22px;
+			margin-right: 5px;*/
+			margin-right: 5px;
+		    width: 20px;
+		    height: 20px;
+		    border-radius: 50%;
+		}
+		li
+		{
+			>div{
+				padding: 0.5rem 0.7rem;
+			}
+		}
+		.js_change_lang
+		{
+			padding: 0;
+			@include position(relative);
+			&:before
+			{
+				content:'';
+				@include position(absolute,0,0,0,0);
+			}
+			&:active
+			{
+				background-color: unset;
+				color:nth($f_color,3);
+			}
+		}
+	}	
+}
+/*---- static Menu -----*/
+.te_footer_info_ept 
+{
+	margin: 0;
+	padding: 0;
+	
+	li
+      {
+		padding: 10px 0;
+		list-style-type: none;
+		@include transition(padding,.5s,ease,0s)
+		cursor: pointer;
+
+			&:hover
+			{
+				padding-left: 10px;
+				a
+				{
+				color: nth($f_color,19);
+				}
+			}
+			 a
+			 {
+			 	font-size:nth($f_sizes,3);
+				text-transform: capitalize;
+				color: nth($f_color,19);;
+			 }
+		}	
+}
+
+.te_footer_title_text
+{
+	@include style(4,10);
+	margin-top:12px;
+	display:inline-block;
+}
+/*--- Payment Image -----*/
+.te_footer_text_img 
+{	
+	margin-bottom:16px;
+
+	img
+	  {
+	   	max-width: 100%;
+	  }
+	 h2
+	  {
+		margin: 16px 0 8px 0;
+		font-size:nth($f_sizes,4);
+		color:nth($f_color,19);
+	  }
+}
+/*--- Multiple Language Selected -----*/
+.te_language
+{
+	.list-inline-item
+	{
+		a{
+			color: inherit;
+			&:hover{
+				color:nth($f_color,19);
+			}
+		}
+	}
+}
+/*--- Bottom Static Menu ---*/
+.te_body_bg{
+	.te_footer_inline_menu_t
+	{
+		font-size:nth($f_sizes,3);
+		list-style-type: none;
+	    text-align:center;
+		margin-bottom:0px;
+		padding: 0;
+		 li
+		{
+			padding: 14px;
+			display: inline-block;
+			@include transition(null,0.3s)
+
+			&:hover
+			{
+				color: nth($f_color,19);
+				@include transition(null,0.3s)
+			}
+		a
+		{
+			color:nth($f_color,19);
+		}	
+		}
+		@media (max-width:500px)
+		{
+			padding-top: 16px;
+			padding-bottom: 16px;
+			> li
+			{
+				padding: 8px 6px;
+			}
+		}
+	}
+	.te_copyright_add_language
+	{
+		text-align: center;
+		color: inherit;
+		padding-bottom:16px;
+		@include media-breakpoint-down(sm) 
+		{
+			font-size:nth($f_sizes,3);
+		}
+		& span{
+			color:nth($f_color,19);
+		}
+	}
+}	
+
+.o_footer{
+	& .te_footer_add_website_link a{
+		font-size:nth($f_sizes,18);
+		width: 180px;
+	}
+	& .js_language_selector{
+		& a.dropdown-toggle, div.dropdown-menu{
+			width: 180px;
+		}
+	}
+}

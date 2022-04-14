@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Sale order report  -->
+	<template id="coupon_discount_saleorder_document" inherit_id="sale.report_saleorder_document">
+
+		<xpath expr="//t[@t-foreach='doc.order_line']" position="attributes">
+			<attribute name="t-foreach">doc.order_line.filtered(lambda line: line.reward_line == False)</attribute>">
+		</xpath>
+
+		<xpath expr="//table[hasclass('o_main_table')]/tr[hasclass('o_total')]" position="before">
+			<t t-if="doc.coupon_applied">
+				<tr class="border-black o_total">
+					 <td><strong>Promo code applied</strong></td>
+					 <td></td>
+					 <td></td>
+					 <td></td>
+					 <td class="t-center">
+						 <span t-esc=" - doc.coupon_discount_amount"
+							   t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+							   />
+					 </td>
+				</tr>
+			</t>
+		</xpath>
+
+	</template>
+
+	<!-- Acount Invoice report-->
+	<template id="coupon_discount_invoice_document" inherit_id="account.report_invoice_document">
+
+		<xpath expr="//t[@t-set='o']" position="after">
+			<t t-set="sale_order" t-value="o.get_sale_order_record()" />
+		</xpath>
+
+		<xpath expr="//t[@t-foreach='o.invoice_line_ids']" position="attributes">
+			<attribute name="t-foreach">o.invoice_line_ids.filtered(lambda line: line.product_id != sale_order.applied_coupon_id.discount_line_product)</attribute>">
+		</xpath>
+
+		<xpath expr="//table[hasclass('o_main_table')]//tr[hasclass('o_total')]" position="before">
+			<t t-if="sale_order and sale_order.coupon_applied">
+				<tr class="border-black o_total">
+					 <td><strong>Promo code applied</strong></td>
+					 <td></td>
+					 <td></td>
+					 <td></td>
+					 <td class="t-center">
+						 <span t-esc=" - sale_order.coupon_discount_amount"
+							   t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'
+							   />
+					 </td>
+				</tr>
+			</t>
+		</xpath>
+
+	</template>
+
+</odoo>

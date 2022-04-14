@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    	<template id="kassacompleet_form">
+	        <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+	        <input type="hidden" name="txnid" t-att-value='reference' />
+	        <input type="hidden" name="order_id" t-att-value='reference' />
+	        <input type="hidden" name="currency" t-att-value='currency and currency.name' />
+	        <input type="hidden" name="amount" t-att-value='amount' />
+	        <input type="hidden" name="kassacompleet_api_key" t-att-value="kassacompleet_api_key" />
+	        <input type="hidden" name="description" t-att-value='description' />
+	        <input type="hidden" name='return_url' t-att-value='returndata'/>
+	        <input type="hidden" name="surl" t-att-value='surl' />
+	        <input type="hidden" name="nurl" t-att-value='nurl' />
+	        <input type="hidden" name="curl" t-att-value='curl' />
+        </template>
+        
+    </data>
+</odoo>

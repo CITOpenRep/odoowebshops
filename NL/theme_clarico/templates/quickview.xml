@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="quick_view_modal"  inherit_id="emipro_theme_base.theme_quickview_template">
+		 <xpath expr="//div[hasclass('oe_theme_quickview_container')]" position="attributes">
+            <attribute name="class">oe_theme_quickview_container quick_view_content d-flex align-content-center
+                flex-wrap
+            </attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('quick_view_content')]" position="inside">
+            <t t-set="combination" t-value="product._get_first_possible_combination()"/>
+            <t t-set="combination_info"
+               t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+            <section
+                    t-attf-class="container-fluid py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
+                    id="product_detail">
+                <div class="row oe_website_sale">
+                    <div class="col-md-7">
+                        <t t-set="variant_img"
+                           t-value="any(product.mapped('product_variant_ids.image_variant'))"/>
+                        <t t-set="image_ids" t-value="product.product_image_ids"/>
+                        <div id="o-carousel-product" class="carousel slide"
+                             data-ride="carousel" data-interval="0">
+                            <div class="carousel-outer">
+                                <!--<div class="carousel-inner">
+                                     <div t-if="variant_img" class="carousel-item active"
+                                         itemprop="image" t-field="product[:1].product_variant_id.image"
+                                         t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product.product_variant_id['__last_update']) or '')}"/>
+                                    <div t-attf-class="carousel-item#{'' if variant_img else ' active'}"
+                                         itemprop="image" t-field="product.image"
+                                         t-options="{'widget': 'image', 'class': 'product_detail_img', 'alt-field': 'name', 'zoom': 'image', 'unique': product['__last_update']}"/>
+                                    <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                                        <div class="carousel-item" t-field="pimg.image"
+                                             t-options='{"widget": "image", "class": "product_detail_img", "alt-field": "name", "zoom": "image" }'/>
+                                    </t>
+                                </div>-->
+                                <div class="carousel-inner">
+                    <div class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image" t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
+                    <!--<div class="carousel-item active" itemprop="image" t-field="product.image" t-options="{'widget': 'image', 'class': 'product_detail_img', 'alt-field': 'name', 'zoom': 'image', 'unique': product['__last_update']}"/>-->
+                    <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                        <div class="carousel-item" t-field="pimg.image" t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
+                    </t>
+                </div>
+                                <t t-if="len(image_ids) or variant_img">
+                                    <a class="carousel-control-prev" href="#o-carousel-product"
+                                       role="button" data-slide="prev">
+                                        <span class="fa fa-chevron-left" role="img" aria-label="Previous"
+                                              title="Previous"/>
+                                    </a>
+                                    <a class="carousel-control-next" href="#o-carousel-product"
+                                       role="button" data-slide="next">
+                                        <span class="fa fa-chevron-right" role="img" aria-label="Next"
+                                              title="Next"/>
+                                    </a>
+                                </t>
+                            </div>
+                            <div t-if="len(image_ids) or variant_img" id="carousel-pager" class="carousel slide"
+                                 data-ride="carousel"
+                                 data-interval="500000000">
+                                <div class="carousel-inner vertical">
+                                   <!-- <li t-if="variant_img" class="carousel-item active">
+                                        <img class="img img-fluid js_variant_img_small" data-slide-to="0"
+                                             data-target="#o-carousel-product"
+                                             t-attf-src="/website/image/product.product/{{product_variant.id}}/image/90x90"
+                                             t-att-alt="product.name"/>
+                                    </li>-->
+                                    <li t-att-class="'carousel-item' if variant_img else 'carousel-item active'">
+                                        <img class="img img-fluid" t-att-data-slide-to="1 if variant_img else '0'"
+                                             data-target="#o-carousel-product"
+                                             t-attf-src="/website/image/product.template/{{product.id}}/image/90x90"
+                                             t-att-alt="product.name"/>
+                                    </li>
+                                    <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                                        <li class="carousel-item">
+                                            <img class="img img-fluid" data-target="#o-carousel-product"
+                                                 t-att-data-slide-to="pimg_index + (variant_img and 2 or 1)"
+                                                 t-attf-src="/website/image/product.image/{{pimg.id}}/image/90x90"
+                                                 t-att-alt="pimg.name"/>
+                                        </li>
+                                    </t>
+                                </div>
+                                <a class="carousel-control-up" href="#carousel-pager" role="button" data-slide="prev">
+                                    <span class="fa fa-angle-up" role="img" aria-label="Previous" title="Previous"/>
+                                </a>
+                                <a class="carousel-control-down" href="#carousel-pager" role="button" data-slide="next">
+                                    <span class="fa fa-angle-down" role="img" aria-label="Next" title="Next"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" id="product_details"><h3>
+                        <a itemprop="name" t-field="product.name" style="color: #004d43;" class="t_product_name"
+                           t-attf-href="/shop/product/#{ slug(product) }">Product Name
+                        </a></h3>
+                        <div class="o_not_editable">
+                            <p t-field="product.website_sale_description" class="text-muted t_prod_desc"/>
+                        </div>
+
+                        <span itemprop="url" style="display:none;"
+                              t-esc="'%sshop/product/%s' % (request.httprequest.url_root, slug(product))"/>
+                        <form action="/shop/cart/update" method="POST">
+                            <t t-set="first_possible_combination"
+                               t-value="product._get_first_possible_combination()"/>
+                            <t t-set="combination_info"
+                               t-value="product._get_combination_info(first_possible_combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                            <t t-set="product_variant"
+                               t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+
+
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="js_product js_main_product">
+                                <t t-placeholder="select">
+                                    <input type="hidden" class="product_id" name="product_id"
+                                           t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'"/>
+                                    <input type="hidden" class="product_template_id" name="product_template_id"
+                                           t-att-value="product.id"/>
+                                    <t t-call="sale.variants">
+                                        <t t-set="ul_class" t-value="'flex-column'"/>
+                                    </t>
+                                </t>
+                                <div class="css_quantity input-group oe_website_spinner" contenteditable="false"
+                                     style="display:none">
+                                    <div class="input-group-prepend">
+                                        <a t-attf-href="#" class="btn btn-secondary js_add_cart_json"
+                                           aria-label="Remove one" title="Remove one">
+                                            <i class="fa fa-minus"/>
+                                        </a>
+                                    </div>
+                                    <input type="text" class="form-control quantity" data-min="1" name="add_qty"
+                                           value="1"/>
+                                    <div class="input-group-append">
+                                        <a t-attf-href="#" class="btn btn-secondary float_left js_add_cart_json"
+                                           aria-label="Add one" title="Add one">
+                                            <i class="fa fa-plus"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <t t-call="website_sale.product_price"/>
+                                <p t-if="product.has_dynamic_attributes() or len(product.product_variant_ids) &gt; 1"
+                                   class="css_not_available_msg bg-danger" style="padding: 15px;">This combination
+                                    does not exist.
+                                </p>
+                                <!--Changes to add p tag with custom class to add product in cart without redirecting to cart page-->
+                                <!--Added By Preet Bhatti -->
+                                <!--Date: 28/may-->
+                                <p class="btn btn-primary btn-lg mt8 bg-success add_to_cart_json">Add to Cart</p>
+<!--                                <a role="button" id="" class="btn btn-primary btn-lg mt8 js_check_product a-submit bg-success"-->
+<!--                                   href="#">Add to Cart-->
+<!--                                </a>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+	</template>
+
+	<!-- Quick view in shop -->
+	<template id="quickview_icon_shop_product_item" inherit_id="website_sale.products_item" priority="10">
+		<xpath expr="//div[hasclass('product_price')]" position="inside">
+			<!--Changes to add cart iscon and 'add to cart' title-->
+            <!--Added By Preet Bhatti -->
+            <!--Date: 28/may-->
+            <a title="Add To Cart" class="btn btn-secondary bg-success btn-sm quick-view-a" t-att-data-id="'%s' % product.id">
+				<span class="fa fa-shopping-cart text-white" />
+			</a>
+		</xpath>
+	</template>
+
+	<template id="quick_product_box" inherit_id="website.layout">
+		<xpath expr="//main" position="inside">
+        <!--Changes to load quick view from ept addons insted of website_sale-->
+        <!--Added By Preet Bhatti -->
+        <!--Date: 28/may-->
+<!--			<div class="mask_cover"></div>-->
+            <div class="container py-2 oe_website_sale">
+                <div class="modal fade" id="quick_view_model_shop" tabindex='-1'>
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content quick_view_modal">
+                            <button type="button" class="close quick_close" data-dismiss="modal"
+                                    aria-label="Close" tabindex="-1">
+                            </button>
+                            <div class="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</xpath>
+	</template>
+
+    <template id="ajax_cart_box" inherit_id="website.layout">
+		<xpath expr="//main" position="inside">
+        <!--Changes to load ajax cart from ept addons insted of website_sale-->
+        <!--Added By Arti Pandya -->
+        <!--Date: 15/July-->
+            <div class="modal fade" id="conformCart" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content text-center">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><span class="popup_product_name"/></h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>You added <b><span class="popup_product_name"/></b> to your shopping cart..</p>
+                        </div>
+                        <div class="p-3">
+                            <button type="button" class="btn btn-primary w-100" data-dismiss="modal">Continue Shopping</button>
+                            <a type="button" class="btn btn-primary w-100 mt8" href="/shop/cart">Process Checkout
+                            <span class="fa fa-chevron-right ml-2"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</xpath>
+	</template>
+
+
+
+	<!-- Loading Icon For All Things -->
+	<template id="load_icon_template" inherit_id="portal.frontend_layout">
+		<xpath expr="//div[@id='wrapwrap']" position="after">
+			<div class="d-none cus_theme_loader_layout">
+				<div class="cus_theme_loader_div_layout">
+					<svg version="1.1" id="Layer_1" x="0px" y="0px" width="24px"
+						height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;"
+						xml:space="preserve">
+                        <rect x="0" y="0" width="4" height="10"
+						fill="#333">
+                            <animateTransform
+						attributeType="xml" attributeName="transform" type="translate"
+						values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform>
+                        </rect>
+                        <rect x="10" y="0" width="4" height="10"
+						fill="#333">
+                            <animateTransform
+						attributeType="xml" attributeName="transform" type="translate"
+						values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+                        </rect>
+                        <rect x="20" y="0" width="4" height="10"
+						fill="#333">
+                            <animateTransform
+						attributeType="xml" attributeName="transform" type="translate"
+						values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+                        </rect>
+                    </svg>
+				</div>
+			</div>
+		</xpath>
+	</template>
+</odoo>

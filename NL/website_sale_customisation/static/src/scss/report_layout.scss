@@ -1,0 +1,138 @@
+/* Report Design Changes */
+/*@font-face {
+    font-family: 'Barlow';
+    src: url(/website_sale_customisation/static/src/fonts/Barlow-Regular.ttf) format(Example: 'truetype' or 'opentype' depending on the file extension of your font);
+}*/
+
+/*.te_report_layout_background{
+    background-image: url(/website_sale_customisation/static/src/img/canna-letterhead-bg1.jpeg);
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin-left: -15px;
+    margin-right: -15px;
+}*/
+.o_boxed_footer{
+     border-top:0;
+     font-size:15px;
+     color: #373f38 !important;
+    & span{
+	    font-family: Barlow !important;
+	    font-size: 16px;
+	    border-top:0;
+	       color: #373f38 !important;
+    }
+    & .te_footer_col:first-child{margin-top:0 !important;}
+    & .te_footer_col{
+        position:relative;
+        margin-top:25px;
+        & .te_footer_logo_addr{
+            position:absolute;
+top:50px;
+left:60px;
+}
+}
+}
+
+.o_boxed_header{
+	/*background-image: url(/website_sale_customisation/static/src/img/canna-letterhead-bg.jpg);
+/*	position: absolute;
+	width:100%;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin : 0px -15px 0px -15px;
+    z-index:-1000;
+    height:400px;*/
+
+    /* padding: 55px 10px 0px 70px; */
+	position: relative;
+    font-family: CenturyGothicBold;
+    color: #006A65;
+    font-size: 14px;
+    text-align:left;
+    border-bottom:0;
+
+    & .logo_header{
+    	/*width:200px;*/
+	position: absolute;
+       top:0;
+       left:35%;
+       height:auto !important;
+      margin-top:23px;
+    }
+    & .canna_small_logo{
+    	padding-bottom:4px;
+    	border-bottom:2px solid #006A65;
+    }
+}
+.te_website_report_html{
+	& .o_boxed_header{
+		padding-top : 0px !important;
+	}
+	& .o_report_layout_boxed{
+		padding-top : 0 !important;
+	}	
+}
+.o_report_layout_boxed{
+	div:first-child{
+		width:100%;
+		display:inline-block;
+		address{
+			color: #00675a !important;
+			font-family: CenturyGothic;
+			span{
+			    font-size:14px;
+			}
+		}
+	}
+	table{
+	    thead{
+		border:0 !important;
+	        th.text-right{
+                text-align:center !important;
+
+            }
+		}
+		tr th{
+			text-transform: capitalize !important;
+			font-family: CenturyGothicBold !important;
+		}
+		tr th, tr td{
+			padding: 8px 10px;
+			border: 1px solid #ccc !important;
+			background-color : transparent !important;
+			color: #00675a !important;
+			font-size: 16px !important;
+			vertical-align: top !important;
+		}
+		.sale_tbody td.text-right, .invoice_tbody td.text-right, .t-center{
+                text-align:center !important;
+        }
+    }
+	strong, p, span{
+		font-family: CenturyGothic !important;
+		color: #00675a !important;
+		font-size : 15px !important;
+	}
+	h2 span, h1 span, h1, h2{
+		margin-top:16px !important;
+		margin-bottom:16px !important;
+		font-weight:600 !important;
+		font-size : 1.5rem !important;
+		font-family: CenturyGothicBold !important;
+		color: #00675a !important;
+
+	}
+	#informations{
+		.col-auto{
+		    width: auto;
+			display: inline-block !important;
+			vertical-align:top;
+			padding-bottom: 15px !important;
+			strong{
+				font-family: CenturyGothicBold !important;
+			}
+		}
+	}
+}

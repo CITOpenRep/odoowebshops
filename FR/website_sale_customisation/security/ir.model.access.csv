@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_size_guide,product.size.guide,model_product_size_guide,,1,1,1,1
+access_sales_product_size_guide,product.size.guide,model_product_size_guide,,1,1,1,1
+access_sales_product_size_guide_value,product.size.guide.value,model_product_size_guide_value,,1,1,1,1
+access_sales_product_size_guide_line,product.size.guide.line,model_product_size_guide_line,,1,1,1,1
+access_sales_product_size_guide_template,product.size.guide.template,model_product_size_guide_template,,1,1,1,1

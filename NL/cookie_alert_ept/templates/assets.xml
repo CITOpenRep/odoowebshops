@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="website_cookie_notice_template_ept" name="Main layout" inherit_id="portal.frontend_layout">    
+	    <xpath expr="//div[@id='wrapwrap']" position="before">  
+	        <link rel="stylesheet" type="text/css" href="/cookie_alert_ept/static/src/css/cookieconsent.min.css" />
+	        <script type="text/javascript" src="/cookie_alert_ept/static/src/js/cookieconsent.min.js"></script>
+			<t t-if="website.is_cookie_notice">
+				<script type="text/javascript"> 
+				window.addEventListener("load", function(){
+				var msg = String("<t t-esc="website.message"/>");
+				var esc_msg = escape(msg);
+				esc_msg = decodeURIComponent(esc_msg); 
+			  	window.cookieconsent.initialise({
+				  "palette": {
+				    "popup": {
+				      "background": "#000" 
+				    },
+				    "button": {
+				      "background": "#006A65"
+				    }
+				  },
+				  <t t-if="website.position !='static_top'">
+				  	  "position": "<t t-esc="website.position"/>",
+				  </t>
+				  <t t-if="website.position == 'static_top'">
+				  	  "position": "top",
+			  		  "static": true,	  
+				  </t>
+				  "content": {
+				    "message": esc_msg,
+				    "dismiss": "<t t-esc="website.btn_text"/>",
+				    "allow": "allow",
+				    "link": "<t t-esc="website.policy_link_text" />",
+				    "href": "<t t-esc="website.policy_url" />"
+				  }
+				})});
+			    </script>
+			 </t>
+	    </xpath>
+	</template>
+</odoo>
+	

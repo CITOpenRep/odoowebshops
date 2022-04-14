@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Order tracking Configuration  -->
+	<record id="res_config_settings_matomo_order_tracking_form" model="ir.ui.view">
+	    <field name="name">res.config.settings.matomo.order.tracking.form</field>
+	    <field name="model">res.config.settings</field>
+	    <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+	    <field name="arch" type="xml">
+	    	<xpath expr="//div[@id='social_default_image_setting']" position="after">
+	    		<div class="col-12 col-lg-6 o_setting_box" id="order_tracking_id">
+                        <div class="o_setting_right_pane">
+                            <label string="Matomo Order Tracking Id" for="matomo_id"/>
+                            <div class="text-muted">
+                                To track the website order set the Motemo id
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="matomo_id" class="o_light_label"/>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="order_tracking_id">
+                        <div class="o_setting_right_pane">
+                            <label string="Matomo Order Tracking Url" for="matomo_url"/>
+                            <div class="text-muted">
+                                To track the website order set the Motemo Url
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="matomo_url" class="o_light_label"/>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+	    	</xpath>
+	    </field>
+	</record>
+</odoo>

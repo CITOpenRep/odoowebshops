@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<!-- Cookie Notification Configuration   -->
+        <record id="res_config_settings_cookie_notice_form" model="ir.ui.view">
+            <field name="name">res.config.settings.cookie.notice.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+            <field name="arch" type="xml">                
+                  <xpath expr="//div[@id='website_settings']" position="after">
+                        <h2>Cookie Box</h2>
+                        <div class="row mt16 o_settings_container" id="cookie_notice_settings">
+                           <div class="col-12 col-md-6 o_setting_box">
+		                      <group name="cookie_notice">
+			                      <field name="is_cookie_notice"/>
+			                      <field name="message" attrs="{'invisible': [('is_cookie_notice','=',False)],'required': [('is_cookie_notice', '=', True)] }"/>
+			                      <field name="btn_text" attrs="{'invisible': [('is_cookie_notice','=',False)],'required': [('is_cookie_notice', '=', True)] }"/>
+			                      <field name="policy_link_text" attrs="{'invisible': [('is_cookie_notice','=',False)],'required': [('is_cookie_notice', '=', True)] }"/>
+			                      <field name="policy_url" attrs="{'invisible': [('is_cookie_notice','=',False)],'required': [('is_cookie_notice', '=', True)] }"/>
+			                      <field name="position" widget="selection" attrs="{'invisible': [('is_cookie_notice','=',False)],'required': [('is_cookie_notice', '=', True)] }"/>
+		                      </group>   
+                           </div>    
+                        </div>                      
+                  </xpath>     
+            </field>
+        </record>
+    </data>
+</odoo>

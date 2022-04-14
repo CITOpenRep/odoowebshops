@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Low stock count in tree view -->
+    <record id="product_product_low_stock_tree" model="ir.ui.view">
+        <field name="name">product.product.low.stock.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="low_stock_count"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Low stock count in form view -->
+    <record id="product_template_low_stock_form" model="ir.ui.view">
+            <field name="name">product.template.low.stock.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='stock_property']" position="after">
+                <group string="Low Stock" name="low_stock_property" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+                        <field name="low_stock_count" />
+                </group>
+                </xpath>
+            </field>
+    </record>
+
+    <!--Low stock count in product form view -->
+    <record id="product_product_low_stock_form_easy" model="ir.ui.view">
+            <field name="name">product.product.low.stock.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='pricing']" position="after">
+                    <group string="Low Stock" name="low_stock_property" >
+                            <field name="low_stock_count" />
+                    </group>
+                </xpath>
+            </field>
+    </record>
+</odoo>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="product_size_guide_action_form_view" model="ir.ui.view">
+        <field name="name">Size Guide Form</field>
+        <field name="model">product.size.guide</field>
+        <field name="arch" type="xml">
+            <form string="Product Size Guide">
+                <sheet>
+                    <div class="oe_left">
+                      <group>
+                   	<field name="name" />
+			    	</group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="product_size_guide_action_tree_view" model="ir.ui.view">
+        <field name="name">Size Guide Tree</field>
+        <field name="model">product.size.guide</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Product Side Guide">
+            	 <field name="name" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="product_size_guide_value_action_tree_view" model="ir.ui.view">
+        <field name="name">Size Guide Value Tree</field>
+        <field name="model">product.size.guide.value</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Product Side Guide Value" editable="bottom">
+            	 <field name="name" />
+            	 <field name="value_id" />
+            </tree>
+        </field>
+    </record>	
+
+    <record id="product_size_guide_action" model="ir.actions.act_window">
+        <field name="name">Product Size Guide</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.size.guide</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define a new Size Guide
+          </p>
+        </field>
+    </record>
+    
+    <record id="product_size_guide_value_action" model="ir.actions.act_window">
+        <field name="name">Product Size Guide Value</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.size.guide.value</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define a new Size Guide
+          </p>
+        </field>
+    </record>
+    
+    <record id="product_size_guide_template_form_view" model="ir.ui.view">
+        <field name="name">Size guide template</field>
+        <field name="model">product.size.guide.template</field>
+        <field name="arch" type="xml">
+            <form string="Size guide template">
+                <sheet>
+                   	<group>
+                   		<field name="name" />
+                  		<field name="size_guide_image" class="oe_avatar"/>
+                		<field name="size_guide_description" />
+                		<field name="size_guide_line_ids" widget="one2many_list" context="{'show_attribute': False}">
+	                        <tree string="Size Guide" editable="bottom">
+	                            <field name="size_guide_id"/>
+	                            <field name="value_ids" widget="many2many_tags" required="True"/>
+	                        </tree>
+	                    </field>
+		    		</group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="product_size_guide_template_value_action" model="ir.actions.act_window">
+        <field name="name">Product Size Guide Template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.size.guide.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define a new Size Guide
+          </p>
+        </field>
+    </record>
+    
+    <menuitem id="menu_sizeguide_settings" name="Size Guide" sequence="90"
+       	parent="website.menu_website_global_configuration"/>
+    <menuitem action="product_size_guide_template_value_action" id="product_size_guide_template" parent="website_sale_customisation.menu_sizeguide_settings" sequence="1" />
+    <menuitem action="product_size_guide_action" id="product_size_guide" parent="website_sale_customisation.menu_sizeguide_settings" sequence="2" />
+    <menuitem action="product_size_guide_value_action" id="product_size_guide_value" parent="website_sale_customisation.menu_sizeguide_settings" sequence="3" />
+</odoo>

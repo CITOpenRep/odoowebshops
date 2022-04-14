@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<!-- RMA form  -->
+    <record id="res_config_settings_rma_form" model="ir.ui.view">
+        <field name="name">res.config.settings.rma.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="webmaster_settings" position="after">
+                <h2>Return Product Responsible Person</h2>
+                <div class="row mt16 o_settings_container" id="rma_responsible">
+                  <div class="col-12 o_setting_box" id="rma_responsible_setting">
+                    <label for="rma_responsible_person"/>
+                    <field name="rma_responsible_person" class="col-3"/>
+                  </div>
+                </div>
+                
+                <h2>Order Return Policy</h2>
+                <div class="row mt16 o_settings_container" id="rma_settings">
+                  <div class="col-6 o_setting_box" id="rma_return_setting">
+                    <label for="rma_return_days"/>
+                    <field name="rma_return_days" class="col-3"/>day(s).
+                  </div>
+                </div> 
+                
+                <h2>RMA Notification</h2>
+                <div class="row mt16 o_settings_container" id="rma_notification_settings">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="create_rma_mail_settings">
+                        <div class="o_setting_right_pane">
+                            <label string="Return Order Create Notification" for="rma_create_mail_template"/>
+                            <div class="text-muted">
+                                Return Order Create Notification Mail Template
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="rma_create_mail_template" class="oe_inline" options="{'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+	            	<div class="col-xs-12 col-md-6 o_setting_box" id="rma_action_template_settings">
+	                     <div class="o_setting_right_pane">
+	                          <label string="Return Order Approve Notification" for="rma_approve_mail_template"/>
+	                          <div class="text-muted">
+	                              Return Order Approve Notification Mail Template
+	                          </div>
+	                          <div class="content-group">
+	                              <div class="mt16">
+	                                  <field name="rma_approve_mail_template" class="oe_inline" options="{'no_create': True}"/>
+	                              </div>
+	                          </div>
+	                     </div>
+	                 </div>
+	                 
+	                 <div class="col-xs-12 col-md-6 o_setting_box" id="validate_rma_mail_settings">
+                        <div class="o_setting_right_pane">
+                            <label string="Return Order Validate Notification" for="rma_validate_mail_template"/>
+                            <div class="text-muted">
+                                Return Order Validate Notification Mail Template
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="rma_validate_mail_template" class="oe_inline" options="{'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	                 
+	                 
+	                 <div class="col-xs-12 col-md-6 o_setting_box" id="close_rma_mail_settings">
+                        <div class="o_setting_right_pane">
+                            <label string="Return Order Close Notification" for="rma_close_mail_template"/>
+                            <div class="text-muted">
+                                Return Order Close Notification Mail Template
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="rma_close_mail_template" class="oe_inline" options="{'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="rma_action_template_settings">
+	                     <div class="o_setting_right_pane">
+	                          <label string="Return Order Reject Notification" for="rma_reject_mail_template"/>
+	                          <div class="text-muted">
+	                              Return Order Reject Notification Mail Template
+	                          </div>
+	                          <div class="content-group">
+	                              <div class="mt16">
+	                                  <field name="rma_reject_mail_template" class="oe_inline" options="{'no_create': True}"/>
+	                              </div>
+	                          </div>
+	                     </div>
+	                 </div>
+	                 <div class="col-xs-12 col-md-6 o_setting_box" id="rma_action_template_settings">
+	                     <div class="o_setting_right_pane">
+	                          <label string="Return Order Acknowledgement" for="rma_ack_mail_template"/>
+	                          <div class="text-muted">
+	                              Return Order Acknowledgement Mail Template
+	                          </div>
+	                          <div class="content-group">
+	                              <div class="mt16">
+	                                  <field name="rma_ack_mail_template" class="oe_inline" options="{'no_create': True}"/>
+	                              </div>
+	                          </div>
+	                     </div>
+	                 </div>
+	                 
+	                 <div class="col-xs-12 col-md-6 o_setting_box" id="rma_action_template_settings">
+	                     <div class="o_setting_right_pane">
+	                          <label string="Return Order Acknowledgement Group" for="rma_ack_group"/>
+	                          <div class="text-muted">
+	                              Return Order Acknowledgement Group
+	                          </div>
+	                          <div class="content-group">
+	                              <div class="mt16">
+	                                  <field name="rma_ack_group" class="oe_inline" options="{'no_create': True}"/>
+	                              </div>
+	                          </div>
+	                     </div>
+	                 </div>
+            	  </div>
+            	</div>
+        </field>
+    </record>
+</odoo>

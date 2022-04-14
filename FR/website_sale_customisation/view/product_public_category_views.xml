@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="website_sale_customisation_product_category_inherit_view" model="ir.ui.view">
+	        <field name="name">product.public.category.form.website</field>
+	        <field name="model">product.public.category</field>
+	        <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//field[@name='sequence']" position="after">
+	        		<field name="child_id" invisible="1"/>
+	        	</xpath>
+	        	<xpath expr="//div[last()]" position="after">
+	        		<notebook attrs="{'invisible':[('child_id', '!=', [])]}">
+	        			<page name="sizeguide" string="Size Guide">
+	                		<group>
+		                		<field name="is_size_guide" />
+		                		<field name="size_guide_template" attrs="{'invisible':[('is_size_guide', '=', False)],'required': [('is_size_guide','=', True)]}"/>
+			            	</group>
+	                	</page>
+	        		</notebook>
+	        	</xpath>
+	        </field>
+	    </record>
+	</data>
+</odoo>

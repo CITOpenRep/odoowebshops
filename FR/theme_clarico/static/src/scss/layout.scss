@@ -1,0 +1,389 @@
+/******************************
+INDEX:
+    01 - Header common styles
+    02 - 404 page
+    03 - Login Style
+    04 - Contact Us Form
+    05 - Contact Us Company Details 
+    06 - Click to scroll top
+    07 - social button icons for product page
+    08 - loading icon
+    09 - Canna Home Page
+******************************/
+/*============================ 01 - Header common styles ================================*/
+/* hide search from website search module when installed */
+.website_search_form_main
+{
+	display:none;
+}
+.te_user_account
+{
+	> .dropdown-menu a.dropdown-item
+	{
+		padding: 0.55rem 1.5rem;
+		border-bottom: 1px dashed #c0c0c0;
+		font-size:nth($f_sizes,3);
+		text-transform: capitalize;
+		
+		> i
+		{
+			@include style(3,19);
+			margin-right:1rem;
+		}
+	}
+	> .dropdown-menu a.dropdown-item:last-child
+	{
+		border:none;
+	}
+}
+
+/*============================ 02 - 404 page ==============================*/
+.page404
+{
+	h1
+	{
+		font-size:6.25rem; /*This font-size is not used in variables*/ 
+		font-family:inherit;
+		color: nth($f_color,3);
+		text-align:center;
+		margin-bottom:0px;
+	}	
+	p
+	{
+		text-transform: uppercase;
+		color: nth($f_color,3);
+		text-align: center;		
+	}
+	ul 
+	{		
+		text-align:center;
+		padding:0;		
+			
+		li
+		{
+			list-style-type:none;
+			display: inline-block;
+		}
+	}
+}
+
+/*=========================== 03 - Login Style ==================================*/
+.oe_login_form, .oe_signup_form, .oe_reset_password_form
+{
+	max-width: 400px;
+	padding: 32px;
+	@include box-shadow(0px 0px 10px 0 rgba(50, 50, 93, 0.1))
+	
+	.form-group > .form-control 
+	{
+		border:0;
+		border-bottom: $input-border-width solid $input-border-color;
+		
+		&:focus
+		{
+			box-shadow: none;
+			border-color: nth($f_color,3);
+		}
+	}
+	& label
+	{
+		font-weight: normal;
+		@include style(3,3,inherit,null,uppercase);
+		@include spacing(1px,0);
+	}
+	& .o_auth_oauth_providers >a
+	{
+		margin-bottom:8px;
+	}
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: nth($f_color,18);
+}
+.form-control::placeholder {
+  color: #b1b1b1; /*This color is not used in variables*/ 
+}
+.te_login_links >a,.te_reset_pw_login_btns > a
+{
+  	@include style(18,4,inherit);
+}
+.te_signup_login_link
+{
+	@include style(18,4,inherit);
+	text-transform: none;
+}
+
+.te_user_account_icon, .te_currency_symbol{
+	display:none;
+}
+
+/*=========================== 04 - Contact Us Form ========================================*/
+.te_contactus_text_block
+{	
+	h1
+	{
+		margin-bottom:0px;
+	}	
+}
+
+.s_website_form{
+		.col-form-label
+		{
+			@include style(3,1,$o-theme-fonts,null,uppercase);
+			font-family : CenturyGothic;
+			font-weight: normal;
+		}
+		.form-control
+		{
+			&:focus
+			{
+				box-shadow: none !important; 
+			}
+		}		
+}
+.te_form_required_text
+{
+	font-size:nth($f_sizes,3);
+	}
+
+/*============================= 05 - Contact Us Company Details ====================================*/
+.te_company_details{
+	span{
+		@include style(2,22,null,1.8,capitalize);
+		margin-top: 0px !important;
+	}
+	a{
+		@include style(7,22,null,1.5,capitalize);
+	}
+	.fa
+	{
+		color:nth($f_color,19);
+	}
+}
+div[name="mail_button"] 
+{
+	margin-bottom: 32px;
+	display: inline-block;
+	a
+	{
+		float:left;
+	}
+}
+/*=========================== 06 - Click to scroll top ===================================*/
+.scrollup-div{
+	@include position(fixed,auto,15px,15px,auto);
+    background: nth($f_color,3);
+    width: 35px;
+    height: 35px;
+    display:none;
+    cursor: pointer;
+    @include transition(null,.3s,null)
+    z-index:9999;
+    border-radius: 50%;
+    
+    &:hover{
+    	 background: nth($f_color,19);
+    }
+    .scrollup-i{
+	    padding: 6px 0px 0 10px;
+	    
+	    @include style(19,5);
+	    font-weight: 900;
+	    width: 35px;
+    	height: 35px;
+    	@include transition(null,.3s,null)
+    	padding: 0.25rem;
+    }
+}
+
+/*================================= 07 - social button icons for product page ====================================*/
+
+.oe_share_icon {
+	@include style(1,19)
+    display: inline-block;
+    background: nth($f_color,5);
+    @include border-radius(100%)
+    text-align: center;
+    margin: 10px 0;
+    width: 38px;
+    height: 38px;	
+    border : 1px solid nth($f_color,19);
+    & i{
+    	font-size: 1rem;
+	    text-align: center;
+	    padding: 9px 5px;
+    }
+    &:hover{
+    	background: nth($f_color,19);
+    	@include transition(null,.3s,null)
+    	& i{
+    		color: nth($f_color,5);
+    	}
+    }
+}
+/*========================================== 08 - loading icon ================================================*/
+/* Load icon style in Layout */
+.cus_theme_loader_layout svg path,
+.cus_theme_loader_layout svg rect{
+  fill: nth($f_color,19);
+}
+.cus_theme_loader_layout{
+	@include position(fixed,0,0,0,0)
+	width: 100%;
+	background:rgba(255, 255, 255, 0.7);
+	z-index: 9999;
+}
+.cus_theme_loader_div_layout{
+	margin-top:20%;
+	display:inline-block;
+	width:100%;
+	text-align:center;
+}
+/*================================== 09 - Canna Home Page =====================================*/
+/* Slider */
+.te_ts_style_7_inner{
+	.te_t_slider_sm_content{
+		.te_slider_title{
+			font-size:nth($f_sizes,11); 
+			/*font-weight: 600;*/
+		}
+		.s_btn{
+			.te_slider_btn{
+				border-radius: 8px !important;
+				background: nth($f_color,5); 
+				@include style(4,3); 
+				border: none;
+				&:hover{
+					background: nth($f_color,19); 
+					color:nth($f_color,5); 
+				}
+			}
+		}
+		& p.o_default_snippet_text{
+			line-height: 150%;
+		    font-size: 1rem;
+		    font-weight: 600;
+		}
+	}
+}
+/* 3 Column Snippet */
+.s_nb_column_fixed
+{
+	.te_3_column_title
+	{
+		color:nth($f_color,22); 
+	}
+}
+.s_three_columns
+{
+	.card-body
+	{
+		@include position(relative);
+		.te_offer_lable
+		{
+			@include position(absolute,-40px,-5px,null,null);
+			background: #bf0f11;
+			@include style(7,5,null,null,uppercase);
+			padding: 0.2rem 0.7rem;
+			border-radius: 6px 0 0 6px;
+			&:before
+			{
+				content: "";
+				@include position(absolute,-5px,0);
+				width: 0;
+				height: 0;
+				border-right: 0px solid transparent;
+				border-bottom: 6px solid #bf0f11;
+				border-left: 11px solid transparent;
+			}
+		}
+		.te_3_column_title
+		{
+			@include style(10,19,null,null,none); 
+			margin: 0;
+			& a{
+				@include style(10,19,null,null,none); 
+				margin: 0;
+			}
+		}
+		.te_3_column_price
+		{
+			@include style(1,19);
+			font-weight: 600;
+		}
+	}
+}
+/* Product Slider */
+.te_slider_view_all
+{
+	display: none !important;
+}
+.te_prod_sl_title
+{
+	color:nth($f_color,22); 
+}
+.s_s1_ind
+{
+	border: none !important;
+	.te_prod_info
+	{
+		.te_prod_info_sub
+		{
+			background: nth($f_color,5) !important;
+			h6 
+			{
+				text-align: left !important;
+				a
+				{
+					@include style(7,19,CenturyGothic,140%);
+				}
+			}
+			.product_price
+			{
+				text-align: left !important;
+				color:nth($f_color,19) !important; 
+				& b{
+					@include style(1,19,CenturyGothicBold);
+				}
+			}
+		}
+	}
+}
+.te_s_text_image{
+	& h2.te_bold_text{
+		@include style(12,6,CenturyGothicBold);
+		margin-bottom: 0;
+	}
+	& h5.te_small_text{
+		@include style(7,3,CenturyGothic);
+	}
+	/*& p.te_content_text{
+		font-size: 0.85rem;
+	}*/
+	& .btn-secondary{
+		background : #efefef;
+		color:nth($f_color,19) !important;
+		border: 0;
+	}
+}
+
+/*.btn-primary{
+	color: #fff !important;
+}*/
+.btn-primary, .btn-secondary{
+	text-transform: uppercase;
+    border-radius: 5px !important;
+    font-weight: 600;
+    font-size: 0.80rem;
+    letter-spacing: 0.5px;
+}
+.btn-secondary{
+	background: transparent;
+    border: 1px solid #868e96;
+    color: #868e96;
+    
+    &:hover{
+    	color: nth($f_color,19);
+    	background-color: transparent;
+    	border-color: nth($f_color,19);
+    }
+}

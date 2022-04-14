@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="reduction_code" inherit_id="website_sale.total" name="Promo Code">
+
+        <!-- Add promo code option in amount total section -->
+        <xpath expr="//div[@id='cart_total']//table/tr[last()]" position="after">
+            <tr t-if="not hide_coupon">
+                <td colspan="3" class="text-center text-xl-right noborder">
+                    <span class=''>
+                        <t t-set='force_coupon'
+                           t-value="website_sale_order.pricelist_id.code or request.params.get('code_not_available')"/>
+                        <t t-if="not force_coupon">
+                            <!-- Check if coupon is allpied on order or not-->
+                            <t t-if="website_sale_order and not website_sale_order.applied_coupon_id">
+                                <a class="show_coupon" style="cursor: pointer;font-size: 17px;">I have a promo code</a>
+                            </t>
+                        </t>
+                        <div t-attf-class="coupon_form #{not force_coupon and 'd-none'}">
+                            <t t-call="website_sale.coupon_form"/>
+                        </div>
+
+                        <!-- Check if coupon is applied on order or not to add message-->
+                        <t t-if="website_sale_order and website_sale_order.applied_coupon_id and website_sale_order.state in ['draft'] or website_sale_order.pricelist_id.code" >
+                            <div class="card bg-success text-white mt16">
+                                <div class="card-header text-left">
+                                    <span>
+                                        <t t-if="not website_sale_order.pricelist_id.code" >
+                                            Promo code <t t-esc="website_sale_order.applied_coupon_id.coupon_code" /> applied successfully.
+                                    </t>
+                                        <t t-if="website_sale_order.pricelist_id.code" >
+                                            Promo code <t t-esc="website_sale_order.pricelist_id.code"/> applied successfully.
+                                        </t>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-left mt16">
+                                <a class='js_remove_product_ept no-decoration text-danger'>Remove Promo code</a>
+                            </div>
+                             <script>
+                                $(document).ready(function() {
+                                    $("a.js_remove_product_ept").click(function(e) {
+                                        $('.cus_theme_loader_layout').removeClass('d-none')
+                                         $("form[name='coupon_code'] input[name='promo']" ).val('')
+                                         $("form[name='coupon_code']" ).submit();
+                                    })
+                                });
+                            </script>
+                        </t>
+
+                        <t t-if="request.params.get('code_not_available')" >
+                            <div class="card bg-warning text-white mt16">
+                                <div class="card-header text-left">
+                                    <span>
+                                        Invalid Promo code
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </span>
+                </td>
+            </tr>
+        </xpath>
+
+        <!-- Add coupon Discount amount in amount total section -->
+        <xpath expr="//tr[@id='order_total_taxes']" position="before">
+            <t t-set="coupon_line" t-value="website_sale_order.order_line.filtered(lambda line: line.reward_line == True)"></t>
+            <tr t-if="coupon_line" id="order_coupon_discount">
+                <td class="text-right noborder">Promo code discount :</td>
+                <td class="text-xl-right noborder">
+                      <span t-esc="sum(coupon_line.mapped('price_unit'))" style="white-space: nowrap;"
+                            t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+
+    <template id="cart_lines_ept" inherit_id="website_sale.cart_lines">
+        <xpath expr="//t[@t-foreach='website_sale_order.website_order_line']" position="attributes">
+            <attribute name="t-foreach">website_sale_order.website_order_line.filtered(lambda line: line.reward_line == False)</attribute>
+        </xpath>
+    </template>
+
+    <template id="popover_cart_lines_ept" inherit_id="website_sale.cart_popover">
+        <!-- Set reward line attribute to true for reward type line -->
+        <xpath expr="//t[@t-foreach='website_sale_order.website_order_line']" position="attributes">
+            <attribute name="t-foreach">website_sale_order.website_order_line.filtered(lambda line: line.reward_line == False)</attribute>
+        </xpath>
+    </template>
+
+     <template id="cart_summary_lines_ept" inherit_id="website_sale.cart_summary">
+        <!-- Set reward line attribute to true for reward type line -->
+        <xpath expr="//tr[@t-foreach='website_sale_order.website_order_line']" position="attributes">
+            <attribute name="t-foreach">website_sale_order.website_order_line.filtered(lambda line: line.reward_line == False)</attribute>
+        </xpath>
+    </template>
+
+    <template id="coupon_form_ept" inherit_id="website_sale.coupon_form">
+        <!-- Set reward line attribute to true for reward type line -->
+        <xpath expr="//p[hasclass('bg-warning')]" position="replace">
+
+        </xpath>
+        <xpath expr="//a[hasclass('a-submit')]" position="attributes">
+            <attribute name="class">btn btn-success a-submit</attribute>
+        </xpath>
+    </template>
+
+    <template id="payment_ept" inherit_id="website_sale.payment">
+        <xpath expr="//form/a[hasclass('a-submit')]" position="attributes">
+            <attribute name="class">btn btn-success a-submit text-white</attribute>
+        </xpath>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,33 @@
+<odoo>
+	<!-- added shipping available field in country view -->
+	<record id="res_country_view_country_tree" model="ir.ui.view">
+        <field name="name">res.country.tree</field>
+        <field name="model">res.country</field>
+        <field name="inherit_id" ref="base.view_country_tree"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+            	<field name="is_shipping_available"/>
+            </field>                                                     
+       	</field>
+  	</record>
+  	
+  	<record id="res_country_view_country_form" model="ir.ui.view">
+        <field name="name">res.country.form</field>
+        <field name="model">res.country</field>
+        <field name="inherit_id" ref="base.view_country_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+            	<field name="is_shipping_available"/>
+            </field>                                                     
+       	</field>
+  	</record>
+  	
+	<record model="ir.actions.act_window" id="res_country_action_view_countries">
+	   <field name="name">Country</field>
+	   <field name="res_model">res.country</field>
+	   <field name="view_type">form</field>
+	   <field name="view_mode">tree,form</field>
+	</record>
+	
+	<menuitem name="Country" id="menu_countries_ept" parent="base.menu_email" action="res_country_action_view_countries"/>
+</odoo>

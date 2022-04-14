@@ -1,0 +1,4 @@
+/*Hide coupon code discount line in cart page*/
+tr[reward-line='True'] {
+    display:none
+}

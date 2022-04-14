@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	
+        <!-- Email template for Sale Order -->
+        <record id="sale.email_template_edi_sale" model="mail.template">
+            <field name="name">Sales Order: Send by email</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">CANNA Order Acknowledgement (# ${object.name})</field>
+            <field name="body_html" type="html">
+            	
+            <table border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 14px;">
+                    <div>
+                        <p style="margin: 0px; padding: 0px; font-size: 14px; color:#006A65;">
+        % set doc_name = 'quotation' if object.state in ('draft', 'sent') else 'order'
+        Dear ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br/><br/>
+Congratulations with your order! We will immediately start processing your order. The maximum delivery time is 5 days<br/><br/>
+Please see attached your order confirmation including all the details.<br/><br/>
+Have fun growing!<br/><br/>
+Kind regards,<br/><br/>
+Team CANNA<br/><br/>
+
+        % if user and user.signature:
+          ${user.signature | safe}
+        % endif
+    </p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+			</field>
+            <field name="report_template" ref="sale.action_report_saleorder"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+        
+        <!--Email template for invoice-->
+        <!-- <record id="account.email_template_edi_invoice" model="mail.template">
+            <field name="name">Invoice: Send by email</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">CANNA Order Invoice (# ${object.number})</field>
+            <field name="body_html" type="html">
+            	
+            <table border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="middle">
+                    <span style="font-size: 10px;">Your Account</span><br/>
+                    <span style="font-size: 20px;font-weight: bold;">
+                        ${object.number}
+                    </span>
+                </td></tr>
+                <tr><td colspan="2" style="text-align:center;">
+                  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;">
+                </td></tr>
+            </tbody></table>
+            <table border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 14px;">
+                    <div>
+                        <p style="font-size: 14px; color:#006A65;">
+Hi ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+
+,<br/><br/>
+Hereby we sent your invoice with the total amount of ${format_amount(object.amount_total, object.currency_id)}, the invoice is already paid so nothing left to do but chill out.
+<br/><br/>If you have any questions about your order please contact our customer service. We have some lovely people working here who are always in the mood to talk to you.
+<br/><br/>See invoice 
+                        <br/><br/>Kind regards,<br/><br/>
+                        Team CANNA Nederland<br/><br/>
+ 
+% if user and user.signature:
+          ${user.signature | safe}
+        % endif
+</p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+            
+            </field>
+            <field name="report_template" ref="account.account_invoices"/>
+            <field name="report_name">Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+       	</record> -->
+       	
+       	<!--Email template for delivery-->
+       	<!-- <record id="delivery.mail_template_data_delivery_confirmation" model="mail.template">
+	        <field name="name">Delivery: Send by Email</field>
+	        <field name="model_id" ref="delivery.model_stock_picking"/>
+	        <field name="email_from">${object.user_id.email_formatted |safe}</field>
+	        <field name="subject">CANNA Order Status (# ${object.origin})</field>
+	        <field name="partner_to">${object.partner_id.id}</field>
+	        <field name="body_html" type="html">
+		        
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">
+        Hi ${object.partner_id.name}<br/><br/>
+        Thank you for your order! We had dispatched your order (# ${object.origin}).<br/>
+        
+        Please find the link to the shipment tracking information.<br/><br/>
+        Kind regards,<br/><br/>
+Team CANNA Nederland<br/><br/>
+        % if user and user.signature:
+          ${user.signature | safe}
+        % endif
+    </p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+	        </field>
+	        <field name="report_template" ref="stock.action_report_delivery"/>
+	        <field name="report_name">${(object.name or '').replace('/','_')}</field>
+	        <field name="lang">${object.partner_id.lang}</field>
+	        <field name="auto_delete" eval="True"/>
+	    </record> -->
+    </data>
+</odoo>

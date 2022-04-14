@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    	<!--Email template -->
+        <record id="rma_ept.rma_ack_mail_template" model="mail.template">
+            <field name="name">RMA Acknowledgement Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">${object.company_id.name} RMA (Ref ${object.code or 'n/a' })</field>
+           <!--  <field name="partner_to">${object._context.get('email_to')}</field> -->
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            		
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">Your RMA (Return form)<br/><br/><strong>${object.name}</strong><br/><br/>
+Dear CANNA admin,<br/><br/>
+				
+				You are the person to handle the following return shipment.
+				<br/><br/>
+Kind regards,<br/><br/>
+				    Team CANNA Nederland<br/><br/>
+% if user and user.signature:
+				          ${user.signature | safe}
+				        % endif
+</p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+
+			]]>
+			</field>
+        </record>
+    
+        <!--Email template -->
+        <record id="rma_ept.rma_create_mail_template" model="mail.template">
+            <field name="name">RMA Create Notification Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">CANNA Return Request Acknowledgement (# ${object.name})</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+				
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">Hi ${object.partner_id.name}
+				% if object.partner_id.parent_id:
+				    (<i>${object.partner_id.parent_id.name}</i>)
+				% endif
+				,<br/><br/>
+				
+				We have received your return request for <strong># ${object.name}</strong> 
+				<br/><br/>
+This is under process and within 5 days you will receive further communication with respect to your return request.<br/><br/>
+Kind regards,<br/><br/>
+				    Team CANNA Nederland<br/><br/>
+% if user and user.signature:
+				          ${user.signature | safe}
+				        % endif
+</p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+			]]>
+			</field>
+        </record>
+        
+        
+        <record id="rma_ept.rma_approve_mail_template" model="mail.template">
+            <field name="name">RMA Response Notification Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">CANNA Returns (# ${object.sale_id.name})</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="action_report_rma"/>
+            <field name="report_name">${(object.code or '')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+					
+            <table style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;" width="590" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr><td style="font-size: 13px;" valign="top">
+                    <div>
+                        <p style="color:#006A65">Hi ${object.partner_id.name}
+					% if object.partner_id.parent_id:
+					    (<i>${object.partner_id.parent_id.name}</i>)
+					% endif
+					,<br/><br/>
+					We are sorry you are not happy with purchase.<br/>We have received confirmation of your returns for (# ${object.sale_id.name})and it has been approved.<br/>Within 5 working days after receiving the return shipment we will process your ${object.rma_reason_id.name}<br/><br/>
+Kind regards,<br/><br/>
+Team CANNA Nederland<br/><br/>
+					
+					
+					% if user and user.signature:
+				          ${user.signature | safe}
+				        % endif
+					</p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+					]]>
+			</field>
+        </record>
+        
+        
+        <record id="rma_ept.rma_validate_mail_template" model="mail.template">
+            <field name="name">RMA Validate Notification Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">CANNA Return Request Status (# ${object.code or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">
+        Hi ${object.partner_id.name}
+					% if object.partner_id.parent_id:
+					    (<i>${object.partner_id.parent_id.name}</i>)
+					% endif
+					,<br/><br/>
+We have received your parcel.<br/><br/>
+        
+        Within 5 working days we will process your ${object.rma_reason_id.name}.<br/><br/>
+        Kind regards,<br/><br/>
+Team CANNA Nederland<br/><br/>
+        % if user and user.signature:
+          ${user.signature | safe}
+        % endif
+    </p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+					]]>
+			</field>
+        </record>
+     
+        <record id="rma_ept.rma_close_mail_template" model="mail.template">
+            <field name="name">RMA Close Notification Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">${object.company_id.name} RMA (Ref ${object.code or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="body_html"><![CDATA[
+				
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">
+Dear ${object.partner_id.name}
+				% if object.partner_id.parent_id:
+				    (<i>${object.partner_id.parent_id.name}</i>)
+				% endif
+				,<br/><br/>
+				
+				Your Return Order Closed for <strong>${object.name}</strong> with <strong>${object.code}</strong> in <strong>${object.state}</strong> status.
+				<br/><br/>Thank you<br/><br/>
+Kind regards,<br/><br/>
+				    Team CANNA Nederland<br/><br/>
+% if user and user.signature:
+				          ${user.signature | safe}
+				        % endif
+</p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+			]]>
+			</field>
+        </record>
+        
+        <record id="rma_ept.rma_reject_mail_template" model="mail.template">
+            <field name="name">RMA Reject Notification Email</field>
+            <field name="email_from">${('"Canna-Merchandise" &lt;%s&gt;' % (object.company_id.email or user.email))|safe}</field>
+            <field name="subject">${object.company_id.name} RMA (Ref ${object.code or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="model_id" ref="model_crm_claim_ept"/>
+            <field name="body_html"><![CDATA[
+				
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tbody><tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        <p style="color:#006A65">
+Dear ${object.partner_id.name}
+				% if object.partner_id.parent_id:
+				    (<i>${object.partner_id.parent_id.name}</i>)
+				% endif
+				,<br/><br/>
+
+				        Your Return Order Reject for <strong>${object.name}</strong> with <strong>${object.code}</strong> in <strong>${object.state}</strong> status.
+<br/>
+				        Thank you
+				    <br/><br/>
+				        
+				    Kind regards<br/><br/>
+Team CANNA Nederland<br/><br/>
+        % if user and user.signature:
+          ${user.signature | safe}
+        % endif
+    </p>
+                    </div>
+                </td></tr>
+                
+            </tbody></table>
+			]]>
+			</field>
+        </record>
+        
+    </data>
+</odoo>

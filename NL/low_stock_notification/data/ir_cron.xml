@@ -1,0 +1,13 @@
+<odoo>
+    <!--Low stock notification cron-->
+    <record id="ir_cron_low_stock_notification" model="ir.cron">
+        <field name="name">Low Stock Notification </field>
+        <field name="model_id" ref="model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">model.low_stock_notification()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field eval="False" name="doall"/>
+    </record>
+</odoo>

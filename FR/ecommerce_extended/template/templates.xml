@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="crm_lead_user_assigned" name="Lead assign mail template">
+        <p style="margin: 0px;">
+            <span>Hi CANNA Team,</span><br />
+            <span style="margin-top: 8px;">You have received an enquiry from a customer.</span>
+            <br />
+            <span style="margin-top: 8px;">To view the enquiry, please click the below link:</span>
+        </p>
+        <p style="margin-top: 24px; margin-bottom: 16px;">
+            <a t-att-href="'/mail/view?model=%s&amp;res_id=%s' % (object._name, object.id)" style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                View <t t-esc="model_description or 'document'"/>
+            </a>
+        </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p style="margin: 0px;">
+            <span style="margin-top: 8px;">Kind regards,</span>
+            <br />
+            <span style="margin-top: 8px;">Cashew Urban Green</span>
+        </p>
+    </template>
+
+    <!-- Inherit the template to change the icon colour -->
+	<template id="wishlist_icon_colour" inherit_id="website_sale_wishlist.add_to_wishlist">
+        <xpath expr="//button[@t-if='product_variant_id']" position="attributes">
+            <attribute name="class">btn btn-secondary btn-sm o_add_wishlist</attribute>
+        </xpath>
+        <xpath expr="//button[@t-if='product_variant_id']/span" position="attributes">
+            <attribute name="class">fa fa-heart</attribute>
+        </xpath>
+    </template>
+
+    <!-- Change the colour of the add to cart button -->
+    <template id="product_add_to_cart_ept" inherit_id="website_sale.product">
+        <xpath expr="//a[@id='add_to_cart']" position="attributes">
+            <attribute name="class">btn btn-secondary text-white bg-success btn-lg mt8 js_check_product a-submit</attribute>
+        </xpath>
+    </template>
+
+    <!-- Change the colour of the process checkout button summary section-->
+    <template id="short_cart_summary_add_to_cart_ept" inherit_id="website_sale.short_cart_summary">
+        <xpath expr="//a[@t-if='website_sale_order and website_sale_order.website_order_line']" position="attributes">
+            <attribute name="class">btn btn-secondary text-white bg-success float-right d-none d-xl-inline-block mr16</attribute>
+        </xpath>
+    </template>
+
+    <!-- Change the colour of the process checkout button  in cart page-->
+    <template id="cart_add_to_cart_ept" inherit_id="website_sale.cart" priority="18">
+         <xpath expr="//div[hasclass('oe_cart')]/div[hasclass('row')]//a[@t-if='website_sale_order and website_sale_order.website_order_line']" position="attributes">
+            <attribute name="class">btn btn-secondary text-white bg-success float-right d-none d-xl-inline-block</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('col-xl-4')]//a[@t-if='website_sale_order and website_sale_order.website_order_line']" position="attributes">
+            <attribute name="class">btn btn-secondary text-white bg-success float-right</attribute>
+        </xpath>
+    </template>
+
+    <!-- Hide the summary section fom address page-->
+    <template id="address_extended" inherit_id="website_sale.address">
+        <xpath expr="//t[@t-call='website_sale.cart_summary']" position="replace">
+        </xpath>
+    </template>
+
+    <!-- Add space Between footer and cart section -->
+    <template id="cart_extended" inherit_id="website_sale.cart">
+        <xpath expr="//div[@id='wrap']/div[hasclass('container')]"
+			position="attributes">
+            <attribute name="class">container oe_website_sale mb-5 py-2</attribute>
+        </xpath>
+    </template>
+</odoo>

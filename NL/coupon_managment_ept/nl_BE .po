@@ -1,0 +1,348 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* coupon_managment_ept
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-23 03:38+0000\n"
+"PO-Revision-Date: 2021-06-23 03:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "<span>\n"
+"                                        Invalid Promo code\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        Ongeldige promotiecode\n"
+"                                    </span>"
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.coupon_discount_invoice_document
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.coupon_discount_saleorder_document
+msgid "<strong>Applied coupon code</strong>"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__active
+msgid "Active"
+msgstr "Actief"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_sale_order__applied_coupon_id
+msgid "Applied Coupon Code"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_sale_order__coupon_discount_amount
+msgid "Applied coupon code discount"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__sale_order_ids
+msgid "Applied on Sale Orders"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_website_coupon__coupon_balance
+msgid "Available coupon balance"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__available_for_multi_order
+msgid "Available for Multiple Orders"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__coupon_amount
+msgid "Coupon Amount"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_sale_order__coupon_applied
+msgid "Coupon Applied"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__coupon_balance
+msgid "Coupon Balance"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__coupon_code
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.sale_coupon_view_form
+msgid "Coupon Code"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "Coupon Discount :"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_sale_order__coupon_discount_amount
+msgid "Coupon Discount Amount"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.view_order_form_extend_rma_ept
+msgid "Coupon Information"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__name
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.sale_coupon_view_form
+msgid "Coupon Name"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.sale_coupon_view_form
+msgid "Coupon Name..."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:224
+#, python-format
+msgid "Coupon cannot be delete once it Processed."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.actions.act_window,help:coupon_managment_ept.website_coupon_action
+msgid "Create a new coupon fo Website"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__discount_line_product
+msgid "Discount Line Product"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/sale_order.py:19
+#, python-format
+msgid "Discount: "
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__display_name
+msgid "Display Name"
+msgstr "Schermnaam"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__end_date
+msgid "End Date"
+msgstr "Einddatum"
+
+#. module: coupon_managment_ept
+#: selection:website.coupon,state:0
+msgid "Expire"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.actions.act_window,help:coupon_managment_ept.website_coupon_action
+msgid "Generate and share coupon codes with your customers to get discounts."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "I have a promo code"
+msgstr "Ik heb een promotie code"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__id
+msgid "ID"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_sale_order_line__reward_line
+msgid "Identify if the line is reward line or not"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_website_coupon__available_for_multi_order
+msgid "If it is checked then it will allow using the remaining coupon balance in the next order"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:114
+#, python-format
+msgid "Incorrect End date"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:117
+#, python-format
+msgid "Incorrect Starte date"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model,name:coupon_managment_ept.model_account_invoice
+msgid "Invoice"
+msgstr "Factuur"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon____last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: coupon_managment_ept
+#: selection:website.coupon,state:0
+msgid "New"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__order_count
+msgid "Order Count"
+msgstr "Aantal orders"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_website_coupon__sale_order_ids
+msgid "Orders in which coupon is used"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_website_coupon__discount_line_product
+msgid "Product used in the sales order to apply the discount."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "Promo code"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "Remove coupon"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_sale_order_line__reward_line
+msgid "Reward Line"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model,name:coupon_managment_ept.model_sale_order
+msgid "Sale Order"
+msgstr "Verkooporder"
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.sale_coupon_view_form
+msgid "Sales"
+msgstr "Verkopen"
+
+#. module: coupon_managment_ept
+#: model:ir.model,name:coupon_managment_ept.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Verkoop Bestelling Regel"
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:213
+#, python-format
+msgid "Sales Orders"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__start_date
+msgid "Start Date"
+msgstr "Startdatum"
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,field_description:coupon_managment_ept.field_website_coupon__state
+msgid "State"
+msgstr "Provincie"
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:136
+#, python-format
+msgid "The code %s is expired"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:167
+#, python-format
+msgid "The coupon %s has not enought balance"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:165
+#, python-format
+msgid "The coupon %s is in closed state"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:110
+#, python-format
+msgid "The length of coupon code must be in between 12 to 16 characters."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:163
+#, python-format
+msgid "This coupon %s has been used or is expired."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_website_coupon__coupon_amount
+msgid "Total coupon amount"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: selection:website.coupon,state:0
+msgid "Used"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.actions.act_window,name:coupon_managment_ept.website_coupon_action
+#: model:ir.ui.menu,name:coupon_managment_ept.menu_website_coupon
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.sale_coupon_view_form
+msgid "Website Coupon"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model.fields,help:coupon_managment_ept.field_sale_order__coupon_applied
+msgid "add a boolean field for coupon applied or not"
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model_terms:ir.ui.view,arch_db:coupon_managment_ept.reduction_code
+msgid "applied successfully."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: code:addons/coupon_managment_ept/models/website_coupon.py:121
+#, python-format
+msgid "insufficient coupon amount."
+msgstr ""
+
+#. module: coupon_managment_ept
+#: model:ir.model,name:coupon_managment_ept.model_website_coupon
+msgid "website.coupon"
+msgstr ""
+

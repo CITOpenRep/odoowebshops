@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="theme_quickview_template" name="common theme quickview">
+		<div class="oe_theme_quickview_container">
+		</div>
+	</template>
+	<template id="theme_category_carousel" name="common theme category carousel">
+		<div class="oe_theme_category_carousel_container w-100">
+		</div>
+	</template>
+	<template id="website_menu_edit" name="Edit Menu">
+		<t t-call="website.layout">
+			<div id="wrap" t-ignore="True">
+				<hr />
+				<div class="container">
+					<div t-if="record">
+						<div t-field="record.html_menu" />
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="clarico_slider_preview" name="slider Preview">
+		<t t-call="website.layout">
+			<div class="input-group js_slider_snippet hidden" data-isemipro="true" t-att-data-slider-id="rec_id"/>
+	  	</t>
+	</template>
+	
+	<template id="emipro_theme_base_matomo_script" inherit_id="portal.frontend_layout" name="Motomo Script Template">
+    	<xpath expr="//t[@t-set='head_website']" position="before">
+    		<t t-set='head'>	
+            	<t t-raw='head or ""'/>
+    			<!-- Matomo -->
+				<script type="text/javascript">
+				  var _paq = window._paq || [];
+				  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+				  _paq.push(['trackPageView']);
+				  _paq.push(['enableLinkTracking']);
+				  (function() {
+				    var u="https://stats.canna.com/piwik/";
+				    _paq.push(['setTrackerUrl', u+'matomo.php']);
+				    _paq.push(['setSiteId', '32']);
+				    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+				    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+				  })();
+				</script>
+				<!-- End Matomo Code -->
+    		</t>
+    	</xpath>
+    </template>
+</odoo>

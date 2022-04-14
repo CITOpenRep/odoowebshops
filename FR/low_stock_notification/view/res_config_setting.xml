@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Configuration Settings For Low Stock Notification-->
+        <record id="res_config_settings_low_stock_form" model="ir.ui.view">
+            <field name="name">res.config.settings.low.stock.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <div id="production_lot_info" position="after">
+                    <div class="low_stock_settings_block" groups="stock.group_stock_manager">
+                        <h2>Low Stock Configuration</h2>
+                        <div class="row mt16 o_settings_container" id="low_stock_config">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="is_low_stock"/>
+                                </div>
+                                <div class="o_setting_right_pane" id="low_stock_setting">
+                                    <label for="is_low_stock"/>
+                                    <div class="text-muted">
+                                        Email configuration for low stock notification
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16" attrs="{'invisible': [('is_low_stock', '=', False)]}">
+                                            <label class="col-lg-3 o_light_label" for="low_stock_user_ids"/>
+                                            <field name="low_stock_user_ids" widget="many2many_tags"/>
+                                            <label class="col-lg-3 o_light_label" for="low_stock_notification_mail_template"/>
+                                            <field name="low_stock_notification_mail_template"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
