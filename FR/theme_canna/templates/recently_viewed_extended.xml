@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--================= Recently Viewed Items =========================-->
+    <template id="canna_recently_viewed_extended_ept" inherit_id="theme_clarico.recently_viewed_ept"
+              name="Recently Viewed items">
+        <xpath expr="//t[@t-if='recent_data']" position="replace">
+            <t t-if="recent_data">
+                <t t-set="recent_products" t-value="recent_data.get('recent_products')"/>
+                <t t-set="compute_currency" t-value="recent_data.get('compute_currency')"/>
+                <t t-if="not len(recent_products) == 1 and product and product.id in recent_products">
+                    <section id="carousel_recently_view" data-type="multi" class="container mt64" data-interval="false">
+                        <div class="fade-right aos-init aos-animate" data-aos="fade-right">
+                            <h2 class="page_title_text text-uppercase py-2 pl-3 pr-5">Recently Viewed Products
+                            </h2>
+                        </div>
+                        <div class="owl-carousel" role="listbox">
+                            <t t-foreach="recent_products" t-as="recent_product">
+                                <t t-set="rproduct"
+                                   t-value="request.env['product.template'].search([('id','=',int(recent_product))])"/>
+                                <div t-if="not rproduct.id == product.id"
+                                     t-att-data-active="true if product and product.id == rproduct.id else false"
+                                     class="img_hover">
+                                    <div class="border mt32">
+                                        <a t-att-href="'/shop/product/%s' %slug(rproduct)">
+                                            <div class="new_span">
+                                                <t t-if="website.is_lazy_load">
+                                                    <img class="img-responsive img-fluid pt-3 mx-auto d-block lazyload"
+                                                         t-attf-data-src="/website/image/product.product/{{rproduct.product_variant_id.id}}/image/200x200"
+                                                         t-attf-src="/web/image/website/#{website.id}/lazy_load_image"
+                                                         t-att-alt="rproduct.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img class="img-responsive img-fluid pt-3 mx-auto d-block lazyload"
+                                                         t-attf-src="/website/image/product.product/{{rproduct.product_variant_id.id}}/image/200x200"
+                                                         t-att-alt="rproduct.name"/>
+                                                </t>
+                                            </div>
+                                        </a>
+
+                                        <div class="w-100 d-inline-blocl">
+                                            <a title="Add To Cart"
+                                               class="btn te_theme_button btn-sm quick-view-a w-100 p-2"
+                                               t-att-data-id="'%s' % rproduct.id">
+                                                <span class="text-white">Add to cart</span>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                    <div class="px-2 text-center te_recent_detail_section">
+                                        <a class="d-block product_name o_text_overflow" t-field="rproduct.name"
+                                           t-att-href="'/shop/product/%s' %slug(rproduct)"/>
+                                        <t t-if="rproduct.product_variant_id and rproduct.website_price_difference and website.get_current_pricelist().discount_policy=='without_discount'">
+                                            <del class="te_shop_del mr8" style="white-space: nowrap;">
+                                                <span t-esc="compute_currency(rproduct.website_public_price)"
+                                                      t-options="{'widget': 'monetary', 'display_currency': website.get_current_pricelist().currency_id, 'from_currency': website.currency_id}"></span>
+                                            </del>
+                                        </t>
+                                        <b>
+                                            <span t-esc="rproduct.website_price"
+                                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        </b>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <t t-if="len(recent_products) &gt; 4">
+                            <a class="carousel-control-prev" role="button" data-slide="prev"
+                               data-target="#carousel_recently_view">
+                                <i class="fa fa-chevron-left fa-lg text-muted"/>
+                            </a>
+                            <a class="carousel-control-next" role="button" data-slide="next"
+                               data-target="#carousel_recently_view">
+                                <i class="fa fa-chevron-right fa-lg text-muted"/>
+                            </a>
+                        </t>
+                    </section>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

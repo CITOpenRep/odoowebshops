@@ -195,32 +195,20 @@ class websiteSaleOrder(WebsiteSale):
                 
                 
 class websiteSaleCustomisation(http.Controller):  
-    # fatch product while changing the product variant
-    # @http.route(['/product/variant/change'], type='json', auth="public", website=True, csrf=False)
-    # def product_varaint_change(self,product_id=False,**kw):
-    #     if product_id:
-    #         product_id = request.env['product.product'].sudo().search([('id', '=', product_id)])
-    #         attr_val_ids = product_id.attribute_value_ids.ids
-    #         value ={
-    #             'attribute_value_ids': attr_val_ids,
-    #             'product_id' : product_id.id
-    #         }
-    #         return value
-    #     else:
-    #         return False
-        
+
     # Clear all the product from cart 
     @http.route(['/shop/clear_cart'], type='json', auth="public", methods=['POST'], website=True)
     def clear_cart(self, **kw):
         order = request.website.sale_get_order(force_create=1)
         if order :
-            order.unlink()
+            order.order_line.unlink()
+            #order.unlink()
             
     @http.route(['/shop/product/size_guide_json'], type='json', auth="public", website=True)
-    def product_size_guide(  self , categ_id, **post):
-        tmp_object = request.env['product.public.category'].browse(int(categ_id))
-        if tmp_object    :
-                values ={'categ_id': tmp_object.with_context()}
+    def product_size_guide(  self , product_id, **post):
+        product = request.env['product.template'].browse(int(product_id))
+        if product:
+                values ={'product_id': product.with_context()}
                 response = http.Response(template="website_sale_customisation.product_size_guide_model",qcontext=values)
                 return response.render()
         return False

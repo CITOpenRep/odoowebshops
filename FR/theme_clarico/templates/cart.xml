@@ -12,9 +12,9 @@
             <!--Changes to open quick view from add to cart button in mobile devices.-->
             <!--Added By Preet Bhatti -->
             <!--Date: 28/may-->
-            <a title="Add to Cart" class="btn btn-sm bg-success text-white quick-view-a add_to_cart_json_mobile" t-att-data-id="'%s' % product.id">
+            <!--<a title="Add to Cart" class="btn btn-sm bg-success text-white quick-view-a add_to_cart_json_mobile" t-att-data-id="'%s' % product.id">
 				Add to Cart
-			</a>
+			</a>-->
 
 
         </xpath>

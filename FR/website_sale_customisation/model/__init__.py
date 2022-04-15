@@ -13,3 +13,5 @@ from . import product_size_guide_template
 from . import res_lang
 from . import account_invoice
 from . import product_product
+from . import product_template
+

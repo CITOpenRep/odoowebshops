@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="shop_landing" model="ir.ui.view">
+            <field name="name">Shop</field>
+            <field name="type">qweb</field>
+            <field name="key">theme_canna.shop_landing</field>
+            <field name="arch" type="xml">
+                <t name="Shop" t-name="theme_canna.shop_landing">
+                    <t t-call="website.layout">
+                        <div id="wrap" class="oe_structure oe_empty">
+                            <div id="wrap" class="oe_structure oe_empty">
+                                <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet"/>
+            <style>
+                .div-video-container &gt; vjs-big-play-button{visibility: hidden !important;}
+                .btn-mute img{width: 25px;}
+                .video-js .vjs-big-play-button { visibility: hidden;}
+                @media (max-width: 767.98px){.btn-mute,.btn-play{top:72% !important;}.div_shop_now{top: 70% !important;} .div_shop_now &gt; .te_theme_button{font-size: 0.5rem !important;}}
+            </style>
+
+            <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+            <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+            <div class="div-video-container" style="position:relative">
+                <video
+                        id="shop_landing_video"
+                        class="video-js vjs-16-9 vjs-fluid"
+                        controls="false"
+                        preload="auto"
+                        nativeControlsForTouch="true"
+                        poster="clarico_extended/static/src/img/backgrounds/Graffitiwall-Background.jpg"
+                        data-setup="{}"
+                >
+                    <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/shop.mp4"
+                            type="video/mp4"/>
+                    <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/shop.webm"
+                            type="video/webm"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank"
+                        >supports HTML5 video
+                        </a
+                        >
+                    </p>
+                </video>
+                <a class="btn-mute" style="position: absolute;right: 30px;top: 7%;cursor:pointer">
+                    <i class="fa fa-microphone-slash text-center fa-2x"></i>
+                </a>
+                <a class="btn-play" style="position: absolute;right: 85px;top: 7%;cursor:pointer">
+                    <i class="fa fa-stop-circle text-center fa-2x"></i>
+                </a>
+<!--                <div style="position: absolute;text-align: center;width: 100%;top: 50%;transform: translateY(-50%);">-->
+<!--                    <a href="/shop" class="btn btn-theme te_theme_button">See Now</a>-->
+<!--                </div>-->
+            </div>
+
+            <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+            <script type="text/javascript">
+                var player = videojs('shop_landing_video', {});
+                const muteButton = document.querySelector(".btn-mute");
+                const playButton = document.querySelector(".btn-play");
+
+                player.muted(true);
+                player.play();
+
+                muteButton.addEventListener("click", function() {
+                const booleanValue = player.muted();
+                if (booleanValue == true) {
+                player.muted(false);
+                $(".btn-mute").html('<i class="fa fa-microphone text-center fa-2x"></i>');
+                } else {
+                player.muted(true);
+                $(".btn-mute").html('<i class="fa fa-microphone-slash text-center fa-2x"></i>')
+                }
+                });
+                playButton.addEventListener("click", function() {
+                if (player.paused()) {
+                player.play();
+                $(".btn-play").html('<i class="fa fa-stop-circle text-center fa-2x"></i>');
+                } else {
+                player.pause();
+                $(".btn-play").html('<i class="fa fa-play-circle text-center fa-2x"></i>');
+                }
+                });
+
+            </script>
+                                <section class="container pt16 fade-right aos-init aos-animate" data-aos="fade-right">
+                                    <div class="canna_page_heading">
+                                        <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">Best Seller
+                                        </h2>
+                                    </div>
+                                </section>
+                                <section class="best_seller_ept pb32 pt32">
+                                    <div class="js_best_seller" data-isemipro="true"/>
+                                </section>
+                                <section class="pt8 pb8">
+                                    <div class="s_btn text-center pt16 pb16" data-name="Buttons">
+                                        <a href="/shop" class="btn btn-theme te_theme_button">See all products
+                                        </a>
+                                    </div>
+                                </section>
+                                <section class="container fade-right aos-init aos-animate" data-aos="fade-right">
+                                    <div class="canna_page_heading">
+                                        <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">Limited Edition
+                                        </h2>
+                                    </div>
+                                </section>
+                                <section class="limited_edition_ept pt32 pb32">
+                                    <div class="js_limited_edition" data-isemipro="true"/>
+                                </section>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <record id="shop_landing_page" model="website.page">
+            <field name="website_published">True</field>
+            <field name="url">/shop_landing</field>
+            <field name="view_id" ref="theme_canna.shop_landing"/>
+        </record>
+    </data>
+</odoo>

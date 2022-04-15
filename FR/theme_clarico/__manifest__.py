@@ -9,8 +9,7 @@
     'version': '12.0.0.30',
     'license': 'OPL-1',	
     'depends': [
-        'emipro_theme_base',       
-    ],
+        'emipro_theme_base','ecommerce_extended'],
 
     'data': [
 		'templates/assets.xml',

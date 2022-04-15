@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- CN Partnership Tree View -->
+    <record id="cn_partnership_view_tree" model="ir.ui.view">
+        <field name="name">CN Partnership : Tree View</field>
+        <field name="model">cn.partnership</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="is_become_partner"/>
+                <field name="is_organize_event"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- CN Partnership Form View -->
+    <record id="cn_partnership_view_form" model="ir.ui.view">
+        <field name="name">CN Partnership : Form View</field>
+        <field name="model">cn.partnership</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="is_become_partner"/>
+                            <field name="is_organize_event"/>
+                            <field name="is_other"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- CN Partnership Action -->
+    <record id="cn_partnership_action" model="ir.actions.act_window">
+        <field name="name">CN Partnership</field>
+        <field name="res_model">cn.partnership</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="cn_partnership_view_tree"/>
+        <field name="help" type="html">
+            <p>
+                Hello !! Create CN Partnership Records.
+            </p>
+        </field>
+    </record>
+
+    <!-- CN Partnership Menu -->
+    <menuitem
+            id="cn_partnership_menu"
+            name="Partner Data"
+            parent="website.menu_website_global_configuration"
+            action="cn_partnership_action"
+    />
+</odoo>

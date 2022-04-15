@@ -253,7 +253,7 @@ body.editor_enable
 	& .te_view_filter_span{
 		display:none;
 		cursor: pointer;
-		@include style(2,19,inherit);
+		@include style(2,5,inherit);
 	}
 }
 .te_view_all_filter_inner{
@@ -340,7 +340,7 @@ body.editor_enable
 	& .te_clear_all_variant{
 		float:right;
 		display:none;
-		color:nth($f_color,19) !important; /* Not used mixin to add important*/  
+		color:nth($f_color,5) !important; /* Not used mixin to add important*/  
 		font-size:11px; /* Not defined in variable */
 		cursor: pointer;
 		z-index:100;
@@ -350,8 +350,8 @@ body.editor_enable
 	display:none;
 	float:right;
 	cursor: pointer;
-	@include style(3,19,inherit,null,capitalize);
-	color:nth($f_color,19) !important; /* Not used mixin to add important*/
+	@include style(3,5,inherit,null,capitalize);
+	//color:nth($f_color,19) !important; /* Not used mixin to add important*/
 }
 .te_shop_attr_ul{
 	.css_attribute_color{
@@ -1791,7 +1791,7 @@ h1.te_product_name
 }
 .te_prod_desc
 {
-	@include style(1,1,inherit);
+	@include style(1,5,inherit);
 	@include media-breakpoint-down(lg)
 	{
 		font-size:nth($f_sizes,3);
@@ -2242,14 +2242,14 @@ h1.te_product_name
 			}
 		}
 	}
-} 
-.oe_optional_products_modal
-{	 
+}
+/*.oe_optional_products_modal
+{
 	.table-striped tbody tr:nth-of-type(2n+1)
 	{
-		background-color: nth($f_color,5);
+		background-color: #fff;
 	}
-}
+}*/
 .text-center 
 {
 	.te_shop_del_price
@@ -2512,6 +2512,7 @@ h1.te_product_name
 
 		img
 		{
+			padding-top: 0px !important;
 			max-width: 100%;
 			@include transition(all,.4s,ease-out)
 		}
@@ -2521,6 +2522,9 @@ h1.te_product_name
 		padding-left:0;
 	}
 	.img_hover {
+		.te_theme_button{
+			margin-top: -5px;
+		}
 		&:hover .new_span {
 			opacity: 0.5;
 			@include transition(all,1s,ease,0s)
@@ -3789,7 +3793,7 @@ form.checkout_autoformat
 	 	
 	 	& .product_detail_img
 	 	{
-	 		max-height:500px;
+	 		max-height:400px;
 	 	}
 	 }
 	 @include media-breakpoint-up(lg)

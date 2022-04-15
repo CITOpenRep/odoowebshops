@@ -7,7 +7,7 @@
         <field name="model">website.coupon</field>
         <field name="arch" type="xml">
             <form string="Website Coupon">
-                <header invisible="1">
+                <header invisible="0">
                     <field name="state" widget="statusbar" nolabel="1"/>
                 </header>
                 <sheet>
@@ -29,17 +29,29 @@
                     <group>
                         <group>
                             <field name="coupon_code" placeholder="Coupon Code" attrs="{'readonly':[('state','!=','new')]}"/>
+                            <field name="reference" string="Internal Reference"/>
                         </group>
                         <group>
                             <field name="start_date" attrs="{'readonly':[('state','!=','new')]}"/>
                             <field name="end_date" attrs="{'readonly':[('state','!=','new')]}"/>
+                            <field name="specific_customer_ids" widget="many2many_tags" attrs="{'invisible':[('specific_customer','!=',True)]}"/>
+                            <field name="coupon_used_partner_ids" widget="many2many_tags" attrs="{'invisible': [('limit_to_use', '=', 'unlimited')]}" readonly="1"/>
                         </group>
                     </group>
                     <group>
                         <group>
                             <field name="coupon_amount" attrs="{'readonly':[('state','!=','new')]}"/>
-                            <field name="coupon_balance" readonly="True"/>
+                            <field name="coupon_type" attrs="{'readonly':[('state','!=','new')]}" required="True"/>
+                            <field name="minimum_cart_amount" attrs="{'readonly':[('state','!=','new')]}"/>
+                            <field name="coupon_balance" readonly="1" invisible="1"/>
                             <!-- <field name="available_for_multi_order" attrs="{'readonly':[('state','!=','new')]}"/> -->
+                        </group>
+                        <group>
+                            <field name="coupon_applicable" invisible="1"/>
+                            <field name="welcome_coupon" attrs="{'readonly':[('state','!=','new')]}"/>
+                            <field name="specific_customer" attrs="{'readonly':[('state','!=','new')]}"/>
+                            <field name="limit_to_use" attrs="{'readonly':[('state','!=','new')]}" required="True"/>
+                            <field name="limited_coupon_use" attrs="{'invisible': [('limit_to_use', '=', 'unlimited')], 'readonly':[('state','!=','new')]}"/>
                         </group>
                     </group>
                 </sheet>

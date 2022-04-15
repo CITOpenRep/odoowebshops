@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="canna_auth_signup" inherit_id="auth_signup.fields" name="Auth Signup/ResetPassword form fields">
+        <xpath expr="//div[hasclass('field-login')]" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('field-name')]" position="replace">
+            <div class="form-group field-name col-lg-10">
+                <input type="text" name="name" t-att-value="name" id="name" class="form-control"
+                       placeholder="Votre nom*"
+                       required="required" t-att-readonly="'readonly' if only_passwords else None"
+                       t-att-autofocus="'autofocus' if login and not only_passwords else None"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-name')]" position="after">
+            <div class="form-group field-last-name col-lg-10">
+                <input type="text" name="last_name" t-att-value="last_name" id="last_name"
+                       class="form-control"
+                       required="required" t-att-readonly="'readonly' if only_passwords else None"
+                       t-att-autofocus="'autofocus' if login and not only_passwords else None"
+                       placeholder="Votre prenom*"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-last-name')]" position="after">
+            <div class="form-group field-DOB col-lg-10">
+                <input type="date" name="date_of_birth" t-att-value="date_of_birth" id="date_of_birth"
+                       class="form-control"
+                       required="required"
+                       onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"
+                       placeholder="Date de naissance*"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-DOB')]" position="after">
+            <div class="form-group field-telephone col-lg-10">
+                <input type="text" name="telephone" t-att-value="telephone" id="telephone"
+                       class="form-control"
+                       placeholder="Telephone (optionnel)"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-telephone')]" position="after">
+            <div class="form-group field-login col-lg-10">
+                <input type="text" name="login" t-att-value="login" id="login" class="form-control"
+                       autofocus="autofocus"
+                       autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"
+                       placeholder="Votre email*"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-password')]" position="replace">
+            <div class="form-group field-password pt-2 col-lg-10">
+                <input type="password" name="password" id="password" class="form-control"
+                       required="required" t-att-autofocus="'autofocus' if only_passwords else None"
+                       placeholder="Mot de passe*"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-confirm_password')]" position="replace">
+            <div class="form-group field-confirm_password col-lg-10 mb0">
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control"
+                       required="required" placeholder="Confirmer le mot de passe*"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="canna_auth_signup_signup" inherit_id="auth_signup.signup" name="Sign up login">
+        <xpath expr="//form[hasclass('oe_signup_form')]" position="replace">
+            <div class="container-fuild">
+            <style>
+                                .div-video-container &gt; vjs-big-play-button{visibility: hidden !important;}
+                                .video-js .vjs-big-play-button { visibility: hidden;;}
+                            </style>
+
+                            <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+                            <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+                            <div class="div-video-container" style="position:relative">
+                                <video id="sing_up_video" class="video-js vjs-16-9 vjs-fluid 454565466456" autoplay="true"  muted="muted" controls="false" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png">
+                                    <source src="//test-1a92a.kxcdn.com/clarico_extended/static/src/video/3d_game.mp4" type="video/mp4"/>
+                                    
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video
+                                        </a>
+                                    </p>
+                                </video>
+                            
+                            </div>
+                            
+                             <script type="text/javascript">
+                                var player = videojs('sing_up_video').ready(function() {
+                                  this.play();
+                                  this.on("ended", function(){
+                                      $("#sing_up_video").slideUp(5000);
+                                      $(".community_form_main").show();
+                                    //$(".community_form_main").slideUp(5000);
+                                    
+                                  });
+                              });
+                              </script>
+          </div>
+                        <div class="container community_form_container" >
+
+                <div class="community_form_main mb32" style="display:none;">
+                    <form class="oe_signup_form" id="canna_signup_form" role="form" method="post" t-if="not message">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <div class="row">
+                            <div class="col-lg-6 community_form_main_form">
+                                <div class="community_form_text_div community_form_text_div_mob">
+                                    <div class="col-lg-12 community_form_title">
+                                        <img class="community_form_title_icon" src="/clarico_extended/static/src/img/snippets/VIPmember-icon.png"/>
+                                        Devenir membre
+                                    </div>
+                                    <div class="col-lg-12 community_form_text">
+                                        Insscris-toi aujourd'hui et profite d'avantages exclusifs
+                                    </div>
+                                    <div class="col-lg-12 community_form_text_bold mb32">
+                                        profite de produits en edition limitee
+                                        <br/>
+                                        Rencontre la Team CANNA
+                                        <br/>
+                                        Sois infrome en exclusivite de toutes nos collaborations
+                                        <br/>
+                                        Recois un cadeau pour ton anniversaire
+                                        <br/>
+                                    </div>
+                                </div>
+                                <t t-call="auth_signup.fields">
+                                    <t t-set="only_passwords" t-value="bool(token and not invalid_token)"/>
+                                </t>
+                            </div>
+                            <div class="col-lg-6 col-md-pull-6 community_form_text_main">
+                                <div class="community_form_text_div">
+                                    <div class="col-lg-12 community_form_title">
+                                        <img class="community_form_title_icon" src="/clarico_extended/static/src/img/snippets/VIPmember-icon.png"/>
+                                        Devenir membre
+                                    </div>
+                                    <div class="col-lg-12 community_form_text">
+                                        Insscris-toi aujourd'hui et profite d'avantages exclusifs
+                                    </div>
+                                    <div class="col-lg-12 community_form_text_bold mb32">
+                                        profite de produits en edition limitee
+                                        <br/>
+                                        Rencontre la Team CANNA
+                                        <br/>
+                                        Sois infrome en exclusivite de toutes nos collaborations
+                                        <br/>
+                                        Recois un cadeau pour ton anniversaire
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 community_form_checkbox">
+                                    <div class="col-lg-12 mb8">
+                                        <label class="community_form_ckbx d-inline-block">J'accepte les conditions
+                                            generals de CANNA
+                                            <input type="checkbox" name="canna_signup_t_n_c_checkbox" id="canna_t_n_c" value="tnc"/>
+                                            <span class="mark"/>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label class="community_form_ckbx d-inline-block">Je souhaite recevoir la
+                                            Newsletter World of CANNA
+                                            <input type="checkbox" name="canna_signup_news_later_checkbox" id="canna_news_latter" value="news"/>
+                                            <span class="mark"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 community_form_submit">
+                                    <p class="alert alert-danger" t-if="error" role="alert">
+                                        <t t-esc="error"/>
+                                    </p>
+                                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                    <input type="hidden" name="token" t-att-value="token"/>
+                                    <div class="oe_login_buttons pt-3">
+                                        <button type="button" class="btn btn-primary btn-block community_form_submit_btn ml16 te_theme_button">
+                                            M'Inscrire
+                                        </button>
+                                        <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link btn-sm d-none" role="button">Already have an account?</a>
+                                        <div class="o_login_auth"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

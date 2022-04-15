@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cannafr_news_ept_form_view" model="ir.ui.view">
+        <field name="name">cannafr.news.form</field>
+        <field name="model">cannafr.news</field>
+        <field name="arch" type="xml">
+            <form string="Canna_FR News Block" duplicate="false">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="website_publish_button"
+                                type="object" icon="fa-globe">
+                            <field name="website_published" widget="website_publish_button"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="canna_fr_subtitle"/>
+                        <field name="canna_fr_news_image" widget="image" class="oe_avatar float-left"/>
+                        <field name="canna_fr_description"/>
+                        <field name="is_active"/>
+                        <field name="created_date" class="oe_inline"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+     <record id="cannafr_news_ept_tree_view" model="ir.ui.view">
+        <field name="name">cannafr.news.tree.view</field>
+        <field name="model">cannafr.news</field>
+        <field name="arch" type="xml">
+            <tree string="Canna_FR News Block">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="canna_fr_subtitle"/>
+                <field name="is_active"/>
+                <field name="created_date" class="oe_inline"/>
+            </tree>
+        </field>
+    </record>
+     <record model="ir.actions.act_window" id="action_canna_fr_news">
+        <field name="name">Canna FR News</field>
+        <field name="res_model">cannafr.news</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            name="News"
+            id="menu_canna_fr_news"
+            action="action_canna_fr_news"
+            parent="website.menu_website_global_configuration"/>
+</odoo>

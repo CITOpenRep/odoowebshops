@@ -145,4 +145,27 @@
         </xpath>
     </template>
 
+    <!-- Sale label for the shop page -->
+    <template id="clarico_shop_products_label" inherit_id="website_sale.products_item" priority="25" active="True">
+        <xpath expr="//div[hasclass('ribbon-wrapper')]" position="replace">
+            <t t-if="product.label_ept_id">
+                <t t-call="clarico_extended.common_label_ept"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="common_label_ept">
+        <div class="te_ribbon-wrapper">
+            <div t-attf-class="#{product.label_ept_id.label_style} label_div" t-if="product.label_ept_id"
+                 t-att-id="product.label_ept_id.label_style"
+                 t-attf-style="background-color:#{product.label_ept_id.html_color};color:#{product.label_ept_id.font_html_color}">
+                <div class="p-1 te_label_name" t-field="product.label_ept_id.name"/>
+            </div>
+        </div>
+    </template>
+    <template id="limited_edition_section" inherit_id="website.layout">
+        <xpath expr="//main" position="inside">
+            <t t-call="clarico_extended.limited_edition_popup"/>
+        </xpath>
+    </template>
+
 </odoo>

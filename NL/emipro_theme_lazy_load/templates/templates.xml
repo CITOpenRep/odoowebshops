@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Hidden input for website layout -->	
+    <template id="lazyload_activate" inherit_id="website.layout">
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <input id="id_lazyload" type="hidden" name="is_lazyload" value="true"/>
+        </xpath>
+    </template>
+    
+    <!-- Lazy load for the shop page images -->
+<!--    <template id="products_item_canna_fr" inherit_id="website_sale.products_item">-->
+        <!--<xpath expr="//a[@t-att-href='product_href']" position="replace">
+            <a itemprop="url" t-att-href="product_href">
+                <t t-if="website.is_lazy_load">
+                    <span itemprop="image" class="new_span"
+                          t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image/">
+                        <img t-attf-data-src="/web/image/product.template/#{product.id}/image/170x170"
+                             t-attf-src="/web/image/website/#{website.id}/lazy_load_image"
+                             class="img img-fluid lazyload"
+                             t-att-alt="product.name"/>
+                    </span>
+                </t>
+                <t t-else="">
+                    <span itemprop="image" class="new_span"
+                          t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image/"
+                          t-field="product.image" t-options="{'widget': 'image', 'resize': '170x170', 'zoom': 'image'}"
+                          t-att-alt="product.name"/>&ndash;&gt;
+                </t>
+            </a>
+        </xpath>-->
+<!--    </template>-->
+
+	<!-- Lazy load for the shop page images -->
+    <!--<template id="website_megamenu_submenu_canna_fr" inherit_id="website_megamenu_ept.website_megamenu_submenu" priority="50">
+        <xpath expr="//li[hasclass('col-sm-3')]//div[hasclass('first-category')]//t[@t-if='submenu.display_category_image']//img"
+               position="replace">
+            <t t-if="website.is_lazy_load">
+                <img class="img-responsive lazyload"
+                     t-att-alt="categ.name"
+                     t-att-data-src="website.image_url(categ, 'image_small')"
+                     t-attf-src="/web/image/website/#{website.id}/lazy_load_image"/>
+            </t>
+            <t t-else="">
+                <img class="img-responsive"
+                     t-att-alt="categ.name"
+                     t-att-src="website.image_url(categ, 'image_small')"/>
+            </t>
+        </xpath>
+    </template>-->
+</odoo>

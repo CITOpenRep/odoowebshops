@@ -128,7 +128,7 @@ INDEX:
 .s_website_form{
 		.col-form-label
 		{
-			@include style(3,1,$o-theme-fonts,null,uppercase);
+// 			@include style(3,1,$o-theme-fonts,null,uppercase);
 			font-family : CenturyGothic;
 			font-weight: normal;
 		}

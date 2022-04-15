@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--======================== Footer Style-4 ===========================-->
+    <template id="customize_footer_style_4" inherit_id="website.footer_custom"
+              active="False">
+        <xpath expr="//section[hasclass('s_text_block')]" position="replace"></xpath>
+        <xpath expr="//div[@id='footer']" position="before">
+            <section class="s_text_block te_ftr_container pt16 pb8">
+                <div class="container">
+                    <div class="row">
+                        <!-- Company Info -->
+                        <div class="te_company_info_section">
+                            <!-- Company Address -->
+                            <div class="te_company_detail">
+                                <!--                                <p-->
+                                <!--                                        t-if="res_company.street or res_company.street2 or res_company.city or res_company.state_id or res_company.zip or res_company.country_id"-->
+                                <!--                                        class="te_ftr_add_ept">-->
+                                <!--                                    <span t-field="res_company.street"/>-->
+                                <!--                                    <span t-field="res_company.street2"/>-->
+                                <!--                                    <span t-field="res_company.city"/>-->
+                                <!--                                    <span t-field="res_company.state_id"/>-->
+                                <!--                                    <span t-field="res_company.zip"/>-->
+                                <!--                                    <span t-field="res_company.country_id"/>-->
+                                <!--                                </p>-->
+                                <p class="te_ftr_add_ept">
+                                    <a>
+                                        Nous contacter
+                                    </a>
+                                </p>
+                            </div>
+                            <!-- Company Number -->
+                            <div class="te_company_detail">
+                                <!--                                <p class="te_ftr_add_ept" t-field="res_company.phone"/>-->
+
+                                <p class="te_ftr_add_ept">
+                                    <a>
+                                        Nous suivre
+                                    </a>
+                                </p>
+                            </div>
+                            <!-- Company Email -->
+                            <div class="te_company_detail">
+                                <!--                                <p class="te_ftr_add_ept" t-field="res_company.email"/>-->
+                                <p class="te_ftr_add_ept">
+                                    <a>
+                                        Condition Genereales de vente
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="te_social_info_section">
+                            <div class="te_social_detail">
+                                <div class="te_footer_social_icon">
+                                    <a t-if="website.social_facebook" t-att-href="website.social_facebook"
+                                       class="btn btn-sm btn-link">
+                                       <span>
+                                            <img src="/clarico_extended/static/src/img/fb.png" alt="facebook" style="width:38px;"/>
+                                        </span>
+                                       
+                                    </a>
+                                    <a t-if="website.social_instagram" t-att-href="website.social_instagram"
+                                       class="btn btn-sm btn-link">
+                                        <span>
+                                            <img src="/clarico_extended/static/src/img/insta.png" alt="instagram" style="width:38px;"/>
+                                        </span>
+                                    </a>
+                                    <a href="https://www.youtube.com/channel/UCsM_ZjVLACQwvUsNSqzfPjg"
+                                       class="btn btn-sm btn-link">
+                                        <span>
+                                            <img src="/clarico_extended/static/src/img/Youtube.png" alt="Youtube" style="width:38px;"/>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Scroll Up Icon -->
+                        <div class="scrollup-div text-center">
+                            <a href="#" class="scrollup-a">
+                                <i class="fa fa-angle-up scrollup-i text-center"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="te_footer_copyright_text container">
+                <!-- Copyright Text -->
+                <div class="te_copyright_text">
+                    <span>Lorem ipsum dolor</span>
+                    <span>&amp;copy;</span>
+                    <span>LifeByCanna 2021</span>
+                    <!--                    <span t-field="res_company.name" itemprop="name">LifeByCanna 2021</span>-->
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

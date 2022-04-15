@@ -157,12 +157,12 @@
 
 	<!-- Quick view in shop -->
 	<template id="quickview_icon_shop_product_item" inherit_id="website_sale.products_item" priority="10">
-		<xpath expr="//div[hasclass('product_price')]" position="inside">
+		<xpath expr="//div[hasclass('oe_product_image')]" position="after">
 			<!--Changes to add cart iscon and 'add to cart' title-->
             <!--Added By Preet Bhatti -->
             <!--Date: 28/may-->
-            <a title="Add To Cart" class="btn btn-secondary bg-success btn-sm quick-view-a" t-att-data-id="'%s' % product.id">
-				<span class="fa fa-shopping-cart text-white" />
+            <a title="Add To Cart" class="btn btn-sm quick-view-a te_theme_button" t-att-data-id="'%s' % product.id">
+				Add to cart
 			</a>
 		</xpath>
 	</template>

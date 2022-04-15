@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="canna_view_mail_mass_mailing_list_form_simplified" model="ir.ui.view">
+        <field name="name">canna.mail.mass_mailing.list.form.simplified</field>
+        <field name="model">mail.mass_mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_list_form_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_public']" position="after">
+                <field name="is_website_mailing"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="canna_view_mail_mass_mailing_list_form" model="ir.ui.view">
+        <field name="name">canna.mail.mass_mailing.list.form</field>
+        <field name="model">mail.mass_mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_list_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_public']" position="after">
+                <field name="is_website_mailing"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

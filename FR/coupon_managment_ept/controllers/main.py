@@ -6,6 +6,14 @@ from odoo.http import request
 
 class WebsiteSaleCoupon(websiteSaleOrder):
 
+    # Clear all the product from cart
+    @http.route(['/shop/clear_cart'], type='json', auth="public", methods=['POST'], website=True)
+    def clear_cart(self, **kw):
+        order = request.website.sale_get_order()
+        if order:
+            order.remove_coupon(order.order_line.filtered(lambda line: line.reward_line))
+            order.order_line.unlink()
+
     @http.route('/shop/payment/validate', type='http', auth="public", website=True, sitemap=False)
     def payment_validate(self, transaction_id=None, sale_order_id=None, **post):
         res = super(websiteSaleOrder, self).payment_validate(transaction_id=transaction_id,sale_order_id=sale_order_id,**post)
@@ -40,17 +48,20 @@ class WebsiteSaleCoupon(websiteSaleOrder):
         Added on: 09/06/2021
         :return: Super Call
         """
-        order = request.website.sale_get_order()
-        if order and promo:
-            coupon_status = request.env['website.coupon'].sudo().apply_coupon(order, promo)
-            if coupon_status.get('not_found'):
-                return super(WebsiteSaleCoupon, self).pricelist(promo, **post)
-            elif coupon_status.get('error'):
-                request.session['error_promo_code'] = coupon_status['error']
-                return request.redirect("/shop/cart?code_not_available=1")
-        if order and not promo:
-            coupon_status = request.env['website.coupon'].sudo().unset_coupon(order)
-        return request.redirect(post.get('r', '/shop/cart'))
+        if not request.env.user.sudo()._is_public():
+            order = request.website.sale_get_order()
+            if order and promo:
+                coupon_status = request.env['website.coupon'].sudo().apply_coupon(order, promo)
+                if coupon_status.get('not_found'):
+                    return super(WebsiteSaleCoupon, self).pricelist(promo, **post)
+                elif coupon_status.get('error'):
+                    request.session['error_promo_code'] = coupon_status['error']
+                    return request.redirect("/shop/cart?code_not_available=1")
+            if order and not promo:
+                coupon_status = request.env['website.coupon'].sudo().unset_coupon(order)
+            return request.redirect(post.get('r', '/shop/cart'))
+        else:
+            return request.render('web.login', {})
 
     @http.route(['/shop/payment'], type='http', auth="public", website=True)
     def payment(self, **post):

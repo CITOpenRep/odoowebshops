@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="world_canna" model="ir.ui.view">
+            <field name="name">World of Canna</field>
+            <field name="type">qweb</field>
+            <field name="key">clarico_extended.world_canna</field>
+            <field name="arch" type="xml">
+                <t name="Shop" t-name="clarico_extended.world_canna">
+                    <t t-call="website.layout">
+                        <div id="wrap" class="oe_structure oe_empty">
+                            
+      <style>
+                                .div-video-container &gt; vjs-big-play-button{visibility: hidden !important;}
+                                .video-js .vjs-big-play-button { visibility: hidden;;}
+                                                @media (max-width: 767.98px){.btn-mute-main,.btn-play-main{top:72% !important;}.div_shop_now{top: 70% !important;} .div_shop_now &gt; .te_theme_button{font-size: 0.5rem !important;}}
+                            </style>
+      <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+      <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+      <div class="div-video-container" style="position:relative">
+        <video id="world_canna_video" class="video-js vjs-16-9 vjs-fluid" loop="true" controls="false" autoplay="true" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png" data-setup="{}">
+          <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/world_of_canna.mp4" type="video/mp4"/>
+          <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/world_of_canna.webm" type="video/webm"/>
+          <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video
+                                        </a>
+                                    </p>
+        </video>
+        <a class="btn-mute-main" style="position: absolute;right: 30px;top:17%;cursor:pointer">
+          <i class="fa fa-microphone-slash text-center fa-2x"/>
+        </a>
+        <a class="btn-play-main" style="position: absolute;right: 30px;top:17%;cursor:pointer">
+          <i class="fa fa-stop-circle text-center fa-2x"/>
+        </a>
+        <div class="div_shop_now" style="position: absolute;text-align: center;width: 100%;top: 70%;transform: translateY(-70%);">
+            <a href="/blog" class="btn btn-primary te_theme_button" data-original-title="" title="" aria-describedby="tooltip1882"> Notre histoire </a>
+          </div>
+        
+        <!--<div style="position: absolute;text-align: center;width: 100%;top: 50%;transform: translateY(-50%);">-->
+        <!--    <a href="/shop" class="btn btn-theme te_theme_button">See Now</a>-->
+        <!--</div>-->
+      </div>
+      
+      <script type="text/javascript">
+                                var player = videojs('world_canna_video', {});
+                                const muteButton_main = document.querySelector(".btn-mute-main");
+                                const playButton_main = document.querySelector(".btn-play-main");
+
+                                player.muted(true);
+                                //player.play();
+
+                                muteButton_main.addEventListener("click", function() {
+                                var booleanValue = player.muted();
+                                if (booleanValue == true) {
+                                player.muted(false);
+                                $(".btn-mute-main").html('<i class="fa fa-microphone text-center fa-2x"/>');
+                                } else {
+                                player.muted(true);
+                                $(".btn-mute-main").html('<i class="fa fa-microphone-slash text-center fa-2x"/>')
+                                }
+                                });
+                                playButton_main.addEventListener("click", function() {
+                                if (player.paused()) {
+                                player.play();
+                                $(".btn-play-main").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                                } else {
+                                player.pause();
+                                $(".btn-play-main").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                                }
+                                });
+
+                            </script>
+                            <section id="canna-team">
+                                <section class="container pt16 aos-init aos-animate fade-right" data-aos="fade-right">
+                                    <div class="canna_page_heading">
+                                        <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">La Team
+                                        </h2>
+                                    </div>
+                                </section>
+                                <div class="container">
+                                    <t t-set="departments"
+                                       t-value="request.env['cannafr.department'].sudo().search([('is_published','=',True)])"/>
+                                    <div class="owl-carousel" id="owl-department" t-att-data-items="len(departments)">
+                                        <t t-foreach="departments" t-as="department">
+                                            <div class="item">
+                                                <div t-att-dep-id="department.id" class="department_img"
+                                                     t-field="department.image"
+                                                     t-options='{"widget": "image", "class": "department_image", "max_width": 320}'/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="pt8 pb8">
+                                <div class="s_btn text-center pt16 pb16" data-name="Buttons">
+                                    <a href="/blog" class="btn btn-theme te_theme_button">Our Story
+                                    </a>
+                                </div>
+                            </section>
+                            <section id="canna-events">
+                                <section class="container pt16 aos-init aos-animate fade-right" data-aos="fade-right">
+                                    <div class="canna_page_heading">
+                                        <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">Events
+                                        </h2>
+                                    </div>
+                                </section>
+                                <div class="container owl_events_block mb32">
+                                    <div id="owl_events_block" class="owl-carousel owl-theme">
+                                        <t t-set="event_data"
+                                           t-value="request.env['cannafr.events'].search([('is_active','=',True),('is_published','=',True)])"/>
+                                        <t t-if="event_data">
+                                            <t t-foreach="event_data" t-as="event">
+                                                <div class="item">
+                                                    <span t-field="event.image"
+                                                          t-options="{'widget': 'image'}"
+                                                          class=""/>
+                                                    <div class="item-right-block">
+                                                        <div class="news-item-title text-uppercase mb16"
+                                                             t-field="event.name"/>
+                                                        <div class="news-item-subtitle canna_cgb mb16"
+                                                             t-field="event.subtitle"/>
+                                                        <div class="news-item-description mb16"
+                                                             t-raw="event.description"/>
+<!--                                                        <div class="news-item-btn mb4 text-center">-->
+<!--                                                            <a href="#" role="button"-->
+<!--                                                               t-att-data-id="event.id"-->
+<!--                                                               class="btn btn-secondary te_event_popup te_theme_button">-->
+<!--                                                                SEE-->
+<!--                                                                <i class="fa fa-angle-right px-2"/>-->
+<!--                                                            </a>-->
+<!--                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="container-fluid pb32 pt32 contact_block" id="canna-sponsoring">
+                                <section class="container pt16 aos-init aos-animate fade-right" data-aos="fade-right">
+                                    <div class="canna_page_heading">
+                                        <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">contact et
+                                            sponsoring
+                                        </h2>
+                                    </div>
+                                </section>
+                                <div class="contact_us_block">
+                                    <form action="/website_form/" method="post" data-model_name="crm.lead"
+                                          class="s_website_form container-fluid"
+                                          enctype="multipart/form-data" data-editable-form="false">
+                                        <div class="row">
+                                            <div class="form-group col-lg-7 form-field o_website_form_required_custom mb8">
+                                                <label class="col-form-label pb0 pt0" for="contact_name">Your Name
+                                                </label>
+                                                <input type="text" class="form-control o_website_form_input"
+                                                       name="contact_name"
+                                                       t-att-value="request.params.get('contact_name', '')"
+                                                       required=""/>
+                                            </div>
+                                            <div class="form-group col-lg-7 form-field mb8">
+                                                <label class="col-form-label pb0 pt0" for="phone">Phone Number</label>
+                                                <input type="text" class="form-control o_website_form_input"
+                                                       name="phone"
+                                                       t-att-value="request.params.get('phone', '')"/>
+                                            </div>
+                                            <div class="form-group col-lg-7 form-field o_website_form_required_custom mb8">
+                                                <label class="col-form-label pb0 pt0" for="email_from">Email</label>
+                                                <input type="text" class="form-control o_website_form_input"
+                                                       name="email_from"
+                                                       required=""
+                                                       t-att-value="request.params.get('email_from', '')"/>
+                                            </div>
+                                            <div class="form-group col-lg-7 form-field o_website_form_required_custom mb8">
+                                                <label class="col-form-label pb0 pt0" for="partner_name">Your Company
+                                                </label>
+                                                <input type="text" class="form-control o_website_form_input"
+                                                       name="partner_name"
+                                                       required=""
+                                                       t-att-value="request.params.get('partner_name', '')"/>
+                                            </div>
+                                            <div class="form-group col-lg-7 form-field o_website_form_required mb8">
+                                                <label class="col-form-label pb0 pt0" for="name">Subject</label>
+                                                <input type="text" class="form-control o_website_form_input" name="name"
+                                                       required=""
+                                                       t-att-value="request.params.get('name', '')"/>
+                                            </div>
+                                            <div class="form-group col-lg-7 form-field o_website_form_required_custom mb16">
+                                                <label class="col-form-label pb0 pt0" for="description">Your Question
+                                                </label>
+                                                <textarea class="form-control o_website_form_input" name="description"
+                                                          rows="6"
+                                                          required="">
+                                                    <t t-esc="request.params.get('description', '')"/>
+                                                </textarea>
+                                            </div>
+                                            <div class="form-group col-lg-7">
+                                                <a href="#" role="button"
+                                                   class="btn btn-secondary btn-lg o_website_form_send o_website_contact_form_send">
+                                                    Send
+                                                </a>
+                                                <span id="o_website_form_result"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="modal fade" id="dept_teams_model" tabindex='-1'>
+                            <div class="modal-dialog modal-lg modal-dialog-top">
+                                <div class="modal-content te_dept_teams_modal">
+                            
+                            
+                           
+                                    <div class="te_close_test">
+                                        <button type="button" class="close te_popup_close" data-dismiss="modal"
+                                                aria-label="Close"
+                                                tabindex="-1">
+                                            <img src="/clarico_extended/static/src/img/close.svg"/>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="position: absolute;transform: translateY(-50%);top: 50%;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <record id="world_canna_page" model="website.page">
+            <field name="website_published">True</field>
+            <field name="url">/world_canna</field>
+            <field name="view_id" ref="clarico_extended.world_canna"/>
+        </record>
+    </data>
+
+    <template id="cannafr_team_popup_ept">
+        <div class="container">
+            <div class="row">
+                <t t-foreach="dept_teams" t-as="dept_team">
+                    <div class="col-lg-6 col-md-6 dept_team_main row">
+                        <div class="col-3">
+                            <div t-att-dep-id="dept_team.id" class="dept_team_img" t-field="dept_team.icon"
+                                 t-options='{"widget": "image", "class": "department_image", "max_width": 320}'/>
+                        </div>
+                        <div class="col-9 dept_teams">
+                            <h2 class="dept_team_name" t-att-team-id="dept_team.id" t-esc="dept_team.name"/>
+                            <h3 t-esc="dept_team.title"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <template id="cannafr_team_detail_popup_ept">
+        <div class="container team_details">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div t-att-dep-id="team.id" class="team_img" t-field="team.image"
+                         t-options='{"widget": "image", "class": "team_image", "max_width": 320}'/>
+                </div>
+                <div class="col-sm-9">
+                    <div>
+                        <h2 class="team_name" t-att-team-id="team.id" t-esc="'%s - %s' % (team.name, team.title)"/>
+                    </div>
+                    <t t-if="team.is_video">
+                        
+                        <style>
+                             .div-video-container &gt; vjs-big-play-button{visibility: hidden !important;}
+                            .video-js .vjs-big-play-button { visibility: hidden;;}
+                            .btn-mute-team_1 img,.btn-mute-team_2 img,.btn-mute-team_3 img,.btn-mute-team_4 img{width: 25px;}
+                        </style>
+
+                        <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+                        <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+                        <p class="ept_team_id" t-att-team-id="team.name" />
+                        <div class="div-video-container" style="position:relative">
+                          <t t-if="team.name == 'Sarah Lezito'">
+                              
+                                <video id="world_canna_video_team_1" class="video-js vjs-16-9 vjs-fluid" controls="false" autoplay="true" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png" data-setup="{}">
+                                    <source t-att-src="'//testzone-1ac3b.kxcdn.com/clarico_extended/static/src/video/%s' % team.video_url" type="video/mp4"/>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                            video
+                                        </a>
+                                    </p>
+                                </video>
+                                <a class="btn-mute-team_1" style="position: absolute;right: 30px;top: 7%;cursor:pointer">
+                                  <img src="/clarico_extended/static/src/img/mute.png" class="ept_video_mic"/>
+                                </a>
+                                <a class="btn-play-team_1" style="position: absolute;right: 85px;top: 7%;cursor:pointer">
+                                    <i class="fa fa-stop-circle text-center fa-2x"/>
+                                </a>
+                            </t>
+                            <t t-if="team.name == 'Philippe Cantenot'">
+                                <video id="world_canna_video_team_2" class="video-js vjs-16-9 vjs-fluid" controls="false" autoplay="true" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png" data-setup="{}">
+                                    <source t-att-src="'//testzone-1ac3b.kxcdn.com/clarico_extended/static/src/video/%s' % team.video_url" type="video/mp4"/>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                            video
+                                        </a>
+                                    </p>
+                                </video>
+                                <a class="btn-mute-team_2" style="position: absolute;right: 30px;top: 7%;cursor:pointer">
+                                    <img src="/clarico_extended/static/src/img/mute.png" class="ept_video_mic"/>
+                                </a>
+                                <a class="btn-play-team_2" style="position: absolute;right: 85px;top: 7%;cursor:pointer">
+                                    <i class="fa fa-stop-circle text-center fa-2x"/>
+                                </a>
+                            </t>
+                             <t t-if="team.name == 'Boxe fighters from the ROF' or team.name == 'Boxeuses du ROF'">
+                                <video id="world_canna_video_team_3" class="video-js vjs-16-9 vjs-fluid" controls="false" autoplay="true" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png" data-setup="{}">
+                                    <source t-att-src="'//testzone-1ac3b.kxcdn.com/clarico_extended/static/src/video/%s' % team.video_url" type="video/mp4"/>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                            video
+                                        </a>
+                                    </p>
+                                </video>
+                                <a class="btn-mute-team_3" style="position: absolute;right: 30px;top: 7%;cursor:pointer">
+                                    <img src="/clarico_extended/static/src/img/mute.png" class="ept_video_mic"/>
+                                </a>
+                                <a class="btn-play-team_3" style="position: absolute;right: 85px;top: 7%;cursor:pointer">
+                                    <i class="fa fa-stop-circle text-center fa-2x"/>
+                                </a>
+                            </t>
+                             <t t-if="team.name == 'Digital Cut'">
+                                <video id="world_canna_video_team_4" class="video-js vjs-16-9 vjs-fluid" controls="false" autoplay="true" preload="auto" nativeControlsForTouch="true" poster="/clarico_extended/static/src/img/poster.png" data-setup="{}">
+                                    <source t-att-src="'//testzone-1ac3b.kxcdn.com/clarico_extended/static/src/video/%s' % team.video_url" type="video/mp4"/>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                            video
+                                        </a>
+                                    </p>
+                                </video>
+                                <a class="btn-mute-team_4" style="position: absolute;right: 30px;top: 7%;cursor:pointer">
+                                    <img src="/clarico_extended/static/src/img/mute.png" class="ept_video_mic"/>
+                                </a>
+                                <a class="btn-play-team_4" style="position: absolute;right: 85px;top: 7%;cursor:pointer">
+                                    <i class="fa fa-stop-circle text-center fa-2x"/>
+                                </a>
+                            </t>
+                          
+                            
+                            <!--<div style="position: absolute;text-align: center;width: 100%;top: 50%;transform: translateY(-50%);">-->
+                            <!--    <a href="/shop" class="btn btn-theme te_theme_button">See Now</a>-->
+                            <!--</div>-->
+                        </div>
+                        <script type="text/javascript">
+                          var team_member_name = $(".ept_team_id").attr('team-id');
+                          var player_team1,player_team2,player_team3,player_team4 = '';
+                          
+                          if(team_member_name == 'Sarah Lezito'){
+                            player_team1 = videojs('world_canna_video_team_1', {});
+                            const muteButton_team_1 = document.querySelector(".btn-mute-team_1");
+                            const playButton_team_1 = document.querySelector(".btn-play-team_1");
+
+                            player_team1.muted(true);
+                            //player.play();
+
+                            muteButton_team_1.addEventListener("click", function() {
+                            const booleanValue_team_1 = player_team1.muted();
+                            if (booleanValue_team_1 == true) {
+                            player_team1.muted(false);
+                            $(".btn-mute-team_1 > img").attr('src','/clarico_extended/static/src/img/unmute.png');
+                            } else {
+                            player_team1.muted(true);
+                            $(".btn-mute-team_1  > img").attr('src','/clarico_extended/static/src/img/mute.png');
+                            }
+                            });
+                            playButton_team_1.addEventListener("click", function() {
+                            if (player_team1.paused()) {
+                            player_team1.play();
+                            $(".btn-play-team_1").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                            } else {
+                            player_team1.pause();
+                            $(".btn-play-team_1").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                            }
+                            });
+                          }
+                          else if(team_member_name == 'Philippe Cantenot'){
+                          
+                            player_team2 = videojs('world_canna_video_team_2', {});
+                            const muteButton_team = document.querySelector(".btn-mute-team_2");
+                            const playButton_team = document.querySelector(".btn-play-team_2");
+
+                            player_team2.muted(true);
+                            //player.play();
+
+                            muteButton_team.addEventListener("click", function() {
+                            const booleanValue_team = player_team2.muted();
+                            if (booleanValue_team == true) {
+                            player_team2.muted(false);
+                            $(".btn-mute-team_2 > img").attr('src','/clarico_extended/static/src/img/unmute.png');
+                            } else {
+                            player_team2.muted(true);
+                            $(".btn-mute-team_2 > img").attr('src','/clarico_extended/static/src/img/mute.png');
+                            }
+                            });
+                            playButton_team.addEventListener("click", function() {
+                            if (player_team2.paused()) {
+                            player_team2.play();
+                            $(".btn-play-team_2").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                            } else {
+                            player_team2.pause();
+                            $(".btn-play-team_2").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                            }
+                            });
+                          }
+                          else if(team_member_name == 'Boxeuses du ROF' || team_member_name == 'Boxe fighters from the ROF'){
+                          
+                            player_team3 = videojs('world_canna_video_team_3', {});
+                            const muteButton_team = document.querySelector(".btn-mute-team_3");
+                            const playButton_team = document.querySelector(".btn-play-team_3");
+
+                            player_team3.muted(true);
+                            //player.play();
+
+                            muteButton_team.addEventListener("click", function() {
+                            const booleanValue_team = player_team3.muted();
+                            if (booleanValue_team == true) {
+                            player_team3.muted(false);
+                            $(".btn-mute-team_3 > img").attr('src','/clarico_extended/static/src/img/unmute.png');
+                            } else {
+                            player_team3.muted(true);
+                            $(".btn-mute-team_3 > img").attr('src','/clarico_extended/static/src/img/mute.png');
+                            }
+                            });
+                            playButton_team.addEventListener("click", function() {
+                            if (player_team3.paused()) {
+                            player_team3.play();
+                            $(".btn-play-team_3").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                            } else {
+                            player_team3.pause();
+                            $(".btn-play-team_3").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                            }
+                            });
+                          }
+                          else if(team_member_name == 'Digital Cut'){
+                          
+                            player_team4 = videojs('world_canna_video_team_4', {});
+                            const muteButton_team = document.querySelector(".btn-mute-team_4");
+                            const playButton_team = document.querySelector(".btn-play-team_4");
+
+                            player_team4.muted(true);
+                            //player.play();
+
+                            muteButton_team.addEventListener("click", function() {
+                            const booleanValue_team = player_team4.muted();
+                            if (booleanValue_team == true) {
+                            player_team4.muted(false);
+                            $(".btn-mute-team_4 > img").attr('src','/clarico_extended/static/src/img/unmute.png');
+                            } else {
+                            player_team4.muted(true);
+                            $(".btn-mute-team_4 > img").attr('src','/clarico_extended/static/src/img/mute.png');
+                            }
+                            });
+                            playButton_team.addEventListener("click", function() {
+                            if (player_team4.paused()) {
+                            player_team4.play();
+                            $(".btn-play-team_4").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                            } else {
+                            player_team4.pause();
+                            $(".btn-play-team_4").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                            }
+                            });
+                          }
+                          /*else if(team_member_name == 'sarah'){
+                            var player_team = videojs('world_canna_video_team_3', {});
+                            const muteButton_team = document.querySelector(".btn-mute-team");
+                            const playButton_team = document.querySelector(".btn-play-team");
+
+                            player_team.muted(true);
+                            //player.play();
+
+                            muteButton_team.addEventListener("click", function() {
+                            const booleanValue_team = player_team.muted();
+                            if (booleanValue == true) {
+                            player_team.muted(false);
+                            $(".btn-mute-team").html('<i class="fa fa-microphone text-center fa-2x"/>');
+                            } else {
+                            player_team.muted(true);
+                            $(".btn-mute-team").html('<i class="fa fa-microphone-slash text-center fa-2x"/>')
+                            }
+                            });
+                            playButton_team.addEventListener("click", function() {
+                            if (player_team.paused()) {
+                            player_team.play();
+                            $(".btn-play-team").html('<i class="fa fa-stop-circle text-center fa-2x"/>');
+                            } else {
+                            player_team.pause();
+                            $(".btn-play-team").html('<i class="fa fa-play-circle text-center fa-2x"/>');
+                            }
+                            });
+                          }*/
+                          $(".te_popup_close").click(function(){
+                          var team_member_name = $.trim($(".team_name").html()).split(' - ')[0];
+                           if( team_member_name== 'Sarah Lezito'){player_team1.dispose();}
+                           else if(team_member_name == 'Philippe Cantenot'){player_team2.dispose();}
+                           else if(team_member_name == 'Boxeuses du ROF' || team_member_name == 'Boxe fighters from the ROF'){player_team3.dispose();}
+                           else if(team_member_name == 'Digital Cut'){player_team4.dispose();}
+                           
+                          });
+                        </script>
+                    </t>
+
+                    <div class="team_description" t-field="team.description"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="cannafr_event_popup">
+        <div t-attf-style="background-image: url('#{website.image_url(event, 'image')}');"
+             class="te_news_popup_img mb16"/>
+        <div class="te_news_popup_text_content">
+            <h4 class="text-uppercase" t-raw="event.name"/>
+            <div class="te_news_subtitle" t-raw="event.subtitle"/>
+            <div class="te_news_popup_desc">
+                <pre t-raw="event.description"/>
+            </div>
+        </div>
+    </template>
+</odoo>

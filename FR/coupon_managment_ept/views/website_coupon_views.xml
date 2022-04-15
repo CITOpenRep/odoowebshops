@@ -54,6 +54,8 @@
                                     <span>
                                         Invalid Promo code
                                     </span>
+                                    <br/>
+                                    <span t-esc="request.session.get('error_promo_code')"/>
                                 </div>
                             </div>
                         </t>

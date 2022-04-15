@@ -10,19 +10,60 @@
         <xpath expr="//p[@t-field='product.description_sale']" position="replace"></xpath>
         <!-- Replaced Indicators -->
 		<xpath expr="//div[@id='o-carousel-product']/ol[hasclass('carousel-indicators')]" position="replace">
-              <div t-if="len(image_ids)" id="carousel-pager" class="carousel slide" data-ride="carousel" data-interval="500000000">
-                <li class="carousel-item active">
-                    <img class="img img-fluid" data-slide-to="0" data-target="#o-carousel-product" t-attf-src="/website/image/product.template/{{product.id}}/image/90x90" t-att-alt="product.name"/>
-                </li>
-                <t t-set="counter" t-value="1"></t>
-                <t t-foreach="image_ids" t-as="pimg">
-                    <li class="carousel-item active">
-                        <img class="img img-fluid" data-target="#o-carousel-product" t-att-data-slide-to="counter" t-attf-src="/website/image/product.image/{{pimg.id}}/image/90x90" t-att-alt="pimg.name"/>
-                    </li>
-                    <t t-set="counter" t-value="counter+1"></t>
-                </t>
+          <div t-if="len(image_ids)" id="carousel-pager" class="carousel slide" data-ride="carousel" data-interval="500000000">
+              <t t-if="website.is_lazy_load">
+                  <li class="carousel-item active">
+                      <img class="img img-fluid lazyload" data-slide-to="0" data-target="#o-carousel-product" t-attf-data-src="/website/image/product.template/{{product.id}}/image/90x90" t-attf-src="/web/image/website/#{website.id}/lazy_load_image" t-att-alt="product.name"/>
+                  </li>
+                  <t t-set="counter" t-value="1"></t>
+                  <t t-foreach="image_ids" t-as="pimg">
+                      <li class="carousel-item active">
+                          <img class="img img-fluid lazyload" data-target="#o-carousel-product" t-att-data-slide-to="counter" t-attf-data-src="/website/image/product.image/{{pimg.id}}/image/90x90" t-attf-src="/web/image/website/#{website.id}/lazy_load_image" t-att-alt="pimg.name"/>
+                      </li>
+                      <t t-set="counter" t-value="counter+1"></t>
+                  </t>
+              </t>
+              <t t-else="">
+                  <li class="carousel-item active">
+                      <img class="img img-fluid" data-slide-to="0" data-target="#o-carousel-product" t-attf-src="/website/image/product.template/{{product.id}}/image/90x90" t-att-alt="product.name"/>
+                  </li>
+                  <t t-set="counter" t-value="1"></t>
+                  <t t-foreach="image_ids" t-as="pimg">
+                      <li class="carousel-item active">
+                          <img class="img img-fluid lazyload" data-target="#o-carousel-product" t-att-data-slide-to="counter" t-attf-src="/website/image/product.image/{{pimg.id}}/image/90x90" t-att-alt="pimg.name"/>
+                      </li>
+                      <t t-set="counter" t-value="counter+1"></t>
+                  </t>
+              </t>
            </div>
 		</xpath>
+        <xpath expr="//div[hasclass('carousel-inner')]" position="replace">
+            <div class="carousel-inner">
+                <t t-if="website.is_lazy_load">
+                    <div class="carousel-item active">
+                        <img t-attf-data-src="/web/image/#{product_variant._name}/#{product_variant.id}/image"
+                             t-attf-src="/web/image/website/#{website.id}/lazy_load_image"
+                             class="img img-fluid lazyload product_detail_img"
+                             itemprop="image"
+                             alt="Product image" loading="eager"/>
+                    </div>
+                    <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                        <div class="carousel-item">
+                            <img class="img img-fluid lazyload product_detail_img" t-attf-data-src="/website/image/product.image/{{pimg.id}}/image" t-attf-src="/web/image/website/#{website.id}/lazy_load_image" t-att-alt="pimg.name"/>
+                        </div>
+                    </t>
+                </t>
+                <t t-else="">
+                    <div class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image"
+                         t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
+                    <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                        <div class="carousel-item" t-field="pimg.image"
+                             t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
+                    </t>
+                </t>
+
+            </div>
+        </xpath>
         <!-- Add Full width if product has not multiple images-->
         <!--Changes to load image in full width if product has no extra images.-->
         <!--Added By Preet Bhatti -->
@@ -33,7 +74,7 @@
         <xpath expr="//h1[@t-field='product.name']" position="after">
             <div class="o_not_editable">
                <p t-field="product.description_sale" class="te_prod_desc d-none" />
-                <p t-field="product.website_sale_description" class="te_prod_desc"/>
+                <p t-field="product.website_description" class="te_prod_desc"/>
             </div>
             <!-- Offer Timer in Product -->
 			<t t-set="product_offer_item" t-value="website.get_current_pricelist().item_ids.filtered(lambda r : r.product_tmpl_id == product and r.date_end !=False)"></t>
@@ -250,17 +291,16 @@
     </template>
     <template id="shop_product_carousel_ept" inherit_id="website_sale.shop_product_carousel">
         <xpath expr="//div[@id='o-carousel-product']//div[hasclass('carousel-inner')]" position="replace">
-            <!--<div class="carousel-inner">
-            <div t-if="variant_img" class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image" t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
-            <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
-            <div class="carousel-item zoomIn" t-field="pimg.image" t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
-            </t>
-            </div>-->
             <div class="carousel-inner">
-                <div class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image" t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
-                <!--<div class="carousel-item active" itemprop="image" t-field="product.image" t-options="{'widget': 'image', 'class': 'product_detail_img', 'alt-field': 'name', 'zoom': 'image', 'unique': product['__last_update']}"/>-->
+                <div t-if="variant_img" class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image" t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
                 <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
-                    <div class="carousel-item" t-field="pimg.image" t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
+                <div class="carousel-item zoomIn" t-field="pimg.image" t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
+                </t>
+                <div class="carousel-item zoomIn active" itemprop="image" t-field="product_variant.image"
+                     t-options="{'widget': 'image', 'class': 'product_detail_img js_variant_img', 'alt-field': 'name', 'zoom': 'image', 'unique': str(product['__last_update']) + (str(product_variant['__last_update']) or '')}"/>
+                <t t-if="len(image_ids)" t-foreach="image_ids" t-as="pimg">
+                    <div class="carousel-item" t-field="pimg.image"
+                         t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;product_detail_img&quot;, &quot;alt-field&quot;: &quot;name&quot;, &quot;zoom&quot;: &quot;image&quot; }"/>
                 </t>
             </div>
             <t t-if="len(image_ids) or variant_img">
@@ -273,9 +313,9 @@
             </t>
         </xpath>
         <xpath expr="//ol[hasclass('carousel-indicators')]" position="replace">
-            <div t-if="len(image_ids)" id="carousel-pager" class="carousel slide" data-ride="carousel" data-interval="500000000">
+            <div t-if="len(image_ids)" id="carousel-pager" class="carousel slide" data-ride="carousel">
                 <li class="carousel-item active">
-                    <img class="img img-fluid" data-slide-to="0" data-target="#o-carousel-product" t-attf-src="/website/image/product.template/{{product.id}}/image/90x90" t-att-alt="product.name"/>
+                    <img class="img img-fluid lazyload" data-slide-to="0" data-target="#o-carousel-product" t-attf-src="/website/image/product.template/{{product.id}}/image/90x90" t-att-alt="product.name"/>
                 </li>
                 <t t-set="counter" t-value="1"></t>
                 <t t-foreach="image_ids" t-as="pimg">

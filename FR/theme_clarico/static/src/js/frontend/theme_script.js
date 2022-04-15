@@ -265,9 +265,9 @@ odoo.define('theme_emipro.theme_script', function(require) {
     sAnimations.registry.themeEvent = sAnimations.Class.extend({
         selector: '.oe_website_sale',
         read_events: {
-            'mouseenter .oe_grid.oe_product': '_onMouseEnter',
-            'mouseleave .oe_grid.oe_product': '_onMouseLeave',
-            'click .oe_product':'_onIcons',
+//            'mouseenter .oe_grid.oe_product': '_onMouseEnter',
+//            'mouseleave .oe_grid.oe_product': '_onMouseLeave',
+//            'click .oe_product':'_onIcons',
             'click .te_clear_attr_a': '_onClearAttribInd',
             'click .te_clear_all_form_selection': '_onClearAttribAll',
             'click .te_clear_all_variant': '_onClearAttribDiv',
@@ -281,7 +281,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
         },
 
    
-        _onMouseEnter: function(ev) {
+        /*_onMouseEnter: function(ev) {
             var self = ev.currentTarget;
             var height = $(self).find("section").outerHeight();
             if ($(window).width() > 1200) {
@@ -292,8 +292,8 @@ odoo.define('theme_emipro.theme_script', function(require) {
         _onMouseLeave: function(ev) {
             var self = ev.currentTarget;
             if ($(window).width() > 1200) {
-            $(self).find(".product_price").removeClass("bottom_animation");
-		}
+                $(self).find(".product_price").removeClass("bottom_animation");
+            }
         },
         _onIcons: function(ev){
             var self = ev.currentTarget;
@@ -301,7 +301,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
             $(self).find(".product_price").removeClass("bottom_animation")
             $(self).find(".oe_product_image").css("opacity", "1");
             }
-        },
+        },*/
         _onClearAttribInd: function(ev) {
             var self = ev.currentTarget;
             var id = $(self).attr("data-id");
@@ -466,7 +466,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
 			
 		this._super.apply(this, arguments);
 		if ($(window).width() > 768) {
-			if($('.carousel .vertical .carousel-item').length > 5)
+			if($('.carousel .vertical .carousel-item').length > 4)
 				{
 					$('.carousel .vertical .carousel-item').each(function(){
 						  var next = $(this).next();
@@ -476,7 +476,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
 						  }
 						  next.children(':first-child').clone().appendTo($(this));
 						  
-						  for (var i=1;i<4;i++) {
+						  for (var i=1;i<3;i++) {
 						    next=next.next();
 						    if (!next.length) {
 						    	next = $(this).siblings(':first');
@@ -514,7 +514,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
         },
     });
     function onShowClearVariant(ev) {
-        $("form.js_attributes input:checked, form.js_attributes select,form.js_attributes input#price_slider_min").each(function() {
+        $("form.js_attributes input:checked, form.js_attributes select,form.js_attributes input#price_default_slider_min").each(function() {
             var self = $(this);
             var type = ($(self).context);
             var type_value;
@@ -541,9 +541,9 @@ odoo.define('theme_emipro.theme_script', function(require) {
                 attr_value = self.find("option:selected").html();
                 target_select = self.parents("li.nav-item").find("a.te_clear_all_variant");
             }
-            else if ($(type).is("input") && $(type).attr('id') == 'price_slider_min') {
-                var get_min_val = parseInt($('input#price_slider_min').val());
-                var get_max_val = parseInt($('input#price_slider_max').val());
+            else if ($(type).is("input") && $(type).attr('id') == 'price_default_slider_min') {
+                var get_min_val = parseInt($('input#price_default_slider_min').val());
+                var get_max_val = parseInt($('input#price_default_slider_max').val());
                 var current_min_val = parseInt($('input#price_range_min_value').val());
                 var current_max_val = parseInt($('input#price_range_max_value').val());
                 if(current_min_val != get_min_val || current_max_val != get_max_val) {
@@ -751,100 +751,148 @@ odoo.define('theme_emipro.theme_script', function(require) {
         }
     }, 1000);
     }
-    //--------------------------------------------------------------------------
-    // 08. Price Filter 
+    // 08. Price Filter
     //--------------------------------------------------------------------------
     //min and max values
     function priceFilter(ev) {
-    //if ($(".price_filter_main_div").length) {
-        // disable on change form swubmit
+        if ($(".price_filter_main_div").length) {
+            var get_min_val = $('input#price_default_slider_min').val();
+            var get_max_val = $('input#price_default_slider_max').val();
+            $("span.min-amount").html(parseInt(get_min_val));
+            $("span.max-amount").html(parseInt(get_max_val));
+            var current_min_val = $('input#price_range_min_value').val();
+            var current_max_val = $('input#price_range_max_value').val();
 
-        $('input#price_range_min_value').change(function(ev) {
-            ev.preventDefault();
-            
-            return false;
-        })
-
-        $('input#price_range_max_value').change(function(ev) {
-            ev.preventDefault();
-            
-            return false;
-        })
-        
-        // set validate for only working number
-        $.fn.inputFilter = function(inputFilter) {
-            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
-                if (inputFilter(this.value)) {
-                    this.oldValue = this.value;
-                    this.oldSelectionStart = this.selectionStart;
-                    this.oldSelectionEnd = this.selectionEnd;
-                } else if (this.hasOwnProperty("oldValue")) {
-                    this.value = this.oldValue;
-                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                }
-            });
-        };
-        
-        // test validation
-        $("input#price_range_min_value, input#price_range_max_value").inputFilter(function(value) {
-            //console.log(/^\d*[0-9]?\d*$/.test(value))
-            return /^\d*[0-9]?\d*$/.test(value);
-        });
-        
-        // form submit on apply 
-        $("#price_slider_form").click(function(ev) {
-              var is_error = 0;
-            // check for blank input
-            if ($("#price_range_min_value").val() == "" || $("#price_range_max_value").val() == "") {
-                $('#price_range_min_value').css({
-                    'border-color': 'red',
-                    'background': '#f2dede'
-                });
-                $('span#submit-error').removeClass("d-none");
+            // Prevent Form From Getting Submit on change event of attributes
+            $('input#priceRangeLower, input#price_range_min_value').change(function(ev) {
                 ev.preventDefault();
-                is_error = 1;
-                return false
-            }
-            
-            // check for value compare to min and max
-            if (parseInt($("#price_range_min_value").val()) > parseInt($("#price_range_max_value").val())) {
-                $('span#submit-error').removeClass("d-none");
-                        is_error = 1;
-                return false
-            }
-            
-            // check for value enter is not more then default max value
-            if (parseInt($("#price_range_max_value").val()) > parseInt($("#price_default_slider_max").val())) {
-                $('span#submit-error').removeClass("d-none");
-                  is_error = 1;
-                return false
-       }
-            
-        //check for value enter is not more then default min value
-            if(parseInt($("#price_default_slider_min").val()) > parseInt($("#price_range_min_value").val())) {
-                $('span#submit-error').removeClass("d-none");
-                  is_error = 1;
-                return false
-            }
-            ajaxorformload(ev);
-            if(is_error == 0)
-            {
-              //form submit
-              //$("form.js_attributes").submit();           
-      }
-        });
+                return false;
+            })
+            $('input#priceRangeUpper, input#price_range_max_value').change(function(ev) {
+                ev.preventDefault();
+                return false;
+            })
+            /* Allow only numbers and "." in calculator input fields */
+            $.fn.inputFilter = function(inputFilter) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+                    if (inputFilter(this.value)) {
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    }
+                });
+            };
+            $(".filter-price input#price_range_min_value, .filter-price input#price_range_max_value").inputFilter(function(value) {
+                return /^-?\d*[0-9]?\d*$/.test(value);
+            });
+            //validations
+            $("#price_slider_form").click(function() {
+                $('span#submit-error').removeClass("price_error_message");
+                $('span#submit-error').html("");
+                $('#price_range_min_value').css({
+                    'border-color': 'inherit',
+                    'background': '#ffffff'
+                });
+                $('#price_range_max_value').css({
+                    'border-color': 'inherit',
+                    'background': '#ffffff'
+                });
 
-        /* Reset button */
-            if(parseInt($("#price_range_min_value").val()) != parseInt($("#price_default_slider_min").val()) || parseInt($("#price_range_max_value").val()) != parseInt($("#price_default_slider_max").val())) {
-                $(".price_filter_head").find(".te_reset").css("display","block");
-                
-                $(".te_reset").click(function(){  
-                    $('input#price_range_min_value').val(parseInt($("#price_default_slider_min").val())); 
-                    $('input#price_range_max_value').val(parseInt($("#price_default_slider_max").val()));
-                    //$("form.js_attributes").submit();
+                if ($("#price_range_min_value").val() == "" || $("#price_range_min_value").val() < parseInt(get_min_val) || $("#price_range_min_value").val() > parseInt(get_max_val)) {
+                    $('#price_range_min_value').css({
+                        'border-color': 'red',
+                        'background': '#f2dede'
+                    });
+                    $('span#submit-error').addClass("price_error_message");
+                    $('span#submit-error').html("Invalid Input");
+                    return false
+                }
+
+                if ($("#price_range_max_value").val() == "" || $("#price_range_max_value").val() < parseInt(get_min_val) || $("#price_range_max_value").val() > parseInt(get_max_val)) {
+                    $('#price_range_max_value').css({
+                        'border-color': 'red',
+                        'background': '#f2dede'
+                    });
+                    $('span#submit-error').addClass("price_error_message");
+                    $('span#submit-error').html("Invalid Input");
+                    return false
+                }
+
+                if (parseFloat($("#price_range_max_value").val()) <= parseFloat($("#price_range_min_value").val())) {
+                    $('span#submit-error').addClass("price_error_message");
+                    $('span#submit-error').html("Minimum amount can't be more or equal to maximum amount");
+                    return false
+                } else {
                     ajaxorformload(ev);
-                })
-            }
+                }
+            })
+            /* Change price range slider to change into the input box
+             * Also change the value if price result is active */
+            var lowerSlider = document.querySelector('#priceRangeLower');
+            var upperSlider = document.querySelector('#priceRangeUpper');
+
+            document.querySelector('#price_range_max_value').value = parseInt(upperSlider.value);
+            document.querySelector('#price_range_min_value').value = parseInt(lowerSlider.value);
+
+            var lowerVal = parseInt(current_min_val);
+            var upperVal = parseInt(current_max_val);
+            upperSlider.oninput = function() {
+                lowerVal = parseInt(lowerSlider.value);
+                upperVal = parseInt(upperSlider.value);
+                if (upperVal < lowerVal + 4) {
+                    lowerSlider.value = upperVal - 4;
+                    if (lowerVal == lowerSlider.min) {
+                        upperSlider.value = 4;
+                    }
+                }
+                if (parseInt(this.value) <= lowerVal) {
+                    $('span#submit-error').addClass("price_error_message");
+                    $('span#submit-error').html("Maximum amount can't be less or equal to minimum amount");
+                    document.querySelector('#price_range_max_value').value = lowerVal
+                } else {
+                    $('span#submit-error').removeClass("price_error_message").html('');
+                    document.querySelector('#price_range_max_value').value = parseInt(this.value)
+                }
+            };
+
+            lowerSlider.oninput = function() {
+                lowerVal = parseInt(lowerSlider.value);
+                upperVal = parseInt(upperSlider.value);
+                if (lowerVal > upperVal - 4) {
+                    upperSlider.value = lowerVal + 4;
+                    if (upperVal == upperSlider.max) {
+                        lowerSlider.value = parseInt(upperSlider.max) - 4;
+                    }
+                }
+                if (parseInt(this.value) >= upperVal) {
+                    $('span#submit-error').addClass("price_error_message");
+                    $('span#submit-error').html("Minimum amount can't be more or equal to maximum amount");
+                    document.querySelector('#price_range_min_value').value = upperVal
+                } else {
+                    $('span#submit-error').removeClass("price_error_message").html('');
+                    document.querySelector('#price_range_min_value').value = parseInt(this.value)
+                }
+            };
+
+            lowerSlider.value = lowerVal;
+            upperSlider.value = upperVal;
+
+            /* Reset button */
+                if(current_min_val != get_min_val || current_max_val != get_max_val) {
+                    $(".price_filter_head").find(".te_reset").css("display","block");
+
+                    $(".te_reset").click(function(){
+                        $('input#price_range_min_value').val(get_min_val);
+                        $('input#price_range_max_value').val(get_max_val);
+                        //$("form.js_attributes").submit();
+                        ajaxorformload(ev);
+                    })
+                }
+        }
+    }
         
         //slider main event
         /*$("#Slider1").slider({
@@ -863,7 +911,7 @@ odoo.define('theme_emipro.theme_script', function(require) {
        
        //$("#Slider1").slider('value',parseInt($('input#price_range_min_value').val()),parseInt($('input#price_range_max_value').val()))
       
-    }
+    // }
 
     //------------------------------------------
     // 09. Theme layout

@@ -1,0 +1,250 @@
+.limited_edition_ept,
+.best_seller_ept {
+    .te_product_slider_2 {
+        max-width: 1200px;
+        margin: 0 auto;
+        color: #fff;
+        .owl-carousel {
+            .owl-stage {
+                display: flex;
+                align-items: center;
+            }
+            .owl-nav button.owl-prev {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                outline: unset;
+                transform: translateY(-50%);
+                .fa {
+                    font-size: 1.5rem;
+                }
+            }
+            .owl-nav button.owl-next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                outline: unset;
+                .fa {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        .te_product_ind {
+            .img {
+                width: auto;
+                margin-left: auto;
+            }
+            .te_prod_info_2 {
+                .product_name {
+                    font-size: 26px;
+                    color: #fff;
+                }
+                .product_price {
+                    font-size: 28px;
+                }
+                .te_prod_cart_wish {
+                    padding-top: 1rem;
+                }
+            }
+        }
+    }
+}
+.limited_edition_ept {
+    .te_slider_img {
+        @include media-breakpoint-up(md) {
+            order: 2;
+        }
+    }
+    .te_product_slider_2 {
+        .te_product_ind {
+            .img {
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+        .te_prod_cart_wish {
+            .limited_edition{
+                width: unset !important;
+            }
+        }
+    }
+}
+#limitedEditionPopup {
+    .modal-content {
+        opacity: 0.9;
+        color: #fff;
+        background-color: #000000;
+        padding: 0 3rem;
+        .btn {
+            display: block;
+            margin: 2rem auto;
+        }
+        .modal-title {
+            text-align: center;
+            color: #fff;
+            margin: 2rem auto;
+            &:before {
+                content: '';
+                background-image: url('/clarico_extended/static/src/img/VIPmember-icon.png');
+                background-size: 100%;
+                width: 30px;
+                height: 30px;
+                vertical-align: middle;
+                position: relative;
+                display: inline-block;
+                margin-right: 0.5rem;
+            }
+        }
+        h4 {
+            margin: 2rem auto;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        ul {
+            li {
+                margin-bottom: 10px;
+            }
+        }
+        .te_btn-close {
+            position: absolute;
+            right: 0;
+            top: 32px;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+    }
+}
+/*=========== World of Canna =============*/
+.item-right-block {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background: rgba(3, 102, 98, 0.9);
+    color: #FFF;
+    padding: 20px;
+    max-width: 30%;
+    transform: translateY(-50%);
+    @include media-breakpoint-down(md) {
+        max-width: 50%;
+    }
+    @include media-breakpoint-down(sm) {
+        max-width: 85%;
+        transform: none;
+        top: auto;
+        bottom: 10%;
+    }
+    .news-item-title {
+        font-size: 20px;
+    }
+    .news-item-subtitle,
+    .news-item-description {
+        font-size: 16px;
+    }
+    .news-item-btn {
+        a.btn {
+            font-size: 18px;
+            padding: 0.575rem 0.275rem 0.575rem 1.5rem;
+            line-height: normal;
+            margin-right: -20px;
+            outline: none;
+            box-shadow: none;
+            i.fa {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+#owl-department {
+    .department_img {
+        text-align: center;
+        .department_image {
+            cursor: pointer;
+            width: auto;
+            margin: 0 auto;
+            transition: ease-in-out all 0.4s;
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+#dept_teams_model {
+    .modal-dialog {
+        width: 100%;
+        max-width: unset;
+        height: 100%;
+        margin: 0 auto;
+        .te_popup_close {
+            opacity: 1;
+            margin: 1rem;
+        }
+        .te_dept_teams_modal {
+            background: rgba(0,0,0,0.7);
+            min-height: 100%;
+        }
+        .dept_team_name {
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        .dept_team_main {
+            margin-bottom: 2rem;
+            align-items: center;
+            .dept_teams {
+                text-align: center;
+            }
+        }
+        .modal-body {
+            align-items: center;
+            display: flex;
+            cursor: default;
+        }
+        .team_details {
+            .team_name {
+                display: inline-block;
+                border-bottom: 2px solid theme-color('primary');
+                margin-bottom: 1.5rem;
+            }
+            .team_description {
+                p {
+                    color: #fff;
+                }
+                * {
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+}
+.te_news_modal{
+    opacity: 0.9;
+    color: #fff;
+    background-color: #000000;
+    padding: 0 3rem;
+}
+.canna_graffitiwall_bg  main {
+    margin-top:0px;
+}
+.img_limited_edition {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}
+section#product_detail hr {
+    border: 0px solid red !important;
+}
+.img_limited_edition {
+    position: absolute !important;
+    left: 0px !important;
+    top: 0px !important;
+    right: auto !important;
+}
+#products_grid .oe_product.te_no_products p.te_extra_text {
+    color: #fff !important;
+}
+tr#order_delivery td p font,tr#order_delivery td p {
+    color: #000 !important;
+    display:block !important;
+}

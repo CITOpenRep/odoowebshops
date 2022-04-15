@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="canna_snippets" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="after">
+            <!--==== Partnership Details ===-->
+            <div class="o_panel_header">
+                Canaa Fr Snippets
+            </div>
+            <div class="o_panel_body">
+                <!--==== Partnership Details Snippet =====-->
+                <t t-snippet="clarico_extended.partnership_details_form"
+                   t-thumbnail="/theme_clarico/static/src/img/snippets/snippets_icon/3_columns/icon-style-3.jpg"/>
+                <!--==== Page Heading Snippet =====-->
+                <t t-snippet="clarico_extended.canna_heading"
+                   t-thumbnail="/theme_clarico/static/src/img/snippets/snippets_icon/style1.jpg"/>
+                <!--==== Homepage Video Snippet =====-->
+                <t t-snippet="clarico_extended.homepage_video"
+                   t-thumbnail="/theme_clarico/static/src/img/snippets/snippets_icon/snippet_12.jpg"/>
+                <!--==== Homepage Shop Button Snippet =====-->
+                <t t-snippet="clarico_extended.homepage_shop_button"
+                   t-thumbnail="/theme_clarico/static/src/img/snippets/snippets_icon/style_btn.jpg"/>
+                <!--==== Contact Us block Snippet =====-->
+                <t t-snippet="clarico_extended.contact_us_block"
+                   t-thumbnail="/theme_clarico/static/src/img/snippets/snippets_icon/slider_5.jpg"/>
+            </div>
+
+            <!--==== Dynamic snippet ===-->
+            <div class="o_panel_header">
+                Dynamic Snippet
+            </div>
+            <div class="o_panel_body">
+                <!--==== Partnership details snippet =====-->
+                <t t-snippet="clarico_extended.best_seller"
+                   t-thumbnail="/clarico_extended/static/src/img/snippets/snippets_icon/best_seller.jpg"/>
+                <t t-snippet="clarico_extended.limited_edition"
+                   t-thumbnail="/clarico_extended/static/src/img/snippets/snippets_icon/best_seller.jpg"/>
+            </div>
+
+        </xpath>
+    </template>
+
+    <!-- Canna heading  -->
+    <template id="canna_heading" name="Page Heading">
+        <section class="container">
+            <div class="canna_page_heading">
+                <h2 class="page_title_text text-uppercase mb32 py-2 pl-3 pr-5">Your page title</h2>
+            </div>
+        </section>
+    </template>
+
+    <!-- Partnership details form  -->
+    <template id="partnership_details_form" name="Partnership Details Form">
+        <section class="partnership_form">
+            <div class="container partnership_form_container">
+                <div class="partnership_form_main mb32">
+                    <div class="partnership_form_info_text">Vous souhaitez devenir partenaire ou organiser un événement
+                        avec CANNA?
+                    </div>
+                    <div class="partnership_form_info_subtext">Parlez-nous de votre projet !</div>
+                    <form id="partnership_form" class="pt16 d-block">
+                        <div class="row">
+                            <div t-attf-class="form-group col-lg-8 div_p_name o_website_form_required_custom mb8">
+                                <label class="col-form-label pb0 pt0" for="name">votre nom</label>
+                                <input type="text" name="name"
+                                       id="partner_name"
+                                       t-attf-class="form-control"
+                                       placeholder="Votre nom*"
+                                       required="required"/>
+                            </div>
+                            <div t-attf-class="form-group col-lg-8 div_p_email o_website_form_required_custom mb16">
+                                <label class="col-form-label pb0 pt0" for="email">Votre email</label>
+                                <input type="email" name="email" id="partner_email"
+                                       t-attf-class="form-control"
+                                       placeholder="Votre email*"
+                                       required="required"/>
+                            </div>
+                            <div class="form-group col-lg-8 partnership_form_ckbx_main mt4 mb4">
+                                <label class="partnership_form_ckbx d-inline-block">Devenir partenaire
+                                    <input type="checkbox" name="is_become_partner" id="is_become_partner" value="1"/>
+                                    <span class="mark"></span>
+                                </label>
+                                <label class="partnership_form_ckbx d-inline-block">Organiser un événement
+                                    <input type="checkbox" name="is_organize_event" id="is_organize_event" value="1"/>
+                                    <span class="mark"></span>
+                                </label>
+                                <label class="partnership_form_ckbx d-inline-block">Autre
+                                    <input type="checkbox" name="is_other" id="is_other" value="1"/>
+                                    <span class="mark"></span>
+                                </label>
+                            </div>
+                            <div t-attf-class="form-group col-lg-8 div_p_evenement o_website_form_required_custom mb16">
+                                <label class="col-form-label pb0 pt0" for="name">votre événement</label>
+                                <textarea t-attf-class="form-control"
+                                          rows="6"
+                                          id="partner_description"
+                                          name="description"
+                                          placeholder="Dites-nous un mot sur votre projet*" required="required"/>
+                            </div>
+                            <div class="form-group col-lg-8 partner_submit_div">
+                                <a href="#" role="button"
+                                   class="btn btn-secondary btn-lg o_website_form_send">
+                                    ENVOYER
+                                </a>
+                                <span id="o_website_form_result" class="text-danger ml8 partner_form_error">
+                                    <i class="fa fa-close mr4" role="img" aria-label="Error" title="Error"/>Please
+                                    fill in the form correctly.
+                                </span>
+                            </div>
+                            <div class="col-lg-5 col-sm-12 partnership_form_msg">
+                                <span>The form has been successfully submitted</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!--===== Best Seller Product Carousel ====-->
+    <template id="best_seller" name="Best Seller Slider">
+        <section class="best_seller_ept pb96 pt96">
+            <div class="js_best_seller" data-isemipro='true'/>
+        </section>
+    </template>
+    <!--============= Product slider options for Best Seller ===================-->
+    <template id="product_slider_options_best_seller" name="Product Slider Options Best Seller"
+              inherit_id="website.snippet_options">
+        <xpath expr="//div" position="after">
+            <div data-js='best_seller_discount_list' data-selector=".js_best_seller"
+                 data-drop-near="[data-oe-field='body_html']:not(:has(.o_layout)) > , .oe_structure > "
+                 data-drop-in="[data-oe-field='body_html']:not(:has(.o_layout)), .oe_structure">
+                <li data-best_seller_discount_list="" data-no-preview="true">
+                    <a href="#">Snippet</a>
+                </li>
+            </div>
+        </xpath>
+    </template>
+
+    <!--===== Best Seller Product Carousel ====-->
+    <template id="limited_edition" name="Limited Edition Slider">
+        <section class="limited_edition_ept pb96 pt96">
+            <div class="js_limited_edition" data-isemipro='true'/>
+        </section>
+    </template>
+    <!--============= Product slider options for Best Seller ===================-->
+    <template id="product_slider_options_limited_edition" name="Product Slider Options Best Seller"
+              inherit_id="website.snippet_options">
+        <xpath expr="//div" position="after">
+            <div data-js='limited_edition_discount_list' data-selector=".js_limited_edition"
+                 data-drop-near="[data-oe-field='body_html']:not(:has(.o_layout)) > , .oe_structure > "
+                 data-drop-in="[data-oe-field='body_html']:not(:has(.o_layout)), .oe_structure">
+                <li data-best_seller_discount_list="" data-no-preview="true">
+                    <a href="#">Snippet</a>
+                </li>
+            </div>
+        </xpath>
+    </template>
+    
+    <template id="limited_edition_popup">
+        <div class="modal fade" id="limitedEditionPopup" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <a href="#" class="te_btn-close" data-dismiss="modal" aria-label="Close" tabindex="-1">
+                            x
+                        </a>
+                        <h3 class="modal-title">
+                            <span>OOPS ! THIS ITEM IS RESERVED TO MEMBERS !</span>
+                        </h3>
+                        <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+                        <ul class="list-unstyled">
+                            <li>Become a CANNA member and gain access to limited editions, private events with CANNA and its partners and many more!</li>
+                            <li> No commitment, just more fun! How to become a member? Just click here!</li>
+                        </ul>
+                         <button class="btn te_theme_button"><a href="/web/signup">Become a member</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="common_dynamic_ept" name="Dynamic Single Slider">
+        <t t-if="limited_edition">
+            <t t-call="clarico_extended.limited_edition_popup"/>
+        </t>
+        <t t-if="filter_data">
+            <section class="te_pc_style_main">
+                <div class="product_container container oe_website_sale">
+                    <!-- Products container -->
+                    <div class="js_data_container">
+                        <!-- Display a Single slider Filter Product -->
+                        <div class="js_filter_data" t-att-filter-id="active_filter_data">
+                            <section class="te_product_slider_2 owl-slider">
+                                <div class="owl-carousel te_slider_style_2_right_pannel">
+                                    <!-- To Display product's data -->
+                                    <t t-foreach="filter_data" t-as="product">
+                                        <div class="item te_product_ind s_s1_ind container">
+                                            <form action="/shop/cart/update" method="post"
+                                                  class="row align-items-center">
+                                                <t t-set="combination"
+                                                   t-value="product._get_first_possible_combination()"/>
+                                                <t t-set="combination_info"
+                                                   t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                                                <t t-set="product_variant"
+                                                   t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <input type="hidden" class="product_id" name="product_id"
+                                                       t-att-value="product_variant.id"/>
+                                                <input type="hidden" class="product_template_id"
+                                                       name="product_template_id"
+                                                       t-att-value="product.id"/>
+                                                <section class="te_slider_img dd_slider_prod_bg col-md-4">
+                                                    <div class="d-inline-block position-relative">
+                                                        <div t-if="product.is_limited_edition"
+                                                             class="img img_limited_edition">
+                                                            <img class="img img-fluid"
+                                                                 src="/clarico_extended/static/src/img/VIPmember-icon-s.png"/>
+                                                        </div>
+<!--                                                        <img class="img img-fluid lazyload" t-attf-data-src="/website/image/product.template/{{product.id}}/image" t-attf-src="/web/image/website/#{website.id}/lazy_load_image"/>-->
+<!--                                                        <span t-field="product.image"-->
+<!--                                                              t-options="{'widget': 'image'}"/>-->
+                                                        <span itemprop="image" class="new_span"
+                                                              t-attf-content="/web/image/product.template/{{product.id}}/image">
+                                                            <img class="img img-fluid lazyload"
+                                                                 t-attf-data-src="/web/image/product.template/#{product.id}/image" src="/emipro_theme_lazy_load/static/src/img/Lazyload.gif" t-att-alt="product.name"/>
+                                                        </span>
+                                                    </div>
+                                                </section>
+                                                <div class="te_prod_info_2 col-md-6">
+                                                    <section class="d-block position-relative p-3 te_prod_info_sub">
+                                                        <t t-if="request.env.user._is_public() and product.is_limited_edition">
+                                                            <h6 class="text-center my-2">
+                                                                <a href="#"
+                                                                   t-field="product.name" class="product_name limited_edition"/>
+                                                            </h6>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <h6 class="text-center my-2">
+                                                                <a t-attf-href="/shop/product/#{ slug(product) }"
+                                                                   t-field="product.name" class="product_name"/>
+                                                            </h6>
+                                                        </t>
+                                                        <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer"
+                                                             class="product_price text-center"
+                                                             t-if="product.product_variant_ids">
+                                                            <b>
+                                                                <t t-if="product.website_price_difference and website.get_current_pricelist().discount_policy=='without_discount'">
+                                                                    <del class="te_shop_del mr8"
+                                                                         style="white-space: nowrap;"
+                                                                         t-esc="compute_currency(product.website_public_price)"
+                                                                         t-options="{'widget':'monetary', 'display_currency': website.get_current_pricelist().currency_id,'from_currency': website.currency_id}"/>
+                                                                </t>
+                                                                <span t-esc="product.website_price"
+                                                                      class="d-inline-block"
+                                                                      t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                                                <span itemprop="price" style="display:none;"
+                                                                      t-esc="product.website_price"/>
+                                                                <span itemprop="priceCurrency"
+                                                                      style="display:none;"
+                                                                      t-esc="website.currency_id.name"/>
+                                                            </b>
+                                                            <div class="te_prod_cart_wish">
+                                                                <t t-if="limited_edition">
+                                                                    <button class="btn te_theme_button limited_edition">
+                                                                        <span aria-label="Add to cart">Add to cart
+                                                                        </span>
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <input name="product_id"
+                                                                           t-att-value="product.product_variant_id.id"
+                                                                           type="hidden"/>
+                                                                    <t t-if="len(product.product_variant_ids) == 1">
+                                                                        <a href="#" role="button"
+                                                                           class="btn te_theme_button a-submit"
+                                                                           aria-label="Shopping cart"
+                                                                           title="Shopping cart">
+                                                                            <span aria-label="Add to cart">Add to cart
+                                                                            </span>
+                                                                        </a>
+                                                                    </t>
+                                                                    <t t-if="len(product.product_variant_ids) &gt; 1">
+                                                                        <a role="button"
+                                                                           class="btn te_theme_button"
+                                                                           t-att-href="'/shop/product/%s' % slug(product)"
+                                                                           aria-label="Shopping cart"
+                                                                           title="Shopping cart">
+                                                                            <span aria-label="Add to cart">Add to cart
+                                                                            </span>
+                                                                        </a>
+                                                                    </t>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </t>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <!-- Homepage video -->
+    <template id="homepage_video" name="Homepage Video Background">
+        <section>
+            <div class="video_container">
+                <video class="home_videoBg" width="100%" playsinline="true" autoplay="true" loop="true"
+                       style="pointer-events: none;">
+                    <source src="/clarico_extended/static/src/video/Desktop_video.mp4" type="video/mp4"/>
+                    <source src="/clarico_extended/static/src/video/Desktop_video.webm" type="video/webm"/>
+                    <source src="/clarico_extended/static/src/video/Desktop_video.ogg" type="video/ogg"/>
+                </video>
+            </div>
+        </section>
+    </template>
+    <!--  Contact us form  -->
+    <template id="contactus_form_extended" inherit_id="website.contactus">
+        <xpath expr="//form[hasclass('s_website_form')]" position="replace">
+            <form action="/website_form/" method="post" data-model_name="crm.lead"
+                  data-success_page="/contactus-thank-you" class="s_website_form container-fluid mt32"
+                  enctype="multipart/form-data" data-editable-form="false">
+                <div class="row">
+                    <div class="form-group col-lg-8 form-field o_website_form_required_custom mb8">
+                        <label class="col-lg-8 col-form-label pb0 pt0" for="contact_name">Your Name</label>
+                        <div class="col-lg-12 col-md-11">
+                            <input type="text" class="form-control o_website_form_input" name="contact_name"
+                                   t-att-value="request.params.get('contact_name', '')" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 form-field mb8">
+                        <label class="col-lg-8 col-form-label pb0 pt0" for="phone">Phone Number</label>
+                        <div class="col-lg-12 col-md-11">
+                            <input type="text" class="form-control o_website_form_input" name="phone"
+                                   t-att-value="request.params.get('phone', '')"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 form-field o_website_form_required_custom mb8">
+                        <label class="col-lg-12 col-md-11 col-form-label pb0 pt0" for="email_from">Email</label>
+                        <div class="col-lg-12 col-md-11">
+                            <input type="text" class="form-control o_website_form_input" name="email_from" required=""
+                                   t-att-value="request.params.get('email_from', '')"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 form-field o_website_form_required_custom mb8">
+                        <label class="col-lg-12 col-md-11 col-form-label pb0 pt0" for="partner_name">Your Company
+                        </label>
+                        <div class="col-lg-12 col-md-11">
+                            <input type="text" class="form-control o_website_form_input" name="partner_name" required=""
+                                   t-att-value="request.params.get('partner_name', '')"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 form-field o_website_form_required mb8">
+                        <label class="col-lg-12 col-md-11 col-form-label pb0 pt0" for="name">Subject</label>
+                        <div class="col-lg-12 col-md-11">
+                            <input type="text" class="form-control o_website_form_input" name="name" required=""
+                                   t-att-value="request.params.get('name', '')"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 form-field o_website_form_required_custom mb16">
+                        <label class="col-lg-12 col-md-11 col-form-label pb0 pt0" for="description">Your Question
+                        </label>
+                        <div class="col-lg-12 col-md-11">
+                            <textarea class="form-control o_website_form_input" name="description" rows="6" required="">
+                                <t t-esc="request.params.get('description', '')"/>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8">
+                        <div class="col-lg-12 col-md-11">
+                            <a href="#" role="button" class="btn btn-secondary btn-lg o_website_form_send">Send</a>
+                            <span id="o_website_form_result"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </xpath>
+    </template>
+
+    <template id="contact_us_block">
+        <section class="container pb32 pt32 contact_block">
+            <div class="contact_us_block">
+                <form action="/website_form/" method="post" data-model_name="crm.lead"
+                      class="s_website_form container-fluid"
+                      enctype="multipart/form-data" data-editable-form="false">
+                    <div class="row">
+                        <div class="form-group col-lg-12 form-field o_website_form_required_custom mb8">
+                            <label class="col-form-label pb0 pt0" for="contact_name">Your Name</label>
+                            <input type="text" class="form-control o_website_form_input" name="contact_name"
+                                   t-att-value="request.params.get('contact_name', '')" required=""/>
+                        </div>
+                        <div class="form-group col-lg-12 form-field mb8">
+                            <label class="col-form-label pb0 pt0" for="phone">Phone Number</label>
+                            <input type="text" class="form-control o_website_form_input" name="phone"
+                                   t-att-value="request.params.get('phone', '')"/>
+                        </div>
+                        <div class="form-group col-lg-12 form-field o_website_form_required_custom mb8">
+                            <label class="col-form-label pb0 pt0" for="email_from">Email</label>
+                            <input type="text" class="form-control o_website_form_input" name="email_from"
+                                   required=""
+                                   t-att-value="request.params.get('email_from', '')"/>
+                        </div>
+                        <div class="form-group col-lg-12 form-field o_website_form_required_custom mb8">
+                            <label class="col-form-label pb0 pt0" for="partner_name">Your Company
+                            </label>
+                            <input type="text" class="form-control o_website_form_input" name="partner_name"
+                                   required=""
+                                   t-att-value="request.params.get('partner_name', '')"/>
+                        </div>
+                        <div class="form-group col-lg-12 form-field o_website_form_required mb8">
+                            <label class="col-form-label pb0 pt0" for="name">Subject</label>
+                            <input type="text" class="form-control o_website_form_input" name="name" required=""
+                                   t-att-value="request.params.get('name', '')"/>
+                        </div>
+                        <div class="form-group col-lg-12 form-field o_website_form_required_custom mb16">
+                            <label class="col-form-label pb0 pt0" for="description">Your Question
+                            </label>
+                            <textarea class="form-control o_website_form_input" name="description" rows="6"
+                                      required="">
+                                <t t-esc="request.params.get('description', '')"/>
+                            </textarea>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <a href="#" role="button"
+                               class="btn btn-secondary btn-lg o_website_form_send o_website_contact_form_send">Send
+                            </a>
+                            <span id="o_website_form_result"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </template>
+
+    <!-- Homepage Homepage Shop Button  -->
+    <template id="homepage_shop_button" name="Homepage Shop Button">
+        <section class="container text-center mt32 mb32 home_center_btn">
+            <a href="/shop" role="button" class="btn btn-primary btn-lg te_theme_button">SHOP</a>
+        </section>
+    </template>
+
+    <!-- News Block Model Popup   -->
+    <template id="news_popup" inherit_id="portal.frontend_layout">
+        <xpath expr="//div[@id='wrapwrap']/main" position="before">
+            <t t-call="clarico_extended.cannafr_news_popup_ept"/>
+        </xpath>
+    </template>
+
+    <template id="cannafr_news_popup_ept">
+        <div class="modal fade" id="news_model" tabindex='-1'>
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content te_news_modal">
+                    <div class="te_close_test">
+                        <button type="button" class="close te_popup_close" data-dismiss="modal" aria-label="Close"
+                                tabindex="-1">
+                            <img src="/clarico_extended/static/src/img/close.svg"/>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="cannafr_news_popup_view">
+        <div t-attf-style="background-image: url('#{website.image_url(news, 'canna_fr_news_image')}');"
+             class="te_news_popup_img mb16"/>
+        <div class="te_news_popup_text_content">
+            <h4 class="text-uppercase" t-raw="news.name"></h4>
+            <div class="te_news_subtitle" t-raw="news.canna_fr_subtitle"/>
+            <div class="te_news_popup_desc">
+                <pre t-raw="news.canna_fr_description"></pre>
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,62 @@
+/*================== Button Style 11 ===============================*/
+ .te_theme_button, .btn-primary{
+        font-weight: bold;
+        font-size:0.875rem;
+        color:#ffffff;
+        border-radius: 0 !important;
+        display: inline-block;
+        background-color:theme-color('primary');
+        border: 1px solid theme-color('primary');
+        &:hover {
+        background-color: #208a85 !important;
+        }
+}
+.add_to_cart_json{
+        font-weight: bold !important;
+        font-size:0.875rem !important;
+        color:#ffffff !important;
+        border-radius: 0 !important;
+        display: inline-block !important;
+        background-color:theme-color('primary') !important;
+        border: 1px solid theme-color('primary');
+        &:hover {
+            background-color: #208a85 !important;
+        }
+}
+
+.js_product, .modal-footer, .oe_cart, .js_cart_summary, .o_add_wishlist_dyn,#partnership_form{
+    .btn-secondary {
+        font-weight: bold;
+        font-size:0.875rem;
+        color:theme-color('primary');
+        border-radius: 0 !important;
+        display: inline-block;
+        background-color:#ffffff;
+        border: 1px solid theme-color('primary');
+        &:hover {
+            background-color: darken(#ffffff, 25%);
+        }
+    }
+}
+.btn-secondary {
+    font-weight: bold;
+    font-size:0.875rem;
+    color:theme-color('primary');
+    border-radius: 0 !important;
+    display: inline-block;
+    background-color:#ffffff;
+    border: 1px solid theme-color('primary');
+
+    &:hover {
+        background-color: darken(#ffffff, 25%);
+    }
+}
+
+@include media-breakpoint-down(xs)
+{
+	.te_theme_button
+	{
+		padding: 0.475rem 0.7rem;
+		font-size:0.8125rem;
+	}
+}

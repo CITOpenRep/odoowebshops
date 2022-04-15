@@ -1,71 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<!-- ============= Price Filter (slider) Template=========== -->
-	<template id="website_pricefilter_ept" name="Price Filter" inherit_id="website_sale.products_attributes">
-		<xpath expr="//form" position="inside">
-			<div class="layout" />
-			<t t-set="range_values" t-value="website.get_min_max_prices()"/>
-			<t t-if="range_values">
-			<div class=" mb16">
-				<!-- title -->
-				<div class="price_filter_head mb16">
-					<i class="fa fa-caret-right"/>
-					<span class="m-0">Price Filter</span>
-					<a class="te_reset pull-right">(Reset)</a>
-				</div>
+    <!-- ============= Price Filter (slider) Template=========== -->
+    <!--<template id="website_pricefilter_ept" name="Price Filter" inherit_id="website_sale.products_attributes">
+        <xpath expr="//form" position="inside">
+            <div class="layout"/>
+            <t t-set="range_values" t-value="website.get_min_max_prices()"/>
+            <t t-if="range_values">
+                <div class=" mb16">
+                    
+                    <div class="price_filter_main_div">
+                        <div class="price_filter_head mb16">
+                            <i class="fa fa-caret-right"/>
+                            <span class="m-0">Price Filter</span>
+                            <a class="te_reset pull-right">(Reset)</a>
+                        </div>
 
-				<!-- Display default min and max value of webshop -->
-				<div class="d-block mb8 price_filter_amount">
-					<div class="d-inline-block">
-						<span t-att-class="'d-none' if website.currency_id.position == 'after' else ''">
-							<t t-esc="website.currency_id.symbol"/>
-						</span>
-						<span class="min-amount" t-esc="range_values[2]"/>
-						<span t-att-class="'d-none' if website.currency_id.position == 'before' else ''">
-							<t t-esc="website.currency_id.symbol"/>
-						</span>
-					</div>
+                    
+                        <div class="d-block mb8 price_filter_amount">
+                            <div class="d-inline-block">
+                                <span t-att-class="'d-none' if website.currency_id.position == 'after' else ''">
+                                    <t t-esc="website.currency_id.symbol"/>
+                                </span>
+                                <span class="min-amount" t-esc="range_values[2]"/>
+                                <span t-att-class="'d-none' if website.currency_id.position == 'before' else ''">
+                                    <t t-esc="website.currency_id.symbol"/>
+                                </span>
+                            </div>
 
-					<div class="d-inline-block pull-right">
-						<span t-att-class="'d-none' if website.currency_id.position == 'after' else ''">
-							<t t-esc="website.currency_id.symbol"/>
-						</span>
-						<span class="max-amount" t-esc="range_values[3]"/>
-						<span t-att-class="'d-none' if website.currency_id.position == 'before' else ''">
-							<t t-esc="website.currency_id.symbol"/>
-						</span>
-					</div>
-				</div>
-			</div>
+                            <div class="d-inline-block pull-right">
+                                <span t-att-class="'d-none' if website.currency_id.position == 'after' else ''">
+                                    <t t-esc="website.currency_id.symbol"/>
+                                </span>
+                                <span class="max-amount" t-esc="range_values[3]"/>
+                                <span t-att-class="'d-none' if website.currency_id.position == 'before' else ''">
+                                    <t t-esc="website.currency_id.symbol"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-			<!-- input which contain default value which used into script -->
-			<input type="hidden" id="price_default_slider_min" t-att-value="range_values[2]"/>
-			<input type="hidden" id="price_default_slider_max" t-att-value="range_values[3]"/>
+                    
+                    <input type="hidden" id="price_default_slider_min" t-att-value="range_values[2]"/>
+                    <input type="hidden" id="price_default_slider_max" t-att-value="range_values[3]"/>
 
-			<!-- slider code and input -->
-			<div class="layout-slider" style="width: 100%">
-				<span style="display: inline-block; width: 100%; padding: 0 5px;">
-					<input id="Slider1" type="slider"  t-att-value="'%s;%s'%(range_values[0],range_values[1])" /></span>
-			</div>
+                    
+                    			<div class="layout-slider" style="width: 100%">
+                    <span style="display: inline-block; width: 100%; padding: 0 5px;">
+                    <input id="Slider1" type="slider"  t-att-value="'%s;%s'%(range_values[0],range_values[1])" /></span>
+                    </div>
 
-			<!-- input which change based on slider and also set validation on it -->
-			<div class="price-wrap mt16">
-				<div class="">
-					<label t-att-class="'d-none' if website.currency_id.position == 'after' else ''" for="priceRangeLower" t-field="website.currency_id.symbol"/>
-					<input name="min_val" id="price_range_min_value" t-att-value="range_values[0]" onpaste="return false" />
-					<label t-att-class="'d-none' if website.currency_id.position == 'before' else ''" for="priceRangeLower" t-field="website.currency_id.symbol"/>
-				</div>
-				<div class="price-wrap_line">-</div>
-				<div class="">
-					<label t-att-class="'d-none' if website.currency_id.position == 'after' else ''" for="priceRangeUpper" t-field="website.currency_id.symbol"/>
-					<input name="max_val" id="price_range_max_value"  t-att-value="range_values[1]" onpaste="return false" />
-					<label t-att-class="'d-none' if website.currency_id.position == 'before' else ''" for="priceRangeUpper" t-field="website.currency_id.symbol"/>
-				</div>
-			</div>
+                    <div class="price-field">
+                        <input type="range" id="priceRangeLower" t-att-min="range_values[2]" t-att-max="range_values[3]"
+                               t-att-value="range_values[0]" onpaste="return false"/>
+                        <input type="range" id="priceRangeUpper" t-att-min="range_values[2]" t-att-max="range_values[3]"
+                               t-att-value="range_values[1]" onpaste="return false"/>
+                    </div>
+                    
+                    <div class="price-wrap mt16">
+                        <div class="">
+                            <label t-att-class="'d-none' if website.currency_id.position == 'after' else ''"
+                                   for="priceRangeLower" t-field="website.currency_id.symbol"/>
+                            <input name="min_val" id="price_range_min_value" t-att-value="range_values[0]"
+                                   onpaste="return false"/>
+                            <label t-att-class="'d-none' if website.currency_id.position == 'before' else ''"
+                                   for="priceRangeLower" t-field="website.currency_id.symbol"/>
+                        </div>
+                        <div class="price-wrap_line">-</div>
+                        <div class="">
+                            <label t-att-class="'d-none' if website.currency_id.position == 'after' else ''"
+                                   for="priceRangeUpper" t-field="website.currency_id.symbol"/>
+                            <input name="max_val" id="price_range_max_value" t-att-value="range_values[1]"
+                                   onpaste="return false"/>
+                            <label t-att-class="'d-none' if website.currency_id.position == 'before' else ''"
+                                   for="priceRangeUpper" t-field="website.currency_id.symbol"/>
+                        </div>
+                    </div>
 
-			<span id="submit-error" class="price_error_message d-none">Invalid Input</span>
-			<a class="w-100 btn btn-primary mt16 rounded py-1" href="#" id="price_slider_form">Voeg filter toe</a>
-			</t>
-		</xpath>
-	</template>
+                    <span id="submit-error" class="price_error_message d-none">Invalid Input</span>
+                    <a class="w-100 btn btn-primary mt16 rounded py-1" href="#" id="price_slider_form">Voeg filter toe</a>
+                </div>
+            </t>
+        </xpath>
+    </template>-->
 </odoo>

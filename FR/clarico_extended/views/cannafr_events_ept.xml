@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cannafr_events_ept_form_view" model="ir.ui.view">
+        <field name="name">cannafr.events.form</field>
+        <field name="model">cannafr.events</field>
+        <field name="arch" type="xml">
+            <form string="Website Events" duplicate="false">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="website_publish_button"
+                                type="object" icon="fa-globe">
+                            <field name="website_published" widget="website_button"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="subtitle"/>
+                        <field name="image" widget="image" class="oe_avatar float-left"/>
+                        <field name="description"/>
+                        <field name="is_active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>Website
+    <record id="cannafr_events_ept_tree_view" model="ir.ui.view">
+        <field name="name">cannafr.events.tree.view</field>
+        <field name="model">cannafr.events</field>
+        <field name="arch" type="xml">
+            <tree string="Website Events">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="subtitle"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_canna_fr_events">
+        <field name="name">Website Events</field>
+        <field name="res_model">cannafr.events</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            name="Event"
+            id="menu_canna_fr_events"
+            action="action_canna_fr_events"
+            parent="website.menu_website_global_configuration"/>
+</odoo>

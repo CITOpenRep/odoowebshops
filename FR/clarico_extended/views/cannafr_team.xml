@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cannafr_team_form_view" model="ir.ui.view">
+        <field name="name">cannafr.team.form</field>
+        <field name="model">cannafr.team</field>
+        <field name="arch" type="xml">
+            <form string="Canna Team">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="website_publish_button"
+                                type="object" icon="fa-globe">
+                            <field name="website_published" widget="website_button"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="title" />
+                        <field name="icon" widget="image" class="oe_avatar float-left"/>
+                        <field name="image" widget="image" class="oe_avatar float-left"/>
+                        <field name="is_video" />
+                        <field name="video_url" attrs="{'invisible': [('is_video', '=', False)]}"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cannafr_team_tree_view" model="ir.ui.view">
+        <field name="name">cannafr.team.tree.view</field>
+        <field name="model">cannafr.team</field>
+        <field name="arch" type="xml">
+            <tree string="Canna Team">
+                <field name="name"/>
+                <field name="title" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_canna_fr_team">
+        <field name="name">Canna Team</field>
+        <field name="res_model">cannafr.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            name="Team Members"
+            id="menu_canna_fr_team"
+            action="action_canna_fr_team"
+            parent="website.menu_website_global_configuration"/>
+</odoo>

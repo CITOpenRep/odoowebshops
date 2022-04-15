@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_extended" model="ir.ui.view">
+        <field name="name">product.template.clarico.extended.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="is_limited_edition"/>
+                    <label for="is_limited_edition"/>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

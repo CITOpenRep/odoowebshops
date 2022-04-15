@@ -21,10 +21,11 @@
             (${object.partner_id.parent_id.name})
         % endif
         <br/><br/>
-Congratulations with your order! We will sent your purchase as soon as possible so within 5 working days you can show off your new purchase.<br/><br/>
-When we post your parcel we will sent you an email that your purchase has been dispatched.<br/><br/>
+Congratulations with your order! We will immediately start processing your order. The maximum delivery time is 5 days<br/><br/>
+Please see attached your order confirmation including all the details.<br/><br/>
+Have fun growing!<br/><br/>
 Kind regards,<br/><br/>
-Team CANNA Nederland<br/><br/>
+Team CANNA<br/><br/>
 
         % if user and user.signature:
           ${user.signature | safe}

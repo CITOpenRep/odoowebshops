@@ -204,8 +204,8 @@ h2.te_page_header_address{
 	font-size : 15px;
 	text-transform: capitalize;
 	cursor: pointer;
-	color: #006A65 !important;
-	border-bottom: 1px solid #006A65;
+	color: #ffffff !important;
+	border-bottom: 1px solid #ffffff;
 	font-family: CenturyGothicBold;
 }
 .div_product_size_guide
@@ -674,7 +674,7 @@ main .s_text_block ul li {
 			
 			& li.carousel-item{
 				width: auto !important;
-				min-height: 100px !important;
+// 				min-height: 100px !important;
 				display: inline-block !important;
 				border: 1px solid #ccc;
     			margin: 10px;

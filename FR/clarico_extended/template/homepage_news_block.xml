@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Homepage News Slider Block  -->
+    <template id="homepage_news_slider" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            
+            <style>
+                .div-video-container > vjs-big-play-button{visibility: hidden !important;}
+                .video-js .vjs-big-play-button { visibility: hidden;;}
+                @media (max-width: 767.98px){.btn-mute,.btn-play{top:72% !important;}}
+            </style>
+
+            <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+            <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+            <div class="div-video-container" style="position:relative">
+                <video
+                        id="landing_video"
+                        class="video-js vjs-16-9 vjs-fluid"
+                        controls="false"
+                        preload="auto"
+                        loop="true"
+                        nativeControlsForTouch="true"
+                        poster="clarico_extended/static/src/img/poster.png"
+                        data-setup="{}"
+                >
+                    <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/home_landing.mp4"
+                            type="video/mp4"/>
+                    <source src="//test-1a749.kxcdn.com/clarico_extended/static/src/video/home_landing.webm"
+                            type="video/webm"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank"
+                        >supports HTML5 video
+                        </a
+                        >
+                    </p>
+                </video>
+                <a class="btn-mute" style="position: absolute;right: 30px;top:17%;cursor:pointer">
+                    <i class="fa fa-microphone-slash text-center fa-2x"></i>
+                </a>
+                <a class="btn-play" style="position: absolute;right: 85px;top: 17%;cursor:pointer">
+                    <i class="fa fa-stop-circle text-center fa-2x"></i>
+                </a>
+                <div style="position: absolute;text-align: center;width: 100%;top: 50%;transform: translateY(-50%);">
+                    <a href="/shop" class="btn btn-theme te_theme_button">See Now</a>
+                </div>
+            </div>
+
+            
+            <script type="text/javascript">
+                var player = videojs('landing_video', {});
+                const muteButton = document.querySelector(".btn-mute");
+                const playButton = document.querySelector(".btn-play");
+
+                player.muted(true);
+                player.play();
+
+                muteButton.addEventListener("click", function() {
+                const booleanValue = player.muted();
+                if (booleanValue == true) {
+                player.muted(false);
+                $(".btn-mute").html('<i class="fa fa-microphone text-center fa-2x"></i>');
+                } else {
+                player.muted(true);
+                $(".btn-mute").html('<i class="fa fa-microphone-slash text-center fa-2x"></i>')
+                }
+                });
+                playButton.addEventListener("click", function() {
+                if (player.paused()) {
+                player.play();
+                $(".btn-play").html('<i class="fa fa-stop-circle text-center fa-2x"></i>');
+                } else {
+                player.pause();
+                $(".btn-play").html('<i class="fa fa-play-circle text-center fa-2x"></i>');
+                }
+                });
+
+            </script>
+            <section>
+                <div class="oe_structure"/>
+                <div class="container homepage_news_block mb32">
+                    <div id="owl_homepage_news_block" class="owl-carousel owl-theme">
+                        <t t-set="news_data"
+                           t-value="request.env['cannafr.news'].search([('is_active','=',True),('is_published','=',True)])"/>
+                        <t t-if="news_data">
+                            <t t-foreach="news_data" t-as="news">
+                                <div class="item">
+                                    <span t-field="news.canna_fr_news_image"
+                                          t-options="{'widget': 'image'}"
+                                          class=""/>
+                                    <div class="item-right-block">
+                                        <div class="news-item-title text-uppercase mb16" t-field="news.name"/>
+                                        <div class="news-item-subtitle canna_cgb mb16"
+                                             t-field="news.canna_fr_subtitle"/>
+                                        <div class="news-item-description mb16" t-raw="news.canna_fr_description"/>
+                                        <div class="news-item-btn mb4 text-center">
+                                            <a href="javascript:void(0)" role="button" t-att-data-id="news.id"
+                                               class="btn btn-secondary te_news_popup te_theme_button">
+                                                SEE
+                                                <i class="fa fa-angle-right px-2"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </section>
+        </xpath>
+    </template>
+</odoo>

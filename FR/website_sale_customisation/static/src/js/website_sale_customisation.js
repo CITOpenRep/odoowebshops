@@ -26,7 +26,7 @@ odoo.define('website_sale_customisation.customisation_script',function (require)
 		event.preventDefault();
 		$(".cus_theme_loader_layout").removeClass("d-none");
 		var product_size_guide_id = $("#size_guide").val();
-     	ajax.jsonRpc("/shop/product/size_guide_json", 'call', {'categ_id': product_size_guide_id}).then(function (data) {
+     	ajax.jsonRpc("/shop/product/size_guide_json", 'call', {'product_id': product_size_guide_id}).then(function (data) {
         	$(".div_loading_icon").css("display","none");
         	$("body").css('position','fixed');
         	$("body").append(data);

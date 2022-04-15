@@ -7,6 +7,10 @@ class SaleOrder(models.Model):
     applied_coupon_id = fields.Many2one('website.coupon', string='Applied Coupon Code')
     coupon_discount_amount = fields.Float(help="Applied coupon code discount")
 
+    def unlink(self):
+        self.remove_coupon(self.order_line.filtered(lambda line: line.reward_line))
+        super(SaleOrder, self).unlink()
+
     @api.one
     def _compute_website_order_line(self):
         super(SaleOrder, self)._compute_website_order_line()
@@ -74,6 +78,7 @@ class SaleOrder(models.Model):
 
         '''Remove the coupon discount line if no all other line get remove from order'''
         if not order.order_line.filtered(lambda line: not line.reward_line):
+            self.remove_coupon(order.order_line.filtered(lambda line: line.reward_line))
             order.order_line.filtered(lambda line: line.unlink())
 
         if order.applied_coupon_id:
@@ -104,11 +109,12 @@ class SaleOrder(models.Model):
         Added on: 15/06/2021
         :return: True
         """
-        self.applied_coupon_id.coupon_balance += abs(line.price_unit)
-        self.coupon_applied = 0
-        self.applied_coupon_id = 0
-        self.coupon_discount_amount = 0
-        line.unlink();
+        if line and self.applied_coupon_id:
+            self.applied_coupon_id.coupon_balance += abs(line.price_unit)
+            self.coupon_applied = 0
+            self.applied_coupon_id = 0
+            self.coupon_discount_amount = 0
+            line.unlink()
 
 
     @api.multi

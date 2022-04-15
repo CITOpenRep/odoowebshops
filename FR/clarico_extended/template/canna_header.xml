@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ======================= Header style option 8 ========================= -->
+    <template id="customize_header_style_8" inherit_id="portal.frontend_layout"
+              active="False" name="Header style 8">
+        <xpath expr="//nav[hasclass('navbar-expand-md')]" position="before">
+            <div class="te_header_before_overlay">
+                <div class="container">
+                    <div class="te_header_style_8_main position-relative">
+                        <div class="header_center_logo">
+                            <t t-if="request.website.viewref('website.layout_logo_show').active">
+                                <a href="/" class="te_header_before_logo logo ">
+                                    <span t-field="res_company.logo" t-options="{'widget': 'image'}"
+                                          t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                                </a>
+                            </t>
+                            <t t-else="">
+                                <a class="navbar-brand te_header_before_logo logo" href="/" t-if="website"
+                                   t-field="website.name">My Website
+                                </a>
+                            </t>
+                        </div>
+                        <div class="col-lg-3 te_header_8_right">
+                            <div class="te_header_search pr-1 d-inline-block">
+                                <div class="te_srch_icon_header">
+                                    <a href="javascript:void(0);" class="">
+                                        <i class="fa fa-search te_srch_icon"/>
+                                        <i class="fa fa-times te_srch_close"/>
+                                    </a>
+                                </div>
+                                <div class="te_search_popover" tabindex="-1">
+                                    <form action="/shop" method="get" t-att-class="search_class">
+                                        <div class="input-group">
+                                            <input type="text" name="search"
+                                                   class="search-query form-control oe_search_box"
+                                                   placeholder="Search..."
+                                                   t-att-value="search"/>
+                                            <button type="submit" class="btn btn-link oe_search_button">
+                                                <i class="fa fa-search"/>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="te_header_lang pl-2 pr-1 d-inline-block"
+                                 t-att-style="'text-align:right' if website_sale_pricelists and len(website_sale_pricelists)&gt;1 else 'text-align:left'">
+                                <div t-if="(request and request.is_frontend_multilang and len(languages) &gt; 1)">
+                                    <div class="dropdown te_header_language">
+                                        <a class="dropdown-toggle btn btn-link" type="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <t t-set="active_lang"
+                                               t-value="list(filter(lambda lg : lg[0] == lang, languages))[0][1].split('/').pop()"/>
+                                            <t t-set="active_lang_code"
+                                               t-value="list(filter(lambda lg : lg[0] == lang, languages))[0][0].split('/').pop()"/>
+                                            <span class="te_img_container">
+                                                <img t-if="active_lang_code == 'en_US'"
+                                                     src="/clarico_extended/static/src/img/header/en.png"
+                                                     t-att-alt="active_lang"/>
+                                                <img t-else=""
+                                                     src="/clarico_extended/static/src/img/header/fr.png"
+                                                     t-att-alt="active_lang"/>
+                                                <span class="caret ml4"/>
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <t t-foreach="languages" t-as="lg">
+                                                <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang=lg[0])"
+                                                   class="dropdown-item js_change_lang"
+                                                   t-att-data-default-lang="(editable or translatable) and 'true' if website and lg[0] == website.default_lang_code else None"
+                                                   t-att-data-lang="lg[0]">
+                                                    <t t-esc="lg[1].split('/').pop()"/>
+                                                </a>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown te_user_account pl-2 pr-1 d-inline-block" t-ignore="true"
+                                 t-if="not user_id._is_public()">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="/clarico_extended/static/src/img/header/user_loggedin.png"
+                                         alt="User Logged in"/>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right js_usermenu" role="menu">
+                                    <a href="/my/home" role="menuitem" class="dropdown-item">
+                                        <span class="fa fa-user"/>
+                                        My Account
+                                    </a>
+                                    <a href="/shop/cart" role="menuitem" class="dropdown-item"><span
+                                            class="fa fa-check-circle"/>Checkout
+                                    </a>
+                                    <a href="/my/orders" role="menuitem" class="dropdown-item"><span
+                                            class="fa fa-pie-chart"/>My orders
+                                    </a>
+                                    <a href="/shop/wishlist" role="menuitem" class="dropdown-item"><span
+                                            class="fa fa-heart"/>My Wishlist
+                                    </a>
+                                    <a id="o_logout" class="dropdown-item" t-attf-href="/web/session/logout?redirect=/"
+                                       role="menuitem"><span class="fa fa-sign-out"/>Logout
+                                    </a>
+                                </div>
+                            </div>
+                            <div groups="base.group_public" class="te_signin te_user_account pl-2 pr-1 d-inline-block">
+                                <a t-attf-href="/web/login">
+                                    <img src="/clarico_extended/static/src/img/header/user_guest.png"
+                                         alt="User Log in"/>
+                                </a>
+                            </div>
+                            <div class="te_cart_icon_head pl-2 pr-0 d-inline-block">
+                                <t t-call="theme_clarico.header_cart"></t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']//header[1]" position="attributes">
+            <attribute name="t-attf-class" add="#{'te_header_canna'}" separator=" "/>
+        </xpath>
+        <xpath expr="//nav[hasclass('navbar-expand-md')]" position="attributes">
+            <attribute name="class">navbar navbar-expand-md te_header_navbar navbar-light
+            </attribute>
+        </xpath>
+        <xpath expr="//ul[@id='top_menu']/li[hasclass('divider')][last()]"
+               position="replace">
+        </xpath>
+        <xpath expr="//ul[@id='top_menu']/li[hasclass('dropdown')]"
+               position="replace">
+        </xpath>
+        <xpath expr="//li[@id='my_cart']" position="replace">
+        </xpath>
+        <xpath expr="//li[@id='my_wish']" position="replace">
+        </xpath>
+    </template>
+    <!-- Apply Backgrounds on specific pages -->
+    <template id="canna_graffitiwall_bg" inherit_id="portal.frontend_layout">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-attf-class" add="#{xmlid == 'clarico_extended.world_canna' and 'canna_graffitiwall_bg' or ''}" separator=" "/>
+        </xpath>
+      <!--   <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-attf-class"
+                       add="#{'custom_page_container' if main_object._name != 'product.template' and main_object._name != 'product.public.category' and main_object._name != 'blog.blog' and main_object.key == 'clarico_extended.world_canna' or
+               'canna_graffitiwall_bg' if main_object._name != 'product.template' and main_object._name != 'product.public.category' and main_object._name != 'blog.blog' and main_object.key == 'theme_canna.shop_landing' else ''}"
+                       separator=" "/>
+        </xpath> -->
+    </template>
+
+</odoo>

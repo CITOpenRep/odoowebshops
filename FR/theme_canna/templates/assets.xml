@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add the custom scss and js files for theme_wiredzone -->
+    <template id="theme_canna_assets_frontend" inherit_id="website.assets_frontend" name="Product Frontend assets">
+        <xpath expr="." postion="inside">
+            <link rel="stylesheet" type="text/scss" href="/theme_canna/static/src/scss/ecommerce.scss"/>
+        </xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/theme_canna/static/src/js/canna.js"/>
+        </xpath>
+    </template>
+</odoo>
+
+
+

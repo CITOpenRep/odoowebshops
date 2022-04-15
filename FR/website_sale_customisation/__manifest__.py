@@ -25,6 +25,7 @@
         'view/product_public_category_views.xml',
         'view/product_size_guide_views.xml',
         'view/res_flag.xml',
+        'view/product_template.xml',
         'security/ir.model.access.csv',
         'report/report_templates.xml',
         'data/report_name.xml',

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cannafr_news,cannafr.news.module.admin,model_cannafr_news,,1,1,1,1
+access_product_label_line,product.label.line,model_product_label_line,,1,1,1,1
+access_cannafr_events,cannafr.events.module.admin,model_cannafr_events,,1,1,1,1
+access_cannafr_department,cannafr.department.module.admin,model_cannafr_department,,1,1,1,1
+access_cannafr_team,cannafr.team.module.admin,model_cannafr_team,,1,1,1,1
+access_cannafr_department_team_line,cannafr.department.team.line.admin,model_cannafr_department_team_line,,1,1,1,1
+access_cn_partnership_admin,admin_cn_partnership,model_cn_partnership,base.group_system,1,1,1,1
+access_cn_partnership_public,public_cn_partnership,model_cn_partnership,,1,0,0,0
+access_cn_partnership_editorDesigner,editorDesigner_cn_partnership,model_cn_partnership,website.group_website_designer,1,1,1,1
